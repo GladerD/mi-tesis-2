@@ -65,10 +65,11 @@
 %}
 %\makeatother
 
-\RequirePackage{iftex}
-\ifPDFTeX
-  \RequirePackage{amssymb}
-\fi
+% amssymb omitido - newtxmath ya proporciona los símbolos matemáticos necesarios
+% \RequirePackage{iftex}
+% \ifPDFTeX
+%   \RequirePackage{amssymb}
+% \fi
 
 % language (no option clash)
 %\RequirePackage{etoolbox}

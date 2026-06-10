@@ -28,9 +28,8 @@
 *.run.xml
 *.xdv
 
-# Compiled output PDFs (regenerable)
-# Uncomment the next line if you don't want to track compiled PDFs:
-# *.pdf
+# Compiled output PDFs (regenerable) — excluir main.pdf del root
+Tesis/main.pdf
 
 # Build directories
 build/

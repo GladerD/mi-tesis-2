@@ -8,11 +8,48 @@
 %pdflatex main.tex
 %pdflatex main.tex
 
+
+% Paquetes adicionales
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes,arrows}
+
+% --- Referencias coloridas con corchetes ---
+\usepackage{cleveref}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{textcomp}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz,circuitikz}
+\usepackage{siunitx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{pdflscape}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usetikzlibrary{positioning, shadows}
+\usepackage[table]{xcolor} % CRUCIAL para \cellcolor en tablas
+\definecolor{colorRama5}{RGB}{220, 235, 252}
+\definecolor{colorRama4}{RGB}{228, 252, 220}
+\definecolor{colorRama3}{RGB}{252, 248, 220}
+\definecolor{colorRama2}{RGB}{252, 225, 220}
+\definecolor{colorRama1}{RGB}{235, 220, 252}
+
+% Configuración para color de corchetes
+\crefformat{equation}{\textcolor{blue}{[#2#1#3]}}
+\crefformat{figure}{\textcolor{red}{[#2#1#3]}}
+\crefformat{table}{\textcolor{teal}{[#2#1#3]}}
+\crefformat{section}{\textcolor{violet}{[#2#1#3]}}
+\crefformat{chapter}{\textcolor{orange}{[#2#1#3]}}
+% Puedes ajustar los colores a tu preferencia
+
 \university{Universidad de Guadalajara}
 \campus{Centro Universitario de Ciencias Exactas e Ingenierías}{División de Ingenierías}
-\title{Identificación de modos de oscilación electromecánicos mediante el algoritmoTufts-Kumaresan multivariable en sistemas eléctricos de potencia} %% titulo del trabajo
+\title{Identificación de modos de oscilación electromecánicos mediante una técnica de Tufts-Kumaresan multivariable} %% titulo del trabajo
 \grade{Maestro en Ciencias en Ingeniería Eléctrica} % grado académico
-\author{Ing. Hernández Reyes Glader Davi} % autor
+\author{Ing. Glader David Hernández Reyes} % autor
 \directors{Dr. José de Jesús Nuño Ayon} % asesor
 \codirector{Dr. Nombre del Codirector}
 \place{Guadalajara, Jalisco}
@@ -58,7 +95,6 @@
 
 \clearemptydoublepage
 
-% ===== cuerpo: arabigos =====
 \mainmatter
 
 \include{capitulos/capitulo1}
