@@ -1,0 +1,16 @@
+{
+  "folders": [
+    { "path": "Tesis" },
+    { "path": "protocolo" },
+    { "path": "IEEE-Conferencia" },
+    { "path": "Presentacion" },
+    { "path": "cartel" },
+    { "path": "cartel 2" },
+    { "path": "Formatos" }
+  ],
+  "settings": {
+    "continue.enableTabAutocomplete": true,
+    "latex-workshop.latex.autoBuild.run": "onSave",
+    "latex-workshop.latex.recipe.default": "lastUsed"
+  }
+}
