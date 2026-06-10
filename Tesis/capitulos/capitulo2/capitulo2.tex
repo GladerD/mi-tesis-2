@@ -11,6 +11,253 @@ Las ecuaciones de Maxwell-Heaviside se muestran en \eqref{eq:maxwell-gauss}--\eq
     \nabla \times \mathbf{B} = \mu \mathbf{J} + \mu \varepsilon \frac{\partial \mathbf{E}}{\partial t} \label{eq:maxwell-ampere}
 \end{gather}
 
+\section{Dinámica de Oscilaciones Electromecánicas}
+% ===========================================================
+
+\subsection{Dinámica de Oscilaciones Electromecánicas}
+\subsubsection{Ecuaciones de Swing del Generador Síncrono}
+
+La dinámica de cada generador $i$ en un sistema de $n_g$ máquinas ($i=1,\ldots,n_g$) se describe mediante las \textbf{ecuaciones de swing}:
+
+\begin{block}{Ecuaciones de Swing }
+\begin{align}
+    \dot{\delta}_i  &= \omega_i - \omega_s \label{eq:swing1} \\[4pt]
+    \dot{\omega}_i  &= \frac{\omega_s}{2H_i}
+                       \Bigl(P_{m,i} - P_{e,i}(\boldsymbol{\delta}) - D_i(\omega_i - \omega_s)\Bigr)
+                       \label{eq:swing2}
+\end{align}
+\end{block}
+
+Para generadores síncronos modeloados de forma clásica (voltaje constante a partir de una reactancia transitoria).
+
+% -----------------------------------------------------------
+
+Parámetros:
+
+\begin{itemize}
+    \item $\delta_i$: ángulo del rotor (rad);
+    \item $\omega_i$: velocidad angular del rotor (rad/s);
+    \item $H_i$: constante de inercia (s);
+    \item $D_i$: constante de amortiguamiento (s);
+    \item $P_{m,i}$: potencia mecánica;
+    \item $P_{e,i}(\boldsymbol{\delta})$: potencia eléctrica — función no lineal de los ángulos de rotor $\boldsymbol{\delta} = [\delta_1, \ldots, \delta_{n_g}]$;
+    \item $\omega_s = 2\pi f_s$: velocidad síncrona de referencia
+\end{itemize}
+
+% -----------------------------------------------------------
+
+% -----------------------------------------------------------
+
+ \subsection{Dinámica de Oscilaciones Electromecánicas}
+ \subsubsection{Linealización alrededor del Punto de Operación}
+
+ Para analizar la estabilidad de pequeña señal, se linealiza el sistema alrededor del punto de equilibrio
+ $(\boldsymbol{\delta}^0, \boldsymbol{\omega}^0)$, en régimen permanente se cumple ($\dot{\delta}_i = 0$, $\dot{\omega}_i = 0$):
+ \begin{equation}
+    P_{m,i} = P_{e,i}(\boldsymbol{\delta}^0), \qquad \omega_i^0 = \omega_s
+ \end{equation}
+
+Se definen las variables de estado de perturbación (desviaciones):
+ \begin{equation}
+    \Delta\boldsymbol{\delta} = \boldsymbol{\delta} - \boldsymbol{\delta}^0, \qquad
+    \Delta\boldsymbol{\omega} = \boldsymbol{\omega} - \boldsymbol{\omega}^0
+ \end{equation}
+
+% -----------------------------------------------------------
+
+    Linealizando la primera ecuacion de osilación:
+    \begin{equation}
+        \Delta\dot{\boldsymbol{\delta}} = \Delta\boldsymbol{\omega}
+    \end{equation}
+
+ Expandiendo la serie de Taylor de primero orden de $P_{e,i}(\boldsymbol{\delta})$ alrededor de $\boldsymbol{\delta}^0$ y usando la condicion de equilibrio se linealiza la segunda ecuacion de osilación:
+ \begin{equation}
+    \Delta\dot{\boldsymbol{\omega}}_i = \frac{\omega_s}{2H_i}\Bigl(-\sum_{j=1}^{n_g} \frac{\partial P_{e,i}}{\partial \delta_j}\big|_0 \Delta\delta_j - D_i \Delta\omega_i\Bigr)
+  \end{equation}
+
+\section{Formulación Discreta y Predicción Lineal}
+% ===========================================================
+
+\subsection{Formulación Discreta y Predicción Lineal}
+\subsubsection{Del Tiempo Continuo al Dominio Muestreado}
+
+Muestreando cada señal $x_i(t)$ con periodo $\Delta t$, definimos
+$x_i[n] = x_i(n\Delta t)$, para $n = 0,1,\dots,N-1$.
+Bajo el modelo de suma de exponenciales amortiguadas,
+\begin{equation}
+    x_i[n] = \sum_{k=1}^{M} a_{i,k}\, z_k^{\,n}, \qquad
+    z_k = e^{\lambda_k \Delta t} = e^{(-\delta_k + j\omega_k)\Delta t}.
+    \label{eq:discrete}
+\end{equation}
+
+Los polos en tiempo discreto $z_k$ contienen toda la información modal:
+
+\begin{block}{Mapeo Continuo $\leftrightarrow$ Discreto}
+\begin{align}
+    z_k &= e^{(-\delta_k + j\omega_k)\Delta t}, \\[4pt]
+    \lambda_k = -\delta_k + j\omega_k &= \frac{\ln z_k}{\Delta t}.
+    \label{eq:mapping}
+\end{align}
+\end{block}
+
+Esta relación permite recuperar el amortiguamiento $\delta_k$ y la frecuencia
+$\omega_k$ a partir de las raíces $z_k$ del polinomio de predicción.
+
+\section{Algoritmo Tufts-Kumaresan Multivariable (Multi-TK)}
+% ===========================================================
+
+\subsection{Algoritmo Multi-TK}
+\subsubsection{Modelo de señal y predicción lineal hacia atrás}
+
+Para $P$ señales medidas $\{x_i[n]\}_{i=1}^P$, cada una de $N$ muestras ($n=0,\dots,N-1$), el modelo de señal es
+\[
+x_i[n] = \sum_{k=1}^{M} a_{i,k}\, z_k^n + w_i[n], \qquad z_k = e^{(-\delta_k + j\omega_k)\Delta t}.
+\]
+
+Se elige un orden de predictor $L$ tal que $M \le L \le N-M$. Para cada canal $i$ se plantea el problema de \textbf{predicción lineal hacia atrás}:
+\begin{equation}
+\mathbf{A}_i\,\mathbf{b} = -\mathbf{h}_i,
+\label{eq:backward_pred}
+\end{equation}
+donde $\mathbf{b}=[b(1),b(2),\dots,b(L)]^\top$ es el vector de coeficientes del polinomio característico.
+
+La matriz de Hankel conjugada para la $i$-ésima señal se construye como:
+\begin{equation}
+\mathbf{A}_i =
+\begin{bmatrix}
+x_i^*(1)   & x_i^*(2)   & \cdots & x_i^*(L) \\
+x_i^*(2)   & x_i^*(3)   & \cdots & x_i^*(L+1) \\
+\vdots     & \vdots     & \ddots & \vdots   \\
+x_i^*(N-L) & x_i^*(N-L+1) & \cdots & x_i^*(N-1)
+\end{bmatrix}
+\in \mathbb{C}^{(N-L)\times L},
+\label{eq:Ai}
+\end{equation}
+y el vector objetivo asociado es
+\begin{equation}
+\mathbf{h}_i =
+\begin{bmatrix}
+x_i^*(0) \\ x_i^*(1) \\ \vdots \\ x_i^*(N-L-1)
+\end{bmatrix}
+\in \mathbb{C}^{N-L}.
+\label{eq:hi}
+\end{equation}
+
+\subsection{Algoritmo Multi-TK}
+\subsubsection{Sistema global multicanal}
+
+Se apilan verticalmente las matrices y los vectores de todos los canales:
+\begin{equation}
+\mathbf{A}_{\text{multi}} =
+\begin{bmatrix} \mathbf{A}_1 \\ \mathbf{A}_2 \\ \vdots \\ \mathbf{A}_P \end{bmatrix}
+\in \mathbb{C}^{P(N-L)\times L},
+\qquad
+\mathbf{h}_{\text{multi}} =
+\begin{bmatrix} \mathbf{h}_1 \\ \mathbf{h}_2 \\ \vdots \\ \mathbf{h}_P \end{bmatrix}
+\in \mathbb{C}^{P(N-L)}.
+\label{eq:multi_system}
+\end{equation}
+
+El sistema completo de predicción lineal es:
+\begin{equation}
+\boxed{\mathbf{A}_{\text{multi}}\,\mathbf{b} = -\mathbf{h}_{\text{multi}}}.
+\label{eq:multi_equation}
+\end{equation}
+
+\subsection{Algoritmo Multi-TK}
+\subsubsection{Descomposición SVD y selección del orden del modelo}
+
+Se aplica la \textbf{descomposición en valores singulares} a $\mathbf{A}_{\text{multi}}$:
+\begin{equation}
+\mathbf{A}_{\text{multi}} = \mathbf{U}\,\boldsymbol{\Sigma}\,\mathbf{V}^H,
+\label{eq:svd}
+\end{equation}
+con $\boldsymbol{\Sigma} = \operatorname{diag}(\sigma_1,\sigma_2,\dots,\sigma_r)$, $\sigma_1 \ge \sigma_2 \ge \dots \ge \sigma_r > 0$.
+
+El número de modos $M$ se selecciona mediante el criterio de \textbf{energía acumulada}:
+\begin{equation}
+E_{s,M} = \frac{\displaystyle\sum_{k=1}^{M} \sigma_k^2}{\displaystyle\sum_{k=1}^{r} \sigma_k^2} \ge E_0,
+\label{eq:energy}
+\end{equation}
+donde típicamente $E_0 = 97\%$ (o $99.9\%$ según el nivel de ruido).
+
+\subsection{Algoritmo Multi-TK}
+\subsubsection{Truncamiento de la SVD y solución del sistema}
+
+Se retiene el subespacio de señal de rango $M$:
+\begin{equation}
+\mathbf{A}_{\text{multi}} \approx \mathbf{U}_s \boldsymbol{\Sigma}_s \mathbf{V}_s^H,
+\quad
+\mathbf{U}_s \in \mathbb{C}^{P(N-L)\times M},\;
+\boldsymbol{\Sigma}_s \in \mathbb{R}^{M\times M},\;
+\mathbf{V}_s \in \mathbb{C}^{L\times M}.
+\label{eq:truncsvd}
+\end{equation}
+
+La solución regularizada del sistema es:
+\begin{equation}
+\boxed{\mathbf{b} = -\mathbf{V}_s\,\boldsymbol{\Sigma}_s^{-1}\,\mathbf{U}_s^H\,\mathbf{h}_{\text{multi}}}.
+\label{eq:solution_final}
+\end{equation}
+
+El truncamiento elimina componentes de ruido y reduce el sesgo. Se recomienda $L \approx \tfrac{3N}{4}$.
+
+\section{Patrones Dinámicos: Formas Modales y Factores de Participación}
+% ===========================================================
+
+\subsection{Estimación de Amplitudes Complejas}
+
+Conocidos los polos $\{z_k\}_{k=1}^{M}$, para cada señal $i$ se resuelve:
+
+\begin{equation}
+\underbrace{
+\begin{bmatrix}
+    z_1^0 & z_2^0 & \cdots & z_M^0 \\
+    z_1^1 & z_2^1 & \cdots & z_M^1 \\
+    \vdots &      & \ddots & \vdots \\
+    z_1^{N-1} & z_2^{N-1} & \cdots & z_M^{N-1}
+\end{bmatrix}
+}_{\boldsymbol{\Psi}}
+\begin{bmatrix} a_{i,1} \\ a_{i,2} \\ \vdots \\ a_{i,M} \end{bmatrix}
+= \mathbf{x}_i
+\end{equation}
+
+Mediante mínimos cuadrados:
+\begin{equation}
+\mathbf{a}_i = \boldsymbol{\Psi}^+\,\mathbf{x}_i
+= \bigl(\boldsymbol{\Psi}^H\boldsymbol{\Psi}\bigr)^{-1}\boldsymbol{\Psi}^H\mathbf{x}_i
+\end{equation}
+
+\subsection{Forma Modal (Mode Shape)}
+
+La \textbf{forma modal} del modo $k$ describe la distribución espacial:
+\begin{equation}
+\mathbf{s}_k =
+\begin{bmatrix}
+    a_{1,k} \\
+    a_{2,k} \\
+    \vdots \\
+    a_{P,k}
+\end{bmatrix}
+=
+\begin{bmatrix}
+    |a_{1,k}|\,e^{j\phi_{1,k}} \\
+    |a_{2,k}|\,e^{j\phi_{2,k}} \\
+    \vdots \\
+    |a_{P,k}|\,e^{j\phi_{P,k}}
+\end{bmatrix}
+\end{equation}
+
+La magnitud $|\mathbf{s}_k|$ indica observabilidad; la fase $\angle\mathbf{s}_k$ revela relaciones entre señales.
+
+\subsection{Factor de Participación}
+
+Para el modo $k$, la participación normalizada de la señal $i$ es:
+\begin{equation}
+\hat{p}_{ik} = \frac{|a_{i,k}|}{\displaystyle\sum_{j=1}^{P} |a_{j,k}|}
+\end{equation}
+
+Cuantifica la magnitud relativa del modo en cada medición y permite identificar grupos coherentes de generadores.
 
 \input{capitulos/capitulo2/integrales_energia.txt}
 
