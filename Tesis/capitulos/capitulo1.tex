@@ -1,0 +1,84 @@
+\documentclass[spanish,pagenum=top,chapterstart=even]{thesis}
+
+% pasos importates para copilar: pdflatex - bibtex - pdflatex - pdflatex
+
+%en la terminal:
+%pdflatex main.tex
+%biber main
+%pdflatex main.tex
+%pdflatex main.tex
+
+\university{Universidad de Guadalajara}
+\campus{Centro Universitario de Ciencias Exactas e Ingenierías}{División de Ingenierías}
+\title{Identificación de modos de oscilación electromecánicos mediante el algoritmoTufts-Kumaresan multivariable en sistemas eléctricos de potencia} %% titulo del trabajo
+\grade{Maestro en Ciencias en Ingeniería Eléctrica} % grado académico
+\author{Ing. Hernández Reyes Glader Davi} % autor
+\directors{Dr. José de Jesús Nuño Ayon} % asesor
+\codirector{Dr. Nombre del Codirector}
+\place{Guadalajara, Jalisco}
+\udglogo{University_emblem} % sin extension si es pdf/png
+
+\newcommand{\blankpage}{\clearpage\thispagestyle{empty}\addtocounter{page}{-1}\newpage}
+
+\thesisbibfile{ref.bib} % definiendo el archivo .bib para la bibliografía
+
+\begin{document}
+% ===== preliminares: romanos =====
+\frontmatter
+
+\maketitle
+% pagina extra en blanco
+% \blankpage
+
+\setcounter{page}{9} % ajustar inicio de numeración
+\dedicatoria{A mi familia y a mi país.}
+%\clearemptydoublepage
+\agradecimientos{agradezco a toda la evolución de la humanidad que me ha llevado hasta aquí.}
+
+\begingroup
+\let\cleardoublepage\clearpage
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\contentsname}
+\tableofcontents
+
+\phantomsection
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+
+\phantomsection
+\addcontentsline{toc}{chapter}{\listtablename}
+\listoftables
+\clearpage
+\thispagestyle{empty}
+\ifodd\value{page}\null\newpage\fi
+
+\endgroup
+
+\clearemptydoublepage
+
+% ===== cuerpo: arabigos =====
+\mainmatter
+
+\include{capitulos/capitulo1}
+
+\chapter*{Capítulo 2: Protocolo de identificación de modos de oscilación electromecánicos}
+\markboth{}{Capítulo 2}
+
+\clearemptydoublepage
+
+% contenido del capítulo 2
+\section{Introducción}
+Desde finales del sigolo XIX, Thomas A. Edison comenzo con el trabjo de electrificacion de luz electrica,
+creando por primera vez, una red electrica de corriente continua (CC) en New York en 1882, la estacion Pearl Street
+generaba 30 kW a 110 Volts para un total de 59 clientes. Luego, Nikola desarrolo papers sobre las ventjas
+de la corriente alterna (CA), que describian motores de induccion y sincronos de dos fases. En 1891 se
+puso en marcha la primera red electrica trifasica de CA en Alemnaia, transmitinendo energia a 179 kM a 12 kV
+Para estados unidos en 1893 se puso la priemra red eelectrica de CA en California, uan red de 12 kM a 2.3 kV.
+En Mexico, la primera red electrica se deribo de una fabrica de tejidos en la ciudad de Leon, Gunajutato
+en 1879.
+
+Los Sistemas Eléctricos de Potencia (SEP) modernos representan una de las infraestructuras más complejas
+y críticas de la sociedad contemporánea. A lo largo de las décadas, estas redes han experimentado una
+expansión significativa en escala e interconexión. La operación segura y fiable de estos vastos sistemas

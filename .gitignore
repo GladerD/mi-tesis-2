@@ -1,0 +1,45 @@
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.nav
+*.snm
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.synctex(busy)
+*.lof
+*.lot
+*.lol
+*.idx
+*.ilg
+*.ind
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist
+*.bcf
+*.run.xml
+*.xdv
+
+# Compiled output PDFs (regenerable)
+# Uncomment the next line if you don't want to track compiled PDFs:
+# *.pdf
+
+# Build directories
+build/
+%OUTDIR%/
+
+# Archives
+*.rar
+*.zip
+
+# OS files
+.DS_Store
+Thumbs.db
