@@ -1,0 +1,79 @@
+==============================================================
+PROMPT DE DIAGNÓSTICO: Tool Calling en Llama 3.1 8B
+==============================================================
+
+PARTE 1: Verificar disponibilidad de herramientas
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Responde EXACTAMENTE las siguientes preguntas:
+
+1. ¿Tienes acceso a herramientas MCP (Model Context Protocol)?
+   - Responde: SÍ o NO
+
+2. ¿Puedes listar los nombres de las herramientas disponibles?
+   - Si es SÍ, lista cada herramienta disponible
+   - Si es NO, responde: "No tengo acceso a la lista de herramientas"
+
+3. ¿Tienes una herramienta llamada 'convert_to_markdown'?
+   - Responde: SÍ o NO
+
+Si respondiste NO a todas las preguntas anteriores:
+   → El problema es que Continue.dev NO está pasando las
+     definiciones de herramientas al modelo.
+
+
+PARTE 2: Test de intención de usar herramientas
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Responde cómo manejarías esta tarea:
+
+Tarea: "Lee el archivo Presentacion/example1.tex"
+
+¿Cómo responderías?
+  A) Usaría una herramienta para leer el archivo
+  B) Diría que no puedo leer archivos
+  C) Describiría lo que debería hacer
+
+Selecciona A, B, o C y explica por qué.
+
+Si respondiste B o C:
+   → El modelo no está usando herramientas aunque
+     estén disponibles.
+
+
+PARTE 3: Análisis de contextLength
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+El config.yaml dice: contextLength: 32768
+
+¿Cuál es tu límite de contexto actual?
+  - Responde el número (ej: 32768, 4096, etc)
+  - Si no sabes, responde: "No tengo información sobre mi contextLength"
+
+Si el número es mucho menor que 32768 (ej: 4096 u 8192):
+   → Continue.dev no está pasando correctamente el contextLength
+     al modelo, lo que podría truncar las tool definitions.
+
+
+PARTE 4: Diagnóstico resumido
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Basándote en tus respuestas anteriores, ¿cuál crees que es
+el problema?
+
+Opciones:
+  1. Las herramientas NO están siendo enviadas por Continue.dev
+  2. Las herramientas se envían pero el modelo no las usa
+  3. El contextLength es demasiado pequeño para incluir tool defs
+  4. Otro (especificar)
+
+Selecciona 1, 2, 3, o 4 y explica.
+
+
+INSTRUCCIONES IMPORTANTES:
+═════════════════════════════════════════════════════════════
+⚠️  NO inventes respuestas. Responde según lo que REALMENTE
+    sabes sobre tus capacidades.
+⚠️  Sé PRECISO en los números y nombres de herramientas.
+⚠️  Si no estás seguro, di "No sé" en lugar de adivinar.
+═════════════════════════════════════════════════════════════
