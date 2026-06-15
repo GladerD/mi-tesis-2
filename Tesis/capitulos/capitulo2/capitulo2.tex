@@ -1,108 +1,339 @@
-% capitulos/Capitulo2.tex
+% capitulos/Capitulo2.tex — versión auditada e integrada
+% Cambios principales: solución modal (Kundur §12.2), contexto WAMS (Sauer Cap. 10),
+% Eckart–Young y Gavish–Donoho (Brunton & Kutz Cap. 1), VarPro (Brunton & Kutz §7.2, Askham–Kutz),
+% corrección de notación (sigma_k para amortiguamiento), erratas y estructura.
 
-\chapter{Marco Teorico}
+\chapter{Marco Teórico}
+
+\section*{Resumen del Capítulo}
+
+Se estableció la cadena teórica completa que va de la ecuación de
+oscilación al algoritmo de identificación: el modelo clásico multimáquina,
+linealizado mediante los coeficientes de potencia sincronizante, produce un
+sistema $\Delta\dot{\mathbf{x}} = \mathbf{A}\Delta\mathbf{x}$ cuya
+respuesta libre es una suma de exponenciales amortiguadas
+\eqref{eq:modal_response}; cualquier canal PMU hereda esa estructura
+espectral \eqref{eq:measured_modal}, lo que justifica el modelo discreto
+\eqref{eq:discrete} bajo la condición de Nyquist \eqref{eq:mapping}. El
+algoritmo Multi-TK resuelve el problema de predicción lineal hacia atrás
+multicanal \eqref{eq:multi_equation} mediante la pseudoinversa de
+Moore--Penrose truncada \eqref{eq:pinv}, cuya optimalidad y efecto
+regularizador quedan garantizados por el teorema de Eckart--Young--Mirsky
+\eqref{eq:eckartyoung}; la separación geométrica de raíces en el plano $z$
+distingue los modos físicos de los espurios, y los criterios de energía
+\eqref{eq:energy}, umbral duro óptimo \eqref{eq:gavish_unknown} y energía
+modal \eqref{eq:cum_mode_energy} gobiernan, respectivamente, el orden del
+modelo y la jerarquización de modos dominantes. El refinamiento por
+Proyección Variable \eqref{eq:varpro_projected}, inicializado con los polos
+Multi-TK, suprime el sesgo de errores en variables de la etapa lineal y
+optimiza directamente la métrica de reconstrucción; sus extensiones con
+restricciones de caja y de consistencia de subespacio
+\eqref{eq:P2}--\eqref{eq:P3} anclan el problema no convexo al subespacio de
+señal identificado. Finalmente, las amplitudes complejas estimadas
+\eqref{eq:amp_svd} se interpretan físicamente: la forma modal empírica es la
+proyección del eigenvector derecho sobre los canales medidos
+\eqref{eq:shape_link}, el índice $\hat{p}_{ik}$ cuantifica observabilidad
+relativa --- distinto, por identificabilidad, del factor de participación
+de estados \eqref{eq:participation_state} --- y los cosenos directores
+\eqref{eq:direction_cosine} junto con el agrupamiento espectral por
+eigengap \eqref{eq:eigengap} particionan el sistema en grupos coherentes de
+generadores sin parámetros fijados a priori. Este marco, validado contra la
+literatura de identificación basada en sincrofasores
+\cite{jiang2021,li2018cwt,li2020era}, constituye el fundamento del
+algoritmo Multi-TK + OptVarPro desarrollado en los capítulos siguientes.
+
+
+% ---------------- INTRODUCCION DEL CAPITULO ----------------
+\section*{Introducción del Capítulo}
+
+Este capítulo construye, de manera deductiva, el puente entre la física de
+las oscilaciones electromecánicas en sistemas eléctricos de potencia y los
+algoritmos de identificación modal basados en mediciones sincrofasoriales
+que sustentan esta tesis. La exposición sigue una cadena de implicaciones:
+se parte de las ecuaciones de oscilación del generador síncrono bajo el
+modelo clásico \cite{kundur1994}, se linealiza alrededor del punto de
+operación para obtener el modelo de estados cuyo espectro define los modos
+electromecánicos, y se demuestra --- mediante la transformación modal y la
+respuesta libre del sistema \cite{kundur1994} --- que toda señal registrada
+por una unidad de medición fasorial en régimen de \emph{ring-down} obedece
+exactamente un modelo de suma de exponenciales complejas amortiguadas. Esta
+derivación convierte el modelo de señal de los métodos de identificación en
+una consecuencia de la física del sistema, y no en un postulado, y delimita
+con precisión su dominio de validez: la banda electromecánica
+($0.1$--$3$~Hz) observada con tasas de reporte PMU de $30$~Hz o superiores
+\cite{sauer2017}.
+
+Sobre esa base, el capítulo desarrolla la maquinaria matemática de
+estimación: la formulación discreta del modelo exponencial y su mapeo
+biunívoco al plano $z$; la predicción lineal hacia atrás multicanal del
+algoritmo Tufts--Kumaresan, cuyo mecanismo de separación señal--ruido en el
+plano complejo se analiza en detalle \cite{tufts1982}; el truncamiento de
+la descomposición en valores singulares como filtro óptimo en el sentido de
+Eckart--Young--Mirsky, junto con los criterios de selección de orden por
+energía acumulada y por umbral duro óptimo \cite{brunton2022,gavish2014};
+la estimación de amplitudes complejas mediante sistemas de Vandermonde
+numéricamente estables; y el refinamiento por mínimos cuadrados no lineales
+separables mediante Proyección Variable, que mitiga el sesgo estructural de
+los estimadores lineales \cite{askham2018}. La parte final traduce los
+parámetros estimados en \emph{patrones dinámicos} interpretables para la
+operación del sistema: formas modales y su vínculo formal con los
+eigenvectores derechos, índices de participación basados en mediciones y su
+distinción rigurosa frente a los factores de participación del análisis de
+pequeña señal, y la identificación de grupos coherentes de generadores
+mediante cosenos directores y agrupamiento espectral con selección
+automática del número de grupos \cite{jiang2021,li2018cwt,li2020era}.
+
+El capítulo incluye, además, el diseño de los estudios experimentales que
+validan las decisiones metodológicas: la selección del orden del predictor
+$L$ mediante diagramas de estabilización, la del orden del modelo $M$
+contrastando el criterio de energía con el umbral de Gavish--Donoho, y las
+formulaciones de optimización con restricciones de subespacio que acoplan
+la etapa lineal y la no lineal del método propuesto.
+
+
 
 \section{Dinámica de Oscilaciones Electromecánicas}
 % ===========================================================
 
-\subsection{Dinámica de Oscilaciones Electromecánicas}
+\subsection{Modelado del Generador Síncrono}
 \subsubsection{Ecuaciones de Swing del Generador Síncrono}
 
 La dinámica de cada generador $i$ en un sistema de $n_g$ máquinas ($i=1,\ldots,n_g$) se describe mediante las \textbf{ecuaciones de swing}:
 
-\begin{block}{Ecuaciones de Swing }
 \begin{align}
     \dot{\delta}_i  &= \omega_i - \omega_s \label{eq:swing1} \\[4pt]
     \dot{\omega}_i  &= \frac{\omega_s}{2H_i}
                        \Bigl(P_{m,i} - P_{e,i}(\boldsymbol{\delta}) - D_i(\omega_i - \omega_s)\Bigr)
                        \label{eq:swing2}
 \end{align}
-\end{block}
 
-Para generadores síncronos modeloados de forma clásica (voltaje constante a partir de una reactancia transitoria).
+Las ecuaciones \eqref{eq:swing1}--\eqref{eq:swing2} corresponden al
+\textbf{modelo clásico} del generador síncrono \cite{kundur1994}: la máquina
+se representa como una fuente de voltaje interna de magnitud constante
+$E'_i$ detrás de la reactancia transitoria $x'_{d,i}$, con potencia mecánica
+$P_{m,i}$ constante en la ventana de análisis y con todos los efectos de
+amortiguamiento (devanados amortiguadores, cargas sensibles a la frecuencia, etc.)
+agregados en el coeficiente $D_i$. Este nivel de modelado es suficiente para
+caracterizar la dinámica electromecánica de interés, pues los modos de
+oscilación de nuestro interes  entre rotores quedan determinados por el intercambio de energía
+cinética y potencia sincronizante entre máquinas \cite{kundur1994,sauer2017}.
 
 % -----------------------------------------------------------
 
-Parámetros:
+Parámetros (todas las potencias en por unidad sobre una base común
+$S_{\text{base}}$):
 
 \begin{itemize}
-    \item $\delta_i$: ángulo del rotor (rad);
+    \item $\delta_i$: ángulo del rotor respecto a la referencia síncrona (rad);
     \item $\omega_i$: velocidad angular del rotor (rad/s);
-    \item $H_i$: constante de inercia (s);
-    \item $D_i$: constante de amortiguamiento (s);
-    \item $P_{m,i}$: potencia mecánica;
-    \item $P_{e,i}(\boldsymbol{\delta})$: potencia eléctrica — función no lineal de los ángulos de rotor $\boldsymbol{\delta} = [\delta_1, \ldots, \delta_{n_g}]$;
-    \item $\omega_s = 2\pi f_s$: velocidad síncrona de referencia
+    \item $H_i$: constante de inercia, $H_i = \tfrac{1}{2}J_i\omega_s^2/S_{\text{base}}$ (s);
+    \item $D_i$: coeficiente de amortiguamiento (p.u.\ de par por
+          p.u.\ de desviación de velocidad, adimensional);
+    \item $P_{m,i}$: potencia mecánica de entrada (p.u.);
+    \item $P_{e,i}(\boldsymbol{\delta})$: potencia eléctrica entregada ---
+          función no lineal de los ángulos de rotor
+          $\boldsymbol{\delta} = [\delta_1, \ldots, \delta_{n_g}]^\top$ a
+          través de la red a nodos de generación (p.u.);
+    \item $\omega_s = 2\pi f_s$: velocidad síncrona de referencia (rad/s).
 \end{itemize}
 
 % -----------------------------------------------------------
 
-% -----------------------------------------------------------
+\subsubsection{Linealización alrededor del Punto de Operación}
 
- \subsection{Dinámica de Oscilaciones Electromecánicas}
- \subsubsection{Linealización alrededor del Punto de Operación}
-
- Para analizar la estabilidad de pequeña señal, se linealiza el sistema alrededor del punto de equilibrio
- $(\boldsymbol{\delta}^0, \boldsymbol{\omega}^0)$, en régimen permanente se cumple ($\dot{\delta}_i = 0$, $\dot{\omega}_i = 0$):
- \begin{equation}
+Para analizar la estabilidad de pequeña señal, se linealiza el sistema alrededor del punto de equilibrio
+$(\boldsymbol{\delta}^0, \boldsymbol{\omega}^0)$; en régimen permanente se cumple ($\dot{\delta}_i = 0$, $\dot{\omega}_i = 0$):
+\begin{equation}
     P_{m,i} = P_{e,i}(\boldsymbol{\delta}^0), \qquad \omega_i^0 = \omega_s
- \end{equation}
+\end{equation}
 
 Se definen las variables de estado de perturbación (desviaciones):
- \begin{equation}
+\begin{equation}
     \Delta\boldsymbol{\delta} = \boldsymbol{\delta} - \boldsymbol{\delta}^0, \qquad
     \Delta\boldsymbol{\omega} = \boldsymbol{\omega} - \boldsymbol{\omega}^0
- \end{equation}
+\end{equation}
 
 % -----------------------------------------------------------
 
-    Linealizando la primera ecuacion de osilación:
-    \begin{equation}
-        \Delta\dot{\boldsymbol{\delta}} = \Delta\boldsymbol{\omega}
-    \end{equation}
+Linealizando la primera ecuación de oscilación:
+\begin{equation}
+    \Delta\dot{\boldsymbol{\delta}} = \Delta\boldsymbol{\omega}
+\end{equation}
 
- Expandiendo la serie de Taylor de primero orden de $P_{e,i}(\boldsymbol{\delta})$ alrededor de $\boldsymbol{\delta}^0$ y usando la condicion de equilibrio se linealiza la segunda ecuacion de osilación:
- \begin{equation}
-    \Delta\dot{\boldsymbol{\omega}}_i = \frac{\omega_s}{2H_i}\Bigl(-\sum_{j=1}^{n_g} \frac{\partial P_{e,i}}{\partial \delta_j}\big|_0 \Delta\delta_j - D_i \Delta\omega_i\Bigr)
-  \end{equation}
+Expandiendo la serie de Taylor de primer orden de $P_{e,i}(\boldsymbol{\delta})$ alrededor de $\boldsymbol{\delta}^0$ y usando la condición de equilibrio se linealiza la segunda ecuación de oscilación:
+\begin{equation}
+    \Delta\dot{\omega}_i = \frac{\omega_s}{2H_i}\Bigl(-\sum_{j=1}^{n_g} \frac{\partial P_{e,i}}{\partial \delta_j}\Big|_0 \Delta\delta_j - D_i \Delta\omega_i\Bigr)
+\end{equation}
+
+Las derivadas parciales evaluadas en el punto de operación definen los
+\textbf{coeficientes de potencia sincronizante} \cite{kundur1994}:
+\begin{equation}
+    K_{ij} \;=\; \left.\frac{\partial P_{e,i}}{\partial \delta_j}\right|_{\boldsymbol{\delta}^0},
+    \qquad i,j = 1,\ldots,n_g,
+    \label{eq:Kij}
+\end{equation}
+que representan el acoplamiento entre las
+máquinas $i$ y $j$ a través de la red y representa el cambio en la potencia eléctrica para un cambio en el punto de equilibr. Agrupando las desviaciones en el
+vector de estados $\Delta\mathbf{x} =
+[\Delta\boldsymbol{\delta}^\top \;\; \Delta\boldsymbol{\omega}^\top]^\top
+\in \mathbb{R}^{2n_g}$, el sistema linealizado adquiere la forma canónica
+de espacio de estados en lazo abierto (movimiento libre):
+\begin{equation}
+    \Delta\dot{\mathbf{x}} \;=\; \mathbf{A}\,\Delta\mathbf{x},
+    \qquad
+    \mathbf{A} \;=\;
+    \begin{bmatrix}
+        \mathbf{0} & \mathbf{I}_{n_g} \\[4pt]
+        -\,\omega_s\,\mathbf{M}^{-1}\mathbf{K} & -\,\omega_s\,\mathbf{M}^{-1}\mathbf{D}
+    \end{bmatrix}
+    \in \mathbb{R}^{2n_g \times 2n_g},
+    \label{eq:statespace}
+\end{equation}
+donde $\mathbf{M} = \operatorname{diag}(2H_1,\ldots,2H_{n_g})$,
+$\mathbf{D} = \operatorname{diag}(D_1,\ldots,D_{n_g})$ y
+$\mathbf{K} = [K_{ij}] \in \mathbb{R}^{n_g\times n_g}$ es la matriz de
+coeficientes de potencia sincronizante. La estabilidad de pequeña señal del
+punto de operación queda gobernada por los eigenvalores de $\mathbf{A}$,
+raíces de la ecuación característica
+$\det(s\mathbf{I}-\mathbf{A}) = 0$ \cite{kundur1994}.
+
+% -----------------------------------------------------------
+
+\subsubsection{Solución Modal: del Espacio de Estados a la Suma de
+Exponenciales Amortiguadas}
+
+Sea $\{\lambda_k\}_{k=1}^{2n_g}$ el espectro de $\mathbf{A}$, con
+eigenvectores derechos $\boldsymbol{\phi}_k$ e izquierdos
+$\boldsymbol{\psi}_k$ que satisfacen
+\begin{equation}
+    \mathbf{A}\boldsymbol{\phi}_k = \lambda_k \boldsymbol{\phi}_k,
+    \qquad
+    \boldsymbol{\psi}_k^\top \mathbf{A} = \lambda_k \boldsymbol{\psi}_k^\top,
+    \qquad
+    \boldsymbol{\psi}_j^\top\boldsymbol{\phi}_k = \delta_{jk}.
+    \label{eq:eigen}
+\end{equation}
+La transformación $\Delta\mathbf{x} = \boldsymbol{\Phi}\mathbf{z}$,
+con $\boldsymbol{\Phi}=[\boldsymbol{\phi}_1 \cdots \boldsymbol{\phi}_{2n_g}]$,
+desacopla \eqref{eq:statespace} en $2n_g$ ecuaciones escalares
+$\dot{z}_k = \lambda_k z_k$, de modo que la respuesta libre ante una
+perturbación inicial $\Delta\mathbf{x}(0)$ es \cite{kundur1994}
+\begin{equation}
+    \Delta\mathbf{x}(t)
+    \;=\;
+    \sum_{k=1}^{2n_g} \boldsymbol{\phi}_k\,
+    \underbrace{\bigl(\boldsymbol{\psi}_k^\top \Delta\mathbf{x}(0)\bigr)}_{c_k}\,
+    e^{\lambda_k t}.
+    \label{eq:modal_response}
+\end{equation}
+
+Dado que $\mathbf{A}$ es real, los eigenvalores oscilatorios aparecen en
+pares complejos conjugados $\lambda_k = \sigma_k \pm j\omega_k$; cada par
+constituye un \textbf{modo electromecánico de oscilación} con frecuencia
+$f_k = \omega_k/2\pi$ y razón de amortiguamiento
+\begin{equation}
+    \zeta_k \;=\; \frac{-\sigma_k}{\sqrt{\sigma_k^2 + \omega_k^2}}.
+    \label{eq:damping_ratio}
+\end{equation}
+Cualquier señal medida $x_i(t)$ que sea combinación lineal de los estados
+--- es el caso de desviaciones de velocidad de rotor, frecuencia de bus,
+potencia activa o ángulos de tensión registrados por un PMU, expresables
+como $x_i = \mathbf{c}_i^\top\Delta\mathbf{x}$ --- tiene la misma
+estructura espectral:
+\begin{equation}
+    x_i(t) \;=\; \sum_{k=1}^{2n_g}
+    \underbrace{\bigl(\mathbf{c}_i^\top\boldsymbol{\phi}_k\bigr)\,c_k}_{a_{i,k}}\,
+    e^{\lambda_k t},
+    \label{eq:measured_modal}
+\end{equation}
+lo que justifica, desde la física del sistema, el modelo de suma de
+exponenciales amortiguadas que adoptan los algoritmos de identificación
+modal de las secciones siguientes. La amplitud compleja $a_{i,k}$ acopla la
+\textit{observabilidad} del modo $k$ en el canal $i$
+(a través de $\mathbf{c}_i^\top\boldsymbol{\phi}_k$, es decir, de la forma
+modal) con la \textit{excitación} del modo por la perturbación
+(a través de $c_k$) \cite{kundur1994}.
+
+% -----------------------------------------------------------
+
+\subsubsection{Modos Electromecánicos y su Observación mediante
+Sincrofasores (WAMS)}
+
+Los modos oscilatorios de \eqref{eq:modal_response} se clasifican según su
+extensión geográfica y banda de frecuencia \cite{kundur1994,sauer2017}:
+\textbf{modos locales} (una planta contra el resto del sistema,
+aproximadamente $1$--$3$~Hz) y \textbf{modos interárea} (grupos coherentes
+de generadores oscilando entre sí, por debajo de $1$~Hz, típicamente
+$0.25$--$1$~Hz). Los modos interárea, de bajo amortiguamiento
+($\zeta_k < 3\%$) y difícil diagnóstico, limitan las transferencias de
+potencia y constituyen el objeto principal de la identificación modal
+\cite{sauer2017}.
+
+Las unidades de medición fasorial (PMU) de un sistema de monitoreo de área
+amplia (WAMS) entregan fasores de tensión y corriente, frecuencia y
+potencias sincronizados vía GPS, con tasas de reporte de $30$ a $120$
+muestras por segundo \cite{sauer2017}. Puesto que la banda electromecánica
+completa se encuentra por debajo de $3$~Hz, una tasa de reporte
+$F_s \ge 30$~Hz satisface holgadamente el criterio de Nyquist
+($F_s > 2 f_k$) y dota a las señales sincrofasoriales de la resolución
+temporal necesaria para estimar tanto $\omega_k$ como $\sigma_k$
+\cite{sauer2017}. En contraste, los sistemas SCADA convencionales, con
+periodos de muestreo del orden de segundos, no resuelven esta dinámica.
+
+Tras una gran perturbación, la respuesta inmediata del sistema es
+fuertemente no lineal; sin embargo, una vez que las trayectorias se
+aproximan al nuevo punto de equilibrio, las oscilaciones decrecientes
+registradas por los PMU --- el régimen de \textbf{ring-down} --- se modelan
+con precisión como la respuesta libre de un sistema lineal no forzado
+\cite{sauer2017}. Es en este régimen donde el modelo
+\eqref{eq:measured_modal} es válido y donde operan los algoritmos de
+predicción lineal desarrollados a continuación.
 
 \section{Formulación Discreta y Predicción Lineal}
 % ===========================================================
 
-\subsection{Formulación Discreta y Predicción Lineal}
-\subsubsection{Del Tiempo Continuo al Dominio Muestreado}
+\subsection{Del Tiempo Continuo al Dominio Muestreado}
 
-Muestreando cada señal $x_i(t)$ con periodo $\Delta t$, definimos
-$x_i[n] = x_i(n\Delta t)$, para $n = 0,1,\dots,N-1$.
-Bajo el modelo de suma de exponenciales amortiguadas,
+Muestreando cada señal $x_i(t)$ de \eqref{eq:measured_modal} con periodo
+$\Delta t = 1/F_s$, definimos $x_i[n] = x_i(n\Delta t)$ para
+$n = 0,1,\dots,N-1$. El modelo continuo de suma de exponenciales
+amortiguadas se transforma exactamente en
 \begin{equation}
     x_i[n] = \sum_{k=1}^{M} a_{i,k}\, z_k^{\,n}, \qquad
-    z_k = e^{\lambda_k \Delta t} = e^{(-\delta_k + j\omega_k)\Delta t}.
+    z_k = e^{\lambda_k \Delta t} = e^{(\sigma_k + j\omega_k)\Delta t},
     \label{eq:discrete}
 \end{equation}
+donde $M \le 2n_g$ es el número de modos efectivamente observables en la
+ventana de datos. Puesto que las señales medidas son reales, los polos
+$z_k$ y las amplitudes $a_{i,k}$ aparecen en pares complejos conjugados,
+por lo que $M$ es par para modos puramente oscilatorios. Los polos en
+tiempo discreto contienen toda la información modal:
 
-Los polos en tiempo discreto $z_k$ contienen toda la información modal:
-
-\begin{block}{Mapeo Continuo $\leftrightarrow$ Discreto}
 \begin{align}
-    z_k &= e^{(-\delta_k + j\omega_k)\Delta t}, \\[4pt]
-    \lambda_k = -\delta_k + j\omega_k &= \frac{\ln z_k}{\Delta t}.
+    z_k &= e^{(\sigma_k + j\omega_k)\Delta t}, \\[4pt]
+    \lambda_k = \sigma_k + j\omega_k &= \frac{\ln z_k}{\Delta t},
+    \qquad |\omega_k|\,\Delta t < \pi .
     \label{eq:mapping}
 \end{align}
-\end{block}
 
-Esta relación permite recuperar el amortiguamiento $\delta_k$ y la frecuencia
-$\omega_k$ a partir de las raíces $z_k$ del polinomio de predicción.
+La condición $|\omega_k|\Delta t < \pi$ es el criterio de Nyquist que
+garantiza la unicidad de la rama principal del logaritmo complejo en
+\eqref{eq:mapping}; las tasas de reporte PMU ($F_s \ge 30$~Hz) la
+satisfacen con amplio margen para la banda electromecánica
+($f_k \le 3$~Hz) \cite{sauer2017}. A partir de las raíces $z_k$ del
+polinomio de predicción se recuperan el amortiguamiento
+$\sigma_k = \operatorname{Re}(\ln z_k)/\Delta t$, la frecuencia
+$\omega_k = \operatorname{Im}(\ln z_k)/\Delta t$ y la razón de
+amortiguamiento $\zeta_k$ de \eqref{eq:damping_ratio}.
 
 \section{Algoritmo Tufts-Kumaresan Multivariable (Multi-TK)}
 % ===========================================================
 
-\subsection{Algoritmo Multi-TK}
-\subsubsection{Modelo de señal y predicción lineal hacia atrás}
+\subsection{Modelo de Señal y Predicción Lineal hacia Atrás}
 
-Para $P$ señales medidas $\{x_i[n]\}_{i=1}^P$, cada una de $N$ muestras ($n=0,\dots,N-1$), el modelo de señal es
+Para $P$ señales medidas $\{x_i[n]\}_{i=1}^P$, cada una de $N$ muestras ($n=0,\dots,N-1$), el modelo de señal con ruido de medición $w_i[n]$ es
 \[
-x_i[n] = \sum_{k=1}^{M} a_{i,k}\, z_k^n + w_i[n], \qquad z_k = e^{(-\delta_k + j\omega_k)\Delta t}.
+x_i[n] = \sum_{k=1}^{M} a_{i,k}\, z_k^n + w_i[n], \qquad z_k = e^{(\sigma_k + j\omega_k)\Delta t}.
 \]
 
 Se elige un orden de predictor $L$ tal que $M \le L \le N-M$. Para cada canal $i$ se plantea el problema de \textbf{predicción lineal hacia atrás}:
@@ -112,7 +343,27 @@ Se elige un orden de predictor $L$ tal que $M \le L \le N-M$. Para cada canal $i
 \end{equation}
 donde $\mathbf{b}=[b(1),b(2),\dots,b(L)]^\top$ es el vector de coeficientes del polinomio característico.
 
-La matriz de Hankel conjugada para la $i$-ésima señal se construye como:
+La elección de la predicción \textit{hacia atrás} sobre datos conjugados
+no es accidental: constituye el mecanismo de discriminación señal--ruido
+del método de Tufts--Kumaresan \cite{tufts1982}. Al elegir un orden
+sobredimensionado $L > M$, el polinomio característico
+\begin{equation}
+    B(z) \;=\; 1 + \sum_{\ell=1}^{L} b(\ell)\, z^{-\ell}
+    \label{eq:charpoly}
+\end{equation}
+posee $L$ raíces, de las cuales sólo $M$ corresponden a modos físicos. En
+la formulación hacia atrás, las raíces de señal se ubican en los
+recíprocos conjugados de los polos, $1/z_k^*$: para modos amortiguados
+($|z_k|<1$) éstas quedan \textbf{fuera} del círculo unitario, mientras que
+las $L-M$ raíces extrañas inducidas por el ruido tienden a permanecer
+\textbf{dentro} de él \cite{tufts1982}. Esta separación geométrica en el
+plano $z$ permite identificar los modos físicos sin ambigüedad, propiedad
+de la que carece la predicción hacia adelante del método de Prony clásico
+\cite{sauer2017,hauer1990}, cuya estructura Hankel es por lo demás análoga
+a \eqref{eq:Ai}.
+
+La matriz de Hankel conjugada para la $i$-ésima señal (el asterisco denota
+conjugación compleja) se construye como:
 \begin{equation}
 \mathbf{A}_i =
 \begin{bmatrix}
@@ -134,8 +385,7 @@ x_i^*(0) \\ x_i^*(1) \\ \vdots \\ x_i^*(N-L-1)
 \label{eq:hi}
 \end{equation}
 
-\subsection{Algoritmo Multi-TK}
-\subsubsection{Sistema global multicanal}
+\subsection{Sistema Global Multicanal}
 
 Se apilan verticalmente las matrices y los vectores de todos los canales:
 \begin{equation}
@@ -155,15 +405,48 @@ El sistema completo de predicción lineal es:
 \label{eq:multi_equation}
 \end{equation}
 
-\subsection{Algoritmo Multi-TK}
-\subsubsection{Descomposición SVD y selección del orden del modelo}
+\subsection{Descomposición SVD y Selección del Orden del Modelo}
 
 Se aplica la \textbf{descomposición en valores singulares} a $\mathbf{A}_{\text{multi}}$:
 \begin{equation}
 \mathbf{A}_{\text{multi}} = \mathbf{U}\,\boldsymbol{\Sigma}\,\mathbf{V}^H,
 \label{eq:svd}
 \end{equation}
-con $\boldsymbol{\Sigma} = \operatorname{diag}(\sigma_1,\sigma_2,\dots,\sigma_r)$, $\sigma_1 \ge \sigma_2 \ge \dots \ge \sigma_r > 0$.
+con $\boldsymbol{\Sigma} = \operatorname{diag}(\sigma_1,\sigma_2,\dots,\sigma_r)$, $\sigma_1 \ge \sigma_2 \ge \dots \ge \sigma_r > 0$
+(en esta sección, $\sigma_k$ denota los valores singulares de
+$\mathbf{A}_{\text{multi}}$, no el amortiguamiento modal).
+
+La optimalidad del truncamiento de la SVD está garantizada por el teorema
+de Eckart--Young--Mirsky \cite{brunton2022}: la mejor aproximación de
+rango $M$ a una matriz, en el sentido de mínimos cuadrados, es
+precisamente su SVD truncada.
+
+Sea $\mathbf{A}_{\mathrm{multi}} = \mathbf{U}\boldsymbol{\Sigma}\mathbf{V}^H$.
+Entonces
+\begin{equation}
+    \mathbf{U}_s\boldsymbol{\Sigma}_s\mathbf{V}_s^H
+    \;=\;
+    \operatorname*{arg\,min}_{\operatorname{rank}(\mathbf{B}) \,\le\, M}
+    \bigl\lVert \mathbf{A}_{\mathrm{multi}} - \mathbf{B} \bigr\rVert_F,
+    \label{eq:eckartyoung}
+\end{equation}
+y el error de aproximación queda exactamente cuantificado por la energía
+de los valores singulares descartados:
+\begin{equation}
+    \bigl\lVert \mathbf{A}_{\mathrm{multi}}
+    - \mathbf{U}_s\boldsymbol{\Sigma}_s\mathbf{V}_s^H \bigr\rVert_F^2
+    \;=\; \sum_{k=M+1}^{r} \sigma_k^2 .
+    \label{eq:trunc_error}
+\end{equation}
+
+Bajo el modelo aditivo
+$\mathbf{A}_{\mathrm{multi}} = \mathbf{A}_{\mathrm{señal}} +
+\mathbf{A}_{\mathrm{ruido}}$, donde
+$\operatorname{rank}(\mathbf{A}_{\mathrm{señal}}) = M$ por construcción del
+modelo \eqref{eq:discrete}, los primeros $M$ valores singulares capturan el
+subespacio de señal y los restantes la contribución del ruido de medición;
+el truncamiento de rango $M$ actúa entonces como un filtro óptimo en el
+sentido de \eqref{eq:eckartyoung} \cite{brunton2022,tufts1982}.
 
 El número de modos $M$ se selecciona mediante el criterio de \textbf{energía acumulada}:
 \begin{equation}
@@ -172,8 +455,35 @@ E_{s,M} = \frac{\displaystyle\sum_{k=1}^{M} \sigma_k^2}{\displaystyle\sum_{k=1}^
 \end{equation}
 donde típicamente $E_0 = 97\%$ (o $99.9\%$ según el nivel de ruido).
 
-\subsection{Algoritmo Multi-TK}
-\subsubsection{Truncamiento de la SVD y solución del sistema}
+El umbral de energía $E_0$ es una regla práctica cuyo valor óptimo depende
+del nivel de ruido. Una alternativa con garantía estadística es el
+\textbf{umbral duro óptimo} de Gavish--Donoho \cite{gavish2014,brunton2022},
+derivado bajo el modelo
+$\mathbf{A}_{\mathrm{multi}} = \mathbf{A}_{\mathrm{señal}} +
+\gamma\,\mathbf{A}_{\mathrm{ruido}}$, con entradas de ruido i.i.d.\
+gaussianas de media cero y varianza unitaria. Para una matriz rectangular
+de dimensiones $n\times m$ ($\beta = m/n \le 1$) y nivel de ruido $\gamma$
+conocido, se retienen únicamente los valores singulares que superan
+\begin{equation}
+    \tau \;=\; \lambda(\beta)\,\sqrt{n}\,\gamma,
+    \qquad
+    \lambda(\beta) = \left( 2(\beta+1) +
+    \frac{8\beta}{(\beta+1) + \sqrt{\beta^2 + 14\beta + 1}} \right)^{1/2},
+    \label{eq:gavish_known}
+\end{equation}
+expresión que se reduce a $\tau = (4/\sqrt{3})\sqrt{n}\,\gamma$ en el caso
+cuadrado. Cuando $\gamma$ es desconocido --- la situación habitual con
+mediciones sincrofasoriales --- el umbral se estima a partir de la mediana
+de los valores singulares, $\sigma_{\mathrm{med}}$:
+\begin{equation}
+    \tau \;=\; \omega(\beta)\,\sigma_{\mathrm{med}},
+    \label{eq:gavish_unknown}
+\end{equation}
+donde $\omega(\beta)$ se calcula numéricamente \cite{gavish2014}. En este
+trabajo, el criterio de energía \eqref{eq:energy} se contrasta con
+\eqref{eq:gavish_unknown} como verificación cruzada del orden $M$.
+
+\subsection{Truncamiento de la SVD y Solución del Sistema}
 
 Se retiene el subespacio de señal de rango $M$:
 \begin{equation}
@@ -191,7 +501,33 @@ La solución regularizada del sistema es:
 \label{eq:solution_final}
 \end{equation}
 
-El truncamiento elimina componentes de ruido y reduce el sesgo. Se recomienda $L \approx \tfrac{3N}{4}$.
+La ecuación \eqref{eq:solution_final} es la solución de mínimos cuadrados
+mediante la \textbf{pseudoinversa de Moore--Penrose truncada}
+\cite{brunton2022}:
+\begin{equation}
+    \mathbf{b}
+    \;=\;
+    -\,\mathbf{A}_{\mathrm{multi}}^{+(M)}\,\mathbf{h}_{\mathrm{multi}},
+    \qquad
+    \mathbf{A}_{\mathrm{multi}}^{+(M)}
+    \;=\;
+    \mathbf{V}_s\,\boldsymbol{\Sigma}_s^{-1}\,\mathbf{U}_s^H .
+    \label{eq:pinv}
+\end{equation}
+Esta solución posee una doble optimalidad \cite{brunton2022}: minimiza el
+residuo $\lVert \mathbf{A}_{\mathrm{multi}}\mathbf{b} +
+\mathbf{h}_{\mathrm{multi}} \rVert_2$ restringido al subespacio de señal de
+rango $M$ y, entre todas las soluciones que lo logran, es la de mínima
+norma $\lVert\mathbf{b}\rVert_2$. El truncamiento cumple además una función
+de regularización numérica: en la pseudoinversa completa, los valores
+singulares pequeños asociados al ruido aparecen invertidos
+($\sigma_k^{-1}$ grande) y amplifican catastróficamente la componente de
+ruido de $\mathbf{h}_{\mathrm{multi}}$; al retener sólo
+$\boldsymbol{\Sigma}_s$, dicha amplificación se elimina y la varianza del
+estimador de $\mathbf{b}$ se reduce drásticamente
+\cite{tufts1982,brunton2022}. Para la longitud del predictor se recomienda
+$L \approx \tfrac{3N}{4}$, valor que maximiza el desempeño del estimador en
+presencia de ruido \cite{tufts1982}.
 
 \section{Patrones Dinámicos: Formas Modales y Factores de Participación}
 % ===========================================================
@@ -219,6 +555,112 @@ Mediante mínimos cuadrados:
 = \bigl(\boldsymbol{\Psi}^H\boldsymbol{\Psi}\bigr)^{-1}\boldsymbol{\Psi}^H\mathbf{x}_i
 \end{equation}
 
+La matriz $\boldsymbol{\Psi}\in\mathbb{C}^{N\times M}$ es una matriz de
+\textbf{Vandermonde} construida sobre los polos estimados. En la práctica,
+la solución vía ecuaciones normales
+$(\boldsymbol{\Psi}^H\boldsymbol{\Psi})^{-1}\boldsymbol{\Psi}^H$ debe
+evitarse: cuando el sistema presenta modos de frecuencias cercanas ---
+situación típica de los modos interárea --- los nodos $z_k$ se aglomeran y
+$\boldsymbol{\Psi}$ se vuelve mal condicionada, y el producto
+$\boldsymbol{\Psi}^H\boldsymbol{\Psi}$ eleva al cuadrado su número de
+condición, $\kappa(\boldsymbol{\Psi}^H\boldsymbol{\Psi}) =
+\kappa(\boldsymbol{\Psi})^2$. La alternativa numéricamente estable es la
+pseudoinversa calculada mediante la SVD de $\boldsymbol{\Psi}$
+\cite{brunton2022}:
+\begin{equation}
+    \mathbf{a}_i \;=\;
+    \mathbf{V}_{\Psi}\,\boldsymbol{\Sigma}_{\Psi}^{-1}\,
+    \mathbf{U}_{\Psi}^{H}\,\mathbf{x}_i,
+    \qquad
+    \boldsymbol{\Psi} =
+    \mathbf{U}_{\Psi}\boldsymbol{\Sigma}_{\Psi}\mathbf{V}_{\Psi}^{H}.
+    \label{eq:amp_svd}
+\end{equation}
+
+\subsection{Refinamiento por Mínimos Cuadrados No Lineales: Proyección
+Variable}
+
+Los estimadores de la familia de predicción lineal comparten una limitación
+estructural: el ruido de medición contamina simultáneamente la matriz de
+regresores $\mathbf{A}_{\mathrm{multi}}$ y el vector objetivo
+$\mathbf{h}_{\mathrm{multi}}$ --- un problema de \textit{errores en
+variables} --- por lo que la solución de mínimos cuadrados lineal produce
+estimaciones de los polos con \textbf{sesgo} que el truncamiento de la SVD
+reduce pero no elimina \cite{brunton2022}. La formulación que ataca el
+sesgo de raíz consiste en resolver directamente el problema de ajuste
+exponencial como un problema de mínimos cuadrados \textbf{no lineal} en los
+parámetros modales \cite{askham2018,brunton2022}. Organizando las $P$
+señales en la matriz de datos
+$\mathbf{X} = [\mathbf{x}_1\;\cdots\;\mathbf{x}_P] \in \mathbb{C}^{N\times P}$
+y las amplitudes en $\mathbf{a} \in \mathbb{C}^{M\times P}$, el problema es
+\begin{equation}
+    \min_{\boldsymbol{\lambda},\,\mathbf{a}}\;
+    \bigl\lVert \mathbf{X} -
+    \boldsymbol{\Psi}(\boldsymbol{\lambda})\,\mathbf{a} \bigr\rVert_F^2,
+    \qquad
+    [\boldsymbol{\Psi}(\boldsymbol{\lambda})]_{n,k} = e^{\lambda_k n \Delta t},
+    \label{eq:varpro_problem}
+\end{equation}
+
+donde $\boldsymbol{\lambda} = [\lambda_1,\ldots,\lambda_M]^\top$. El
+problema \eqref{eq:varpro_problem} es \textbf{separable}: para
+$\boldsymbol{\lambda}$ fijo, las amplitudes óptimas tienen solución cerrada
+$\hat{\mathbf{a}}(\boldsymbol{\lambda}) =
+\boldsymbol{\Psi}(\boldsymbol{\lambda})^{+}\mathbf{X}$. El método de
+\textbf{Proyección Variable} (VarPro) explota esta estructura eliminando
+las variables lineales y optimizando únicamente sobre las no lineales
+\cite{askham2018}:
+\begin{equation}
+    \min_{\boldsymbol{\lambda}}\;
+    \Bigl\lVert
+    \bigl(\mathbf{I} - \boldsymbol{\Psi}(\boldsymbol{\lambda})
+    \boldsymbol{\Psi}(\boldsymbol{\lambda})^{+}\bigr)\,\mathbf{X}
+    \Bigr\rVert_F^2,
+    \label{eq:varpro_projected}
+\end{equation}
+es decir, se minimiza la norma de la proyección de los datos sobre el
+complemento ortogonal del subespacio generado por las exponenciales. La
+dimensión del problema de optimización se reduce de $M(P+1)$ a $M$
+variables complejas, y la estimación resultante de
+$\boldsymbol{\lambda}$ suprime el sesgo de los métodos de regresión lineal
+\cite{askham2018,brunton2022}. En este trabajo, los polos obtenidos por el
+algoritmo Multi-TK se emplean como inicialización de
+\eqref{eq:varpro_projected}, combinando la robustez del subespacio de señal
+de la SVD con la consistencia estadística del ajuste no lineal.
+
+\subsection{Discriminación de Modos Dominantes por Energía Modal}
+
+Los estimadores con orden sobredimensionado (Multi-TK con $L>M$, VarPro
+con modos triviales adicionales para absorber ruido) entregan un conjunto
+de modos en el que los modos físicos dominantes están mezclados con modos
+triviales. Para separarlos, además del criterio sobre valores singulares
+\eqref{eq:energy}, se emplea el criterio de \textbf{energía modal} sobre
+las amplitudes estimadas \cite{jiang2021}: la energía del modo $k$ se
+define a partir de las amplitudes complejas de todos los canales,
+\begin{equation}
+    E_k \;=\; \sum_{i=1}^{P} |a_{i,k}|^2
+    \;=\; \lVert \mathbf{s}_k \rVert_2^2,
+    \label{eq:mode_energy}
+\end{equation}
+y los modos se ordenan por energía decreciente. El peso de energía
+acumulada
+\begin{equation}
+    E_{s,k} \;=\;
+    \frac{\displaystyle\sum_{i=1}^{k} E_i}{\displaystyle\sum_{i=1}^{M} E_i}
+    \times 100\%
+    \label{eq:cum_mode_energy}
+\end{equation}
+determina los $k$ primeros modos como dominantes cuando
+$E_{s,k} \ge E_0$, con $E_0 = 85\%$ como valor validado empíricamente
+frente al análisis de eigenvalores y a la densidad espectral de potencia
+en el sistema de prueba de 16 generadores y 68 buses \cite{jiang2021}. A
+diferencia de \eqref{eq:energy}, que opera sobre el subespacio de la
+matriz de datos \emph{antes} de estimar los polos, el criterio
+\eqref{eq:cum_mode_energy} opera sobre la contribución de cada modo ya
+estimado a la reconstrucción de las señales, por lo que ambos criterios
+son complementarios: el primero fija el orden del modelo $M$ y el segundo
+jerarquiza los modos físicos dentro de ese orden.
+
 \subsection{Forma Modal (Mode Shape)}
 
 La \textbf{forma modal} del modo $k$ describe la distribución espacial:
@@ -239,7 +681,35 @@ La \textbf{forma modal} del modo $k$ describe la distribución espacial:
 \end{bmatrix}
 \end{equation}
 
-La magnitud $|\mathbf{s}_k|$ indica observabilidad; la fase $\angle\mathbf{s}_k$ revela relaciones entre señales.
+La magnitud $|\mathbf{s}_k|$ indica observabilidad; la fase $\angle\mathbf{s}_k$ revela relaciones entre señales. Para comparar formas
+modales entre modos o entre métodos, $\mathbf{s}_k$ se normaliza a norma
+unitaria, $\hat{\mathbf{s}}_k = \mathbf{s}_k / \lVert\mathbf{s}_k\rVert_2$,
+o respecto a su componente de mayor magnitud, convención empleada en la
+literatura de identificación basada en mediciones
+\cite{jiang2021,li2020era}.
+
+La forma modal empírica $\mathbf{s}_k$ tiene una interpretación exacta en
+términos del modelo de estados \eqref{eq:statespace}: por
+\eqref{eq:measured_modal}, $a_{i,k} =
+(\mathbf{c}_i^\top\boldsymbol{\phi}_k)\,c_k$, de modo que
+\begin{equation}
+    \mathbf{s}_k \;=\; c_k
+    \begin{bmatrix}
+        \mathbf{c}_1^\top \boldsymbol{\phi}_k \\
+        \vdots \\
+        \mathbf{c}_P^\top \boldsymbol{\phi}_k
+    \end{bmatrix},
+    \label{eq:shape_link}
+\end{equation}
+es decir, $\mathbf{s}_k$ es la proyección del \textbf{eigenvector derecho}
+$\boldsymbol{\phi}_k$ sobre los canales medidos, escalada por el factor de
+excitación $c_k$, común a todos los canales. Dado que $c_k$ es un escalar,
+las magnitudes \textit{relativas} y las fases \textit{relativas} entre
+canales de $\mathbf{s}_k$ coinciden con las del eigenvector derecho, que es
+precisamente la forma modal del análisis de pequeña señal
+\cite{kundur1994}. En particular, los canales en contrafase
+($\Delta\phi \approx 180^\circ$) identifican los grupos coherentes de
+generadores que oscilan uno contra otro en un modo interárea.
 
 \subsection{Factor de Participación}
 
@@ -248,8 +718,114 @@ Para el modo $k$, la participación normalizada de la señal $i$ es:
 \hat{p}_{ik} = \frac{|a_{i,k}|}{\displaystyle\sum_{j=1}^{P} |a_{j,k}|}
 \end{equation}
 
-Cuantifica la magnitud relativa del modo en cada medición y permite identificar grupos coherentes de generadores.
+Debe distinguirse $\hat{p}_{ik}$ del \textbf{factor de participación} del
+análisis de pequeña señal, definido como el producto de los elementos de
+los eigenvectores derecho e izquierdo,
+\begin{equation}
+    p_{ki} \;=\; \phi_{ki}\,\psi_{ik},
+    \label{eq:participation_state}
+\end{equation}
+que mide la participación neta del estado $k$ en el modo $i$ combinando
+actividad (eigenvector derecho) y controlabilidad de la condición inicial
+(eigenvector izquierdo), y cuya evaluación exige el conocimiento explícito
+de la matriz $\mathbf{A}$ \cite{kundur1994}. El índice $\hat{p}_{ik}$ aquí
+propuesto es, en cambio, una medida \textit{empírica de observabilidad
+relativa} del modo $k$ en el canal $i$, calculable exclusivamente a partir
+de mediciones sincrofasoriales sin requerir un modelo del sistema. Ambas
+nociones coinciden en su uso práctico: jerarquizar las señales (y por ende
+las máquinas o áreas) dominantes en cada modo e identificar los grupos
+coherentes de generadores, lo que habilita la localización de los canales
+óptimos para monitoreo y control de oscilaciones \cite{sauer2017}. Esta
+distinción está respaldada por la literatura de identificación basada en
+mediciones: los métodos que estiman explícitamente una realización de
+estado (p.~ej.\ ERA) recuperan el factor de participación formal a partir
+de los eigenvectores derecho e izquierdo de la matriz de estados
+realizada \cite{li2020era}, mientras que los métodos de ajuste de
+amplitudes (OptVarPro, Prony multicanal, Multi-TK) construyen índices de
+participación a partir de las magnitudes $|a_{i,k}|$
+\cite{jiang2021}. En ambos enfoques se ha verificado, sobre el sistema de
+prueba de 16 generadores y 68 buses, que los generadores con mayor índice
+empírico coinciden con los de mayor factor de participación obtenido por
+análisis de eigenvalores, aun cuando los valores numéricos difieren
+\cite{jiang2021,li2020era}.
 
-\input{capitulos/capitulo2/integrales_energia.txt}
+\subsection{Identificación de Grupos Coherentes: Coseno Director y
+Agrupamiento Espectral}
 
-\chapterbibliography 
+La forma modal de un solo modo separa a los generadores en, a lo sumo,
+dos grupos en contrafase; la partición del sistema en grupos coherentes
+bajo la acción conjunta de \emph{múltiples} modos dominantes requiere una
+medida de similitud entre generadores construida sobre el conjunto
+completo de formas modales \cite{jiang2021,li2018cwt}. Sea
+$\mathbf{r}_i = [a_{i,1}, a_{i,2}, \ldots, a_{i,M}] \in \mathbb{C}^{1\times M}$
+la fila de amplitudes complejas (residuos) del generador $i$ sobre los $M$
+modos dominantes, normalizada a norma unitaria,
+$\hat{\mathbf{r}}_i = \mathbf{r}_i / \lVert\mathbf{r}_i\rVert_2$. El
+\textbf{coseno director} entre los generadores $i$ y $j$ se define como la
+parte real del producto interno complejo normalizado:
+\begin{equation}
+    r_{ij} \;=\;
+    \operatorname{Re}\bigl( \hat{\mathbf{r}}_i\, \hat{\mathbf{r}}_j^{H} \bigr)
+    \;\in\; [-1,\, 1].
+    \label{eq:direction_cosine}
+\end{equation}
+Dos generadores completamente coherentes (misma respuesta modal, fase
+relativa nula) tienen $r_{ij}=1$; dos generadores en contrafase perfecta
+tienen $r_{ij}=-1$ \cite{li2018cwt,li2020era}. Es esencial conservar el
+signo en \eqref{eq:direction_cosine}: tomar la magnitud
+$|\hat{\mathbf{r}}_i \hat{\mathbf{r}}_j^{H}|$ colapsa el rango a $[0,1]$ y
+asigna similitud máxima a generadores en oposición de fase, que por
+definición pertenecen a grupos coherentes distintos.
+
+A partir de la matriz de cosenos directores
+$\mathbf{R} = [r_{ij}] \in \mathbb{R}^{n_g \times n_g}$ existen dos
+estrategias de partición:
+
+\textbf{(a) Umbralización.} Dos generadores se declaran coherentes si
+$r_{ij} \ge r_0$, con $r_0 = 0.8$ como umbral validado en la literatura
+\cite{li2018cwt,li2020era}. La matriz binaria de adyacencia resultante
+define un grafo no dirigido cuyas componentes conexas son los grupos
+coherentes. Su limitación es la necesidad de fijar $r_0$ a priori.
+
+\textbf{(b) Agrupamiento espectral con eigengap.} Para evitar el umbral,
+se construye un grafo ponderado $G=(V,E)$ con vértices en los generadores
+y pesos de arista \cite{jiang2021}
+\begin{equation}
+    w_{ij} \;=\;
+    \begin{cases}
+        r_{ij}, & r_{ij} \ge 0,\\
+        0, & r_{ij} < 0,
+    \end{cases}
+    \qquad i \ne j,
+    \label{eq:edge_weights}
+\end{equation}
+de modo que la incoherencia (signo negativo) se traduce en ausencia de
+arista. Con $d_i = \sum_{j} w_{ij}$ y
+$\mathbf{D} = \operatorname{diag}(d_1,\ldots,d_{n_g})$, el laplaciano del
+grafo y su versión normalizada simétrica son
+\begin{equation}
+    \mathbf{L} \;=\; \mathbf{D} - \mathbf{W},
+    \qquad
+    \mathbf{L}_N \;=\; \mathbf{D}^{-1/2}\,\mathbf{L}\,\mathbf{D}^{-1/2}.
+    \label{eq:laplacian}
+\end{equation}
+Los eigenvalores de $\mathbf{L}_N$, ordenados ascendentemente
+$0 = \mu_1 \le \mu_2 \le \cdots \le \mu_{n_g}$, codifican la estructura de
+comunidades del grafo: el número de grupos coherentes $K$ se selecciona
+mediante el criterio del \textbf{eigengap},
+\begin{equation}
+    K \;=\; \operatorname*{arg\,max}_{k}\;
+    \bigl( \mu_{k+1} - \mu_k \bigr),
+    \label{eq:eigengap}
+\end{equation}
+es decir, $K$ es el índice donde ocurre la mayor brecha espectral
+\cite{jiang2021}. La partición se obtiene aplicando $k$-medias sobre las
+filas, normalizadas a norma unitaria, de la matriz formada por los $K$
+primeros eigenvectores de $\mathbf{L}_N$. Este procedimiento resuelve de
+forma aproximada el problema de corte de grafo y no requiere conocer
+$K$ ni $r_0$ a priori; sobre el sistema de 16 generadores y 68 buses
+reproduce los grupos coherentes del análisis de eigenvalores, con la
+capacidad adicional de aislar generadores de comportamiento singular en
+grupos unitarios \cite{jiang2021}.
+
+\chapterbibliography

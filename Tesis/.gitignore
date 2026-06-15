@@ -42,9 +42,3 @@ build/
 # OS files
 .DS_Store
 Thumbs.db
-# Carpetas de caché o auxiliares
-_build/
-*.backup
-
-# PDF compilado (si prefieres no subirlo; o puedes ignorarlo y compilar localmente)
-# *.pdf
