@@ -1,0 +1,90 @@
+% capitulos/Capitulo1.tex
+
+\chapter{Introducción}
+
+Desde finales del siglo XIX, Thomas A. Edison comenzó con el trabajo de electrificación, creando por primera vez, una red eléctrica de corriente continua (CC) en New York en 1882, la estación Pearl Street generaba 30 kW a 110 Volts para un total de 59 clientes. Luego, Nikola Tesla hizo publicaciones sobre las ventajas de la corriente alterna (CA), que describen motores de inducción y síncronos de dos fases. En 1891 se puso en marcha la primera red eléctrica trifásica de CA en Alemania, transmitiendo energía a 179 km a 12 kV. Para Estados Unidos en 1893 se puso la primera red eléctrica de CA en California, una red de 12 km a 2.3 kV~\cite{Glover2017}. En México, la primera red eléctrica se deriva de una fábrica de tejidos en la ciudad de León, Guanajuato en 1879, y en menos de 10 años se tenía una capacidad instalada en todo México de 937.89 kW en 60 estaciones eléctricas~\cite{Garza1994}.
+
+Con el paso de las décadas, estas pequeñas redes eléctricas fueron evolucionando gradualmente, hasta llegar a ser las grandes redes eléctricas interconectadas, incluso internacionalmente, que conocemos hoy en día. Estas grandes redes son la infraestructura más grande de la sociedad moderna. Por lo que la red eléctrica puede ser definida como el conjunto de cables y máquinas que conectan las fuentes de electricidad (las estaciones de energía) con los clientes y la infinidad de diferentes usos~\cite{Amin2008}. Usualmente estas grandes redes están fuertemente interconectadas, por lo que una falla lo suficientemente severa genera grandes problemas a lo largo de toda la red interconectada. En este contexto podemos definir la estabilidad del sistema eléctrico como la capacidad del sistema de mantener su estado de operación sin mayores desviaciones en las variables eléctricas (voltaje, frecuencia, ángulo de fase), tras haber sido sometido a una falla o perturbacion en la red~\cite{Kundur2004, Hatziargyriou2021}.
+
+A lo largo de la historia, las vulnerabilidades de las grandes redes interconectadas se han hecho evidentes debido a los grandes apagones que han ocurrido en diferentes regiones del mundo. En Estados Unidos por ejemplo, los cortes de energía y las perturbaciones en la red eléctrica cuestan anualmente entre 75,000 y 180,000 millones de dólares~\cite{Amin2008}. Las diferentes fallas consecutivas durante los últimos 40 años ponen en evidencia la vulnerabilidad y la necesidad de comprender los fenómenos de estabilidad, para el desarrollo de controles y la restauración de la red. Para poder diseñar estas medidas, es necesario clasificar los diferentes tipos de estabilidad, dependiendo de la naturaleza física del fenomeno de inestabilidad, el tamaño de la perturbación, los dispositivos, procesos y el tiempo involucrado. Una de las categorías recae en la estabilidad del rotor, la cual se puede definir como la capacidad de las máquinas síncronas interconectadas de mantener sincronismo entre sí después de sufrir algún disturbio~\cite{Kundur2004, Hatziargyriou2021}. Estas perturbaciones desbalancean el par mecánico y eléctrico de las máquinas síncronas, dando lugar a oscilaciones de baja frecuencia (LFOs) que pueden ser amortiguadas o no, dependiendo de las características del sistema. Las LFOs se pueden ver como modos (frecuencia y amortiguamiento de la osilacion) electromecánicos de oscilación, y dependiendo de su naturaleza pueden causar inestabilidad en el sistema eléctrico de potencia. Los modos se clasifican como locales (1 a 2 Hz) o inter-área (0.2 a 1 Hz), dependiendo de la ubicación de las máquinas involucradas en la oscilación. Los modos locales involucran a una o pocas máquinas en una misma área geográfica, mientras que los modos inter-área involucran a grupos de máquinas en diferentes áreas geográficas que oscilan entre sí. El detectar y mitigar estos modos mediante las mediciones disponibles surge como una herramienta crucial para garantizar la estabilidad y confiabilidad. 
+
+La necesidad de un monitoreo de la dinámica del sistema en tiempo real es más crucial que nunca. Los sistemas tradicionales de supervisión (por sus siglas en ingles SCADA) son insuficientes para el análisis dinámico, debido a sus bajas tasas de muestreo y la falta de sincronización temporal entre mediciones distantes. La verdadera revolución tecnológica en este ámbito ha sido el desarrollo de las Unidades de Medición Fasorial (PMU) y su integración en Sistemas de Monitoreo de Área Amplia (WAMS)~\cite{Hauer2007}. Las PMUs proporcionan mediciones de alta velocidad (e.g., 30-120 Hz) de fasores de voltaje y corriente, crucialmente sincronizadas mediante una marca de tiempo global (GPS), ofreciendo un análisis del estado dinámico del sistema.
+
+Este trabajo se alinea con los lineamientos de la Secretaría de Ciencia, Humanidades, Tecnología e Innovación (Secihti) bajo el Eje de Cambio Climático y Gestión de Riesgos, buscando fortalecer las capacidades tecnológicas del Estado mexicano en el sector energético. 
+\section{Antecedentes}
+
+La disponibilidad de flujos de datos de PMUs abre dos vías principales para el análisis modal: el análisis de datos ambientales (ambient data) durante la operación normal y el análisis de ringdown tras una perturbación severa~\cite{Thambirajah2010}. Por ejemplo, las fallas grandes en la red generan una aceleración en los rotores de los generadores, produciendo así una desviación en la frecuencia del sistema y otras mediciones eléctricas, por ejemplo, el flujo de potencia, voltaje, entre otras.
+
+La clasificación de los análisis transitorios para estimar los modos de oscilación se subdividen en un principio en métodos lineales y no lineales. Los métodos no lineales se subdividen a su vez en métodos paramétricos y no paramétricos. Los métodos paramétricos hacen la identificación de un modelo matemático del sistema y así determinan valores instantáneos de frecuencia y amortiguamiento, mientras que los métodos no paramétricos usan técnicas en el dominio de la frecuencia, como la transformada de Fourier, para estimar los modos de oscilación. Por otro lado, los métodos lineales se aplican la suposición de que los modos de oscilación no varian significativamente durante el periodo de análisis. Estas técnicas hacen un ajuste de curvas y se subdividen en dos clases: las técnicas del dominio del tiempo y las técnicas del dominio de la frecuencia. Las técnicas del dominio de la frecuencia como la identificación en el dominio de la frecuencia o identificación por la transformada Z, ajustan el modelo basado en el espectro de la frecuencia de los datos medidos. Por otro lado, las técnicas del dominio del tiempo, como lo son Prony, Algoritmo de Realización del Sistema Propio y Matrix Pencil, basan su estimación en la matriz de Hankel, una matriz cuadrada construida que ventanea los datos medidos en el tiempo~\cite{Thambirajah2010}.
+
+\subsection{Técnicas de análisis multivariables}
+
+Técnicas como Prony para múltiples señales como en~\cite{Trudnowski1999}, establecen un enfoque multivariable para el análisis modal, lo que mejora la exactitud con la que se estiman los parámetros. Los métodos que basan el análisis en una señal presentan menores ventajas en comparación con los métodos multivariables, ya que de una sola señal no se pueden extraer los patrones dinámicos globales del sistema, y en ocasiones los modos de oscilación pueden no ser observables en ciertas señales. Por lo que los métodos multivariables presentan una ventaja significativa al aprovechar la información contenida en múltiples señales medidas en diferentes ubicaciones del sistema eléctrico de potencia.
+
+Después de Prony multivariable~\cite{Trudnowski1999}, en 2007 el doctor Messina y colegas mediante funciones ortogonales empíricas aplican la SVD a la matriz de datos para extender los patrones propios y temporales de mayor energía~\cite{Messina2007}. Una técnica que reduce el tiempo de cómputo usando las mismas funciones empíricas ortogonales se presenta en~\cite{Esquivel2015}. En 2012 se realiza una extensión que no solo proporciona la variabilidad temporal de la oscilación de baja frecuencia, sino que también calcula la distribución espacial de los modos de oscilación polarizados (POM) relevantes sin necesidad de experiencia previa del sistema~\cite{Yang2012}. 2014 fue el año para una expansión multivariable basada en un análisis de Fourier para datos ringdowns, aquí se aplican las tendencias de las oscilaciones observadas en los picos de amplitud en el dominio de la frecuencia, usando la FFT~\cite{Tashman2014}.
+
+En 2015, el doctor Barocio y colegas mediante una descomposición dinámica de modos (DMD) aproximan el operador de Koopman global, aproximando funciones de Koopman utilizando dos conjuntos de secuencias de datos ordenadas temporalmente~\cite{Barocio2015}. En 2016, se usan técnicas de reducción lineal más avanzados que analizan la geometría del manifold formado por todos los datos del sistema en un espacio de alta resolución~\cite{Arvizu2016}. Para 2017 se propone una respuesta directa a la falla de observabilidad del CWT estándar, combinando la información de todos los canales antes de la estimación para encontrar modos que podrían estar ocultos en canales individuales~\cite{Li2018}. En 2019 una extensión MIMO del Vector Fitting es aplicada para múltiples señales simultáneas~\cite{Schumacher2019, Banuelos2019}.
+
+Más recientemente, en 2022, el doctor Zamora-Méndez propone una descomposición iterativa de valores propios basado en una extensión de las matrices de Hankel para múltiples señales~\cite{Zamora2024} y en 2024 Rodríguez-Soto, E. Barocio y colaboradores extendieron el método DMD multivariable que utiliza una corrección espacio-temporal entre PMUs para mejorar los datos faltantes y outliers utilizando las distancias de Mahalanobis~\cite{Rodriguez2024}. En el año actual, técnicas como el análisis independiente de componentes rápido (FastICA) junto con el algoritmo de búsqueda de coincidencias no lineal (NMP) ayuda a la mejora de estimación de parámetros modales a partir de datos contaminados con ruido~\cite{Wang2025}.
+
+Esta realidad ha impulsado una intensa investigación en métodos de identificación modal basados en mediciones (data-driven) que procesan todas las señales de WAMS simultáneamente en una gran matriz de datos. La clasificación presentada en la Fig.~\ref{fig:clasificacion_tecnicas} no es meramente descriptiva, sino que revela la evolución lógica y las limitaciones actuales de la tecnología. Se observa una clara diferencia histórica: por un lado, las técnicas paramétricas clásicas (Rama 5, e.g., Prony) ofrecen alta resolución espectral pero sufren ante el ruido; por otro lado, las técnicas de subespacio y geométricas (Ramas 3 y 4, e.g., ERA, SSI, DMD) manejan mejor la dimensionalidad global pero imponen una carga computacional que dificulta su aplicación en tiempo real estricto.Es aquí donde cobra relevancia la identificación de un campo tecnológico específico. Mientras que los métodos híbridos recientes (Rama 1) se enfocan en el pre-filtrado (Bessel) o la descomposición iterativa (IEVDHM), existe un vacío en la literatura respecto a la adaptación multivariable de métodos paramétricos robustos.
+
+\begin{figure}[t]
+    \centering
+    \input{diagramas/diagrama_wams.tex} 
+    \caption{Clasificación de Técnicas Multivariables (WAMS)}
+    \label{fig:clasificacion_tecnicas} % El nombre para citarlo
+\end{figure}
+
+\section{Justificación}
+
+La creciente integración de recursos energéticos renovables y la operación de los sistemas de potencia cerca de sus límites de estabilidad han aumentado la naturaleza no lineal de las oscilaciones. Los métodos actuales de monitoreo enfrentan desafíos críticos que justifican el desarrollo de una nueva metodología capaz de procesar informacion de manera robusta y global.
+
+En este contexto, la presente investigación se alinea estratégicamente con el Programa Nacional Estratégico (PRONACE) bajo el Eje Estratégico de Cambio Climático y Gestión de Riesgos, contribuyendo directamente al desarrollo de modelos tecnológicos de bajo consumo de energía aplicados a la ciudad. La transición hacia un modelo energético sustentable requiere la ampliacion en gran medida de las redes inteligentes (Smart Grids) y la integración de micro-redes y generación renovable. Sin embargo, la intermitencia de estas fuentes limpias introduce dinámicas complejas que amenazan la confiabilidad del suministro. El algoritmo multivariable propuesto actúa como una propuesta tecnológica, pues al garantizar un monitoreo preciso de la estabilidad transitoria, permite operar estas redes modernas de manera segura y eficiente.
+
+\section{Objetivos}
+
+\subsection{General}
+
+Desarrollar y proponer un método de identificación y analisis modal robusto y eficiente para sistemas de monitoreo de área amplia (WAMS), basado en la extensión multivariable del algoritmo Tufts-Kumaresan \cite{Tufts1982} \cite{Moghdam2024}.
+
+\subsection{Específicos}
+
+\begin{itemize}
+\item Formular matemáticamente la extensión de la matriz de predicción lineal hacia atrás del método Kumaresan-Tufts para soportar entradas de múltiples señales (MIMO).
+\item Implementar estrategias de truncamiento adaptativo de valores singulares para discriminar automáticamente entre los modos dominantes del sistema y el ruido de medición no correlacionado.
+\item Validar el desempeño del algoritmo propuesto mediante señales sintéticas y simulaciones de sistemas de potencia de prueba, comparando su precisión y tiempo de ejecución frente a métodos clásicos como Prony Multiseñal, ERA y Matrix Pencil bajo diferentes escenarios de ruido.
+\item Estimar las aomplitudes y fases de los modos identificados para caracterizar completamente la dinámica electromecánica del sistema. Graficar y vizualizar los formas modales y factores de participacion.
+\item Proponer un enotorno visual interactivo para el análisis y monitoreo en tiempo real de los modos electromecánicos
+\end{itemize}
+
+\section{Hipótesis}
+
+Con una extensión multivariable de la tecnica Tufts-Kumaresan (M-TK), mediante una descomposición de valores singulares recursiva, se espera la identificación unificada de modos electromecánicos con una robustez y una eficiencia computacional apta para el monitoreo en tiempo real.
+
+\section{Metodología}
+
+\begin{itemize}
+\item Revisión bibliográfica y estado del arte: Análisis de técnicas de identificación modal para sistemas de potencia.
+\item Selección e implementación de algoritmos: Selección de técnicas multivariables representativas (ERA, Prony multivariable, etc.). Implementación computacional de los algoritmos seleccionados
+\item Desarrollo de casos de estudio: Creación de modelos de simulación en software especializado (MATLAB/Simulink, DigSILENT, etc.). Diseño de escenarios con diferentes tipos de perturbaciones y condiciones operativas.
+\item Validación y evaluación: Pruebas de los algoritmos con datos sintéticos y reales. Comparación del desempeño entre métodos multivariables. Análisis de sensibilidad frente a ruido y posiblemente missing data o outliers.
+\item Análisis de resultados: Análisis estadístico de los resultados obtenidos. Elaboración de conclusiones y recomendaciones.
+\end{itemize}
+
+\section{Cronograma}
+
+
+A continuación, se presenta la planeación de las actividades a desarrollar durante el periodo 2025-2026:
+
+\input{diagramas/cronograma_completo.tex}
+
+\chapterbibliography 
+
+
+
+
+
+
+
+

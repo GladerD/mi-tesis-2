@@ -1,0 +1,100 @@
+% Definición de comandos rápidos para colorear celdas
+\newcommand{\vaca}{\cellcolor{gray!20}V}
+\newcommand{\clase}{\cellcolor{colorRama5}X} % Fase 1: Formativa
+\newcommand{\plan}{\cellcolor{colorRama4}X}  % Fase 2: Definición
+\newcommand{\impl}{\cellcolor{colorRama3}X}  % Fase 3: Desarrollo
+\newcommand{\val}{\cellcolor{colorRama2}X}   % Fase 4: Validación
+\newcommand{\tesis}{\cellcolor{colorRama1}X} % Fase 5: Egreso
+
+\begin{table}[htbp]
+\centering
+\caption{Cronograma de actividades (Agosto 2025 - Diciembre 2026)}
+\label{tab:cronograma_unificado}
+
+% --- PARTE 1: 2025 a Marzo 2026 ---
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|p{5.5cm}|*{32}{c|}}
+\hline
+\multirow{3}{*}{\textbf{Actividad / Semanas}} 
+& \multicolumn{20}{c|}{\textbf{2025}} 
+& \multicolumn{12}{c|}{\textbf{2026}} \\ \cline{2-33}
+
+& \multicolumn{4}{c|}{\textbf{Ago.}} & \multicolumn{4}{c|}{\textbf{Sep.}} & \multicolumn{4}{c|}{\textbf{Oct.}} & \multicolumn{4}{c|}{\textbf{Nov.}} & \multicolumn{4}{c|}{\textbf{Dic.}} 
+& \multicolumn{4}{c|}{\textbf{Ene.}} & \multicolumn{4}{c|}{\textbf{Feb.}} & \multicolumn{4}{c|}{\textbf{Mar.}} \\ \cline{2-33}
+
+& 1&2&3&4 & 1&2&3&4 & 1&2&3&4 & 1&2&3&4 & 1&2&3&4 & 1&2&3&4 & 1&2&3&4 & 1&2&3&4 \\ \hline
+
+\textbf{Periodo Vacacional} 
+& & & & & & & & & & & & & & & & & & &\vaca&\vaca 
+& \vaca&\vaca& & & & & & & & & &\vaca \\ \hline
+
+Clases formativas 
+& \clase&\clase&\clase&\clase & \clase&\clase&\clase&\clase & \clase&\clase&\clase&\clase & \clase&\clase&\clase&\clase & \clase&\clase& & 
+& & & & & & & & & & & & \\ \hline
+
+Revisión de tesis 
+& & & & & & & & & & & & & & & & & \plan&\plan& & 
+& & & & & & & & & & & & \\ \hline
+
+
+Antecedentes, Justificación 
+& & & & & & & & & & & & & & & & & & & & 
+& & &\plan&\plan & \plan&\plan&\plan&\plan & & & & \\ \hline
+
+Objetivos e Hipótesis 
+& & & & & & & & & & & & & & & & & & & & 
+& & & & & \plan&\plan&\plan&\plan & & & & \\ \hline
+
+Metodología, Organización 
+& & & & & & & & & & & & & & & & & & & & 
+& & & & & \plan&\plan&\plan&\plan & \plan&\plan&\plan& \\ \hline
+
+Revisión bibliográfica 
+& & & & & & & & & & & & & & & & & & & & 
+& & &\plan&\plan & \plan&\plan&\plan&\plan & \plan&\plan&\plan& \\ \hline
+
+Implementación algoritmos 
+& & & & & & & & & & & & & & & & & & & & 
+& & & & & & & & & \impl&\impl&\impl& \\ \hline
+\end{tabular}%
+}
+
+\vspace{0.5cm} % Espacio de separación entre las dos tablas concatenadas
+
+% --- PARTE 2: Abril 2026 a Diciembre 2026 ---
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|p{5.5cm}|*{36}{c|}}
+\hline
+\multirow{3}{*}{\textbf{Actividad / Semanas}} 
+& \multicolumn{36}{c|}{\textbf{2026 (Continuación)}} \\ \cline{2-37}
+
+& \multicolumn{4}{c|}{\textbf{Abr.}} & \multicolumn{4}{c|}{\textbf{May.}} & \multicolumn{4}{c|}{\textbf{Jun.}} & \multicolumn{4}{c|}{\textbf{Jul.}} & \multicolumn{4}{c|}{\textbf{Ago.}} & \multicolumn{4}{c|}{\textbf{Sep.}} & \multicolumn{4}{c|}{\textbf{Oct.}} & \multicolumn{4}{c|}{\textbf{Nov.}} & \multicolumn{4}{c|}{\textbf{Dic.}} \\ \cline{2-37}
+
+& 1&2&3&4 & 1&2&3&4 & 1&2&3&4 & 1&2&3&4 & 1&2&3&4 & 1&2&3&4 & 1&2&3&4 & 1&2&3&4 & 1&2&3&4 \\ \hline
+
+\textbf{Periodo Vacacional} 
+& \vaca& & & & & & & & & & & & & &\vaca&\vaca & & & & & & & & & & & & & & & & & & &\vaca&\vaca \\ \hline
+
+Implementación algoritmos 
+& &\impl&\impl&\impl & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & \\ \hline
+
+Desarrollo casos de estudio 
+& &\impl&\impl&\impl & \impl&\impl&\impl&\impl & \impl&\impl&\impl&\impl & & & & & & & & & & & & & & & & & & & & & & & & \\ \hline
+
+Presentación Anteproyecto 
+& & & & & & & & & & & & & \val&\val& & & & & & & & & & & & & & & & & & & & & & \\ \hline
+
+Validación de algoritmos 
+& & & & & & & & & \val&\val&\val&\val & \val&\val& & & \val&\val&\val&\val & & & & & & & & & & & & & & & & \\ \hline
+
+Análisis de resultados 
+& & & & & & & & & & & & & & & & & \val&\val&\val&\val & \val&\val&\val&\val & & & & & & & & & & & & \\ \hline
+
+Redacción de tesis 
+& & & & & & & & & & & & & & & & & & & & & \tesis&\tesis&\tesis&\tesis & \tesis&\tesis&\tesis&\tesis & \tesis&\tesis&\tesis&\tesis & \tesis& & & \\ \hline
+
+Examen de Grado 
+& & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & &\tesis& & \\ \hline
+\end{tabular}%
+}
+\end{table}
