@@ -1,101 +1,70 @@
-% capitulos/Capitulo2.tex — versión auditada e integrada
-% Cambios principales: solución modal (Kundur §12.2), contexto WAMS (Sauer Cap. 10),
-% Eckart–Young y Gavish–Donoho (Brunton & Kutz Cap. 1), VarPro (Brunton & Kutz §7.2, Askham–Kutz),
-% corrección de notación (sigma_k para amortiguamiento), erratas y estructura.
-
 \chapter{Marco Teórico}
 
-\section*{Resumen del Capítulo}
+% ---------------- RESUMEN ----------------
+\section*{Resumen}
+Las oscilaciones electromecánicas de baja frecuencia limitan la capacidad
+de transferencia de los sistemas eléctricos interconectados y, cuando están
+pobremente amortiguadas, pueden desencadenar apagones de gran escala. Su
+diagnóstico tradicional mediante análisis de eigenvalores exige un modelo
+preciso y parámetros actualizados, difíciles de mantener en redes
+reales. Extraer las propiedades modales --- modos
+dominantes, formas modales, factores de participación y grupos coherentes
+--- directamente de mediciones sincrofasoriales, sin un modelo del sistema y
+con robustez frente al ruido es un problema abierto. Se propone un algoritmo de
+identificación que combine la predicción lineal multicanal de
+Tufts--Kumaresan, basada en el truncamiento de la descomposición en
+valores singulares permite estimar los parámetros modales con exactitud comparable 
+al análisis de eigenvalores y mayor robustez al ruido que los métodos basados en 
+datos existentes. El objetivo es establecer el marco teórico que fundamenta
+esa cadena, deduciendo el modelo de señal desde la física del generador
+síncrono y rigorizando cada etapa de estimación. El capitulo
+articula una estructura teórica invertible que (i) deriva el modelo de
+exponenciales amortiguadas como consecuencia de la respuesta libre del
+sistema y no como postulado; (ii) sustenta el truncamiento de la SVD como
+filtro óptimo y la selección de orden por umbral duro óptimo; (iii) conecta
+las cantidades medibles con los eigenvectores del modelo de estados; y (iv)
+formaliza la identificación de grupos coherentes por coseno director y
+agrupamiento espectral. El marco se valida contra la literatura de
+identificación modal basada en mediciones sobre el sistema de prueba de
+16 generadores y 68 buses.
 
-Se estableció la cadena teórica completa que va de la ecuación de
-oscilación al algoritmo de identificación: el modelo clásico multimáquina,
-linealizado mediante los coeficientes de potencia sincronizante, produce un
-sistema $\Delta\dot{\mathbf{x}} = \mathbf{A}\Delta\mathbf{x}$ cuya
-respuesta libre es una suma de exponenciales amortiguadas
-\eqref{eq:modal_response}; cualquier canal PMU hereda esa estructura
-espectral \eqref{eq:measured_modal}, lo que justifica el modelo discreto
-\eqref{eq:discrete} bajo la condición de Nyquist \eqref{eq:mapping}. El
-algoritmo Multi-TK resuelve el problema de predicción lineal hacia atrás
-multicanal \eqref{eq:multi_equation} mediante la pseudoinversa de
-Moore--Penrose truncada \eqref{eq:pinv}, cuya optimalidad y efecto
-regularizador quedan garantizados por el teorema de Eckart--Young--Mirsky
-\eqref{eq:eckartyoung}; la separación geométrica de raíces en el plano $z$
-distingue los modos físicos de los espurios, y los criterios de energía
-\eqref{eq:energy}, umbral duro óptimo \eqref{eq:gavish_unknown} y energía
-modal \eqref{eq:cum_mode_energy} gobiernan, respectivamente, el orden del
-modelo y la jerarquización de modos dominantes. El refinamiento por
-Proyección Variable \eqref{eq:varpro_projected}, inicializado con los polos
-Multi-TK, suprime el sesgo de errores en variables de la etapa lineal y
-optimiza directamente la métrica de reconstrucción; sus extensiones con
-restricciones de caja y de consistencia de subespacio
-\eqref{eq:P2}--\eqref{eq:P3} anclan el problema no convexo al subespacio de
-señal identificado. Finalmente, las amplitudes complejas estimadas
-\eqref{eq:amp_svd} se interpretan físicamente: la forma modal empírica es la
-proyección del eigenvector derecho sobre los canales medidos
-\eqref{eq:shape_link}, el índice $\hat{p}_{ik}$ cuantifica observabilidad
-relativa --- distinto, por identificabilidad, del factor de participación
-de estados \eqref{eq:participation_state} --- y los cosenos directores
-\eqref{eq:direction_cosine} junto con el agrupamiento espectral por
-eigengap \eqref{eq:eigengap} particionan el sistema en grupos coherentes de
-generadores sin parámetros fijados a priori. Este marco, validado contra la
-literatura de identificación basada en sincrofasores
-\cite{jiang2021,li2018cwt,li2020era}, constituye el fundamento del
-algoritmo Multi-TK + OptVarPro desarrollado en los capítulos siguientes.
 
 
 % ---------------- INTRODUCCION DEL CAPITULO ----------------
-\section*{Introducción del Capítulo}
+\section{Introducción del Capítulo}
 
 Este capítulo construye, de manera deductiva, el puente entre la física de
-las oscilaciones electromecánicas en sistemas eléctricos de potencia y los
-algoritmos de identificación modal basados en mediciones sincrofasoriales
-que sustentan esta tesis. La exposición sigue una cadena de implicaciones:
-se parte de las ecuaciones de oscilación del generador síncrono bajo el
-modelo clásico \cite{kundur1994}, se linealiza alrededor del punto de
-operación para obtener el modelo de estados cuyo espectro define los modos
-electromecánicos, y se demuestra --- mediante la transformación modal y la
-respuesta libre del sistema \cite{kundur1994} --- que toda señal registrada
-por una unidad de medición fasorial en régimen de \emph{ring-down} obedece
-exactamente un modelo de suma de exponenciales complejas amortiguadas. Esta
-derivación convierte el modelo de señal de los métodos de identificación en
-una consecuencia de la física del sistema, y no en un postulado, y delimita
-con precisión su dominio de validez: la banda electromecánica
-($0.1$--$3$~Hz) observada con tasas de reporte PMU de $30$~Hz o superiores
-\cite{sauer2017}.
+las oscilaciones electromecánicas y los algoritmos de identificación modal
+basados en mediciones sincrofasoriales que sustentan esta tesis. La
+exposición sigue una cadena de implicaciones: se parte de las ecuaciones de
+oscilación del generador síncrono bajo el modelo clásico \cite{kundur1994},
+se linealiza alrededor del punto de operación para obtener el modelo de
+estados cuyo espectro define los modos electromecánicos, y se demuestra ---
+mediante la transformación modal y la respuesta libre del sistema ---  que
+toda señal registrada por una unidad de medición fasorial en régimen de
+\emph{ring-down} obedece un modelo de suma de exponenciales complejas
+amortiguadas. Esta derivación convierte el modelo de señal en consecuencia
+de la física del sistema, y no en postulado, y delimita su dominio de
+validez: la banda electromecánica ($0.1$--$3$~Hz) observada con tasas de
+reporte PMU de $30$~Hz o superiores \cite{sauer2017}.
 
-Sobre esa base, el capítulo desarrolla la maquinaria matemática de
-estimación: la formulación discreta del modelo exponencial y su mapeo
-biunívoco al plano $z$; la predicción lineal hacia atrás multicanal del
-algoritmo Tufts--Kumaresan, cuyo mecanismo de separación señal--ruido en el
-plano complejo se analiza en detalle \cite{tufts1982}; el truncamiento de
-la descomposición en valores singulares como filtro óptimo en el sentido de
-Eckart--Young--Mirsky, junto con los criterios de selección de orden por
-energía acumulada y por umbral duro óptimo \cite{brunton2022,gavish2014};
-la estimación de amplitudes complejas mediante sistemas de Vandermonde
-numéricamente estables; y el refinamiento por mínimos cuadrados no lineales
-separables mediante Proyección Variable, que mitiga el sesgo estructural de
-los estimadores lineales \cite{askham2018}. La parte final traduce los
-parámetros estimados en \emph{patrones dinámicos} interpretables para la
-operación del sistema: formas modales y su vínculo formal con los
-eigenvectores derechos, índices de participación basados en mediciones y su
-distinción rigurosa frente a los factores de participación del análisis de
-pequeña señal, y la identificación de grupos coherentes de generadores
-mediante cosenos directores y agrupamiento espectral con selección
-automática del número de grupos \cite{jiang2021,li2018cwt,li2020era}.
-
-El capítulo incluye, además, el diseño de los estudios experimentales que
-validan las decisiones metodológicas: la selección del orden del predictor
-$L$ mediante diagramas de estabilización, la del orden del modelo $M$
-contrastando el criterio de energía con el umbral de Gavish--Donoho, y las
-formulaciones de optimización con restricciones de subespacio que acoplan
-la etapa lineal y la no lineal del método propuesto.
+Sobre esa base se desarrolla la maquinaria de estimación: la formulación
+discreta y su mapeo al plano $z$; la predicción lineal hacia atrás
+multicanal de Tufts--Kumaresan y su mecanismo de separación señal--ruido
+\cite{tufts1982}; el truncamiento de la SVD como filtro óptimo de
+Eckart--Young--Mirsky con selección de orden por energía y por umbral duro
+óptimo \cite{brunton2022,gavish2014}; la estimación de amplitudes mediante
+sistemas de Vandermonde estables; y el refinamiento por proyección variable
+\cite{askham2018}. La parte final traduce los parámetros en patrones
+dinámicos interpretables: formas modales, índices de participación y grupos
+coherentes \cite{jiang2021,li2018cwt,li2020era}. Se incluye, además, el
+diseño de los estudios experimentales que validan la selección del orden
+del predictor $L$, la del orden del modelo $M$ y las formulaciones de
+optimización con restricciones de subespacio.
 
 
 
-\section{Dinámica de Oscilaciones Electromecánicas}
-% ===========================================================
-
-\subsection{Modelado del Generador Síncrono}
+\subsection{Dinámica de Oscilaciones Electromecánicas}
 \subsubsection{Ecuaciones de Swing del Generador Síncrono}
 
 La dinámica de cada generador $i$ en un sistema de $n_g$ máquinas ($i=1,\ldots,n_g$) se describe mediante las \textbf{ecuaciones de swing}:
@@ -455,33 +424,7 @@ E_{s,M} = \frac{\displaystyle\sum_{k=1}^{M} \sigma_k^2}{\displaystyle\sum_{k=1}^
 \end{equation}
 donde típicamente $E_0 = 97\%$ (o $99.9\%$ según el nivel de ruido).
 
-El umbral de energía $E_0$ es una regla práctica cuyo valor óptimo depende
-del nivel de ruido. Una alternativa con garantía estadística es el
-\textbf{umbral duro óptimo} de Gavish--Donoho \cite{gavish2014,brunton2022},
-derivado bajo el modelo
-$\mathbf{A}_{\mathrm{multi}} = \mathbf{A}_{\mathrm{señal}} +
-\gamma\,\mathbf{A}_{\mathrm{ruido}}$, con entradas de ruido i.i.d.\
-gaussianas de media cero y varianza unitaria. Para una matriz rectangular
-de dimensiones $n\times m$ ($\beta = m/n \le 1$) y nivel de ruido $\gamma$
-conocido, se retienen únicamente los valores singulares que superan
-\begin{equation}
-    \tau \;=\; \lambda(\beta)\,\sqrt{n}\,\gamma,
-    \qquad
-    \lambda(\beta) = \left( 2(\beta+1) +
-    \frac{8\beta}{(\beta+1) + \sqrt{\beta^2 + 14\beta + 1}} \right)^{1/2},
-    \label{eq:gavish_known}
-\end{equation}
-expresión que se reduce a $\tau = (4/\sqrt{3})\sqrt{n}\,\gamma$ en el caso
-cuadrado. Cuando $\gamma$ es desconocido --- la situación habitual con
-mediciones sincrofasoriales --- el umbral se estima a partir de la mediana
-de los valores singulares, $\sigma_{\mathrm{med}}$:
-\begin{equation}
-    \tau \;=\; \omega(\beta)\,\sigma_{\mathrm{med}},
-    \label{eq:gavish_unknown}
-\end{equation}
-donde $\omega(\beta)$ se calcula numéricamente \cite{gavish2014}. En este
-trabajo, el criterio de energía \eqref{eq:energy} se contrasta con
-\eqref{eq:gavish_unknown} como verificación cruzada del orden $M$.
+
 
 \subsection{Truncamiento de la SVD y Solución del Sistema}
 
@@ -577,56 +520,6 @@ pseudoinversa calculada mediante la SVD de $\boldsymbol{\Psi}$
     \label{eq:amp_svd}
 \end{equation}
 
-\subsection{Refinamiento por Mínimos Cuadrados No Lineales: Proyección
-Variable}
-
-Los estimadores de la familia de predicción lineal comparten una limitación
-estructural: el ruido de medición contamina simultáneamente la matriz de
-regresores $\mathbf{A}_{\mathrm{multi}}$ y el vector objetivo
-$\mathbf{h}_{\mathrm{multi}}$ --- un problema de \textit{errores en
-variables} --- por lo que la solución de mínimos cuadrados lineal produce
-estimaciones de los polos con \textbf{sesgo} que el truncamiento de la SVD
-reduce pero no elimina \cite{brunton2022}. La formulación que ataca el
-sesgo de raíz consiste en resolver directamente el problema de ajuste
-exponencial como un problema de mínimos cuadrados \textbf{no lineal} en los
-parámetros modales \cite{askham2018,brunton2022}. Organizando las $P$
-señales en la matriz de datos
-$\mathbf{X} = [\mathbf{x}_1\;\cdots\;\mathbf{x}_P] \in \mathbb{C}^{N\times P}$
-y las amplitudes en $\mathbf{a} \in \mathbb{C}^{M\times P}$, el problema es
-\begin{equation}
-    \min_{\boldsymbol{\lambda},\,\mathbf{a}}\;
-    \bigl\lVert \mathbf{X} -
-    \boldsymbol{\Psi}(\boldsymbol{\lambda})\,\mathbf{a} \bigr\rVert_F^2,
-    \qquad
-    [\boldsymbol{\Psi}(\boldsymbol{\lambda})]_{n,k} = e^{\lambda_k n \Delta t},
-    \label{eq:varpro_problem}
-\end{equation}
-
-donde $\boldsymbol{\lambda} = [\lambda_1,\ldots,\lambda_M]^\top$. El
-problema \eqref{eq:varpro_problem} es \textbf{separable}: para
-$\boldsymbol{\lambda}$ fijo, las amplitudes óptimas tienen solución cerrada
-$\hat{\mathbf{a}}(\boldsymbol{\lambda}) =
-\boldsymbol{\Psi}(\boldsymbol{\lambda})^{+}\mathbf{X}$. El método de
-\textbf{Proyección Variable} (VarPro) explota esta estructura eliminando
-las variables lineales y optimizando únicamente sobre las no lineales
-\cite{askham2018}:
-\begin{equation}
-    \min_{\boldsymbol{\lambda}}\;
-    \Bigl\lVert
-    \bigl(\mathbf{I} - \boldsymbol{\Psi}(\boldsymbol{\lambda})
-    \boldsymbol{\Psi}(\boldsymbol{\lambda})^{+}\bigr)\,\mathbf{X}
-    \Bigr\rVert_F^2,
-    \label{eq:varpro_projected}
-\end{equation}
-es decir, se minimiza la norma de la proyección de los datos sobre el
-complemento ortogonal del subespacio generado por las exponenciales. La
-dimensión del problema de optimización se reduce de $M(P+1)$ a $M$
-variables complejas, y la estimación resultante de
-$\boldsymbol{\lambda}$ suprime el sesgo de los métodos de regresión lineal
-\cite{askham2018,brunton2022}. En este trabajo, los polos obtenidos por el
-algoritmo Multi-TK se emplean como inicialización de
-\eqref{eq:varpro_projected}, combinando la robustez del subespacio de señal
-de la SVD con la consistencia estadística del ajuste no lineal.
 
 \subsection{Discriminación de Modos Dominantes por Energía Modal}
 
@@ -777,55 +670,5 @@ $|\hat{\mathbf{r}}_i \hat{\mathbf{r}}_j^{H}|$ colapsa el rango a $[0,1]$ y
 asigna similitud máxima a generadores en oposición de fase, que por
 definición pertenecen a grupos coherentes distintos.
 
-A partir de la matriz de cosenos directores
-$\mathbf{R} = [r_{ij}] \in \mathbb{R}^{n_g \times n_g}$ existen dos
-estrategias de partición:
 
-\textbf{(a) Umbralización.} Dos generadores se declaran coherentes si
-$r_{ij} \ge r_0$, con $r_0 = 0.8$ como umbral validado en la literatura
-\cite{li2018cwt,li2020era}. La matriz binaria de adyacencia resultante
-define un grafo no dirigido cuyas componentes conexas son los grupos
-coherentes. Su limitación es la necesidad de fijar $r_0$ a priori.
-
-\textbf{(b) Agrupamiento espectral con eigengap.} Para evitar el umbral,
-se construye un grafo ponderado $G=(V,E)$ con vértices en los generadores
-y pesos de arista \cite{jiang2021}
-\begin{equation}
-    w_{ij} \;=\;
-    \begin{cases}
-        r_{ij}, & r_{ij} \ge 0,\\
-        0, & r_{ij} < 0,
-    \end{cases}
-    \qquad i \ne j,
-    \label{eq:edge_weights}
-\end{equation}
-de modo que la incoherencia (signo negativo) se traduce en ausencia de
-arista. Con $d_i = \sum_{j} w_{ij}$ y
-$\mathbf{D} = \operatorname{diag}(d_1,\ldots,d_{n_g})$, el laplaciano del
-grafo y su versión normalizada simétrica son
-\begin{equation}
-    \mathbf{L} \;=\; \mathbf{D} - \mathbf{W},
-    \qquad
-    \mathbf{L}_N \;=\; \mathbf{D}^{-1/2}\,\mathbf{L}\,\mathbf{D}^{-1/2}.
-    \label{eq:laplacian}
-\end{equation}
-Los eigenvalores de $\mathbf{L}_N$, ordenados ascendentemente
-$0 = \mu_1 \le \mu_2 \le \cdots \le \mu_{n_g}$, codifican la estructura de
-comunidades del grafo: el número de grupos coherentes $K$ se selecciona
-mediante el criterio del \textbf{eigengap},
-\begin{equation}
-    K \;=\; \operatorname*{arg\,max}_{k}\;
-    \bigl( \mu_{k+1} - \mu_k \bigr),
-    \label{eq:eigengap}
-\end{equation}
-es decir, $K$ es el índice donde ocurre la mayor brecha espectral
-\cite{jiang2021}. La partición se obtiene aplicando $k$-medias sobre las
-filas, normalizadas a norma unitaria, de la matriz formada por los $K$
-primeros eigenvectores de $\mathbf{L}_N$. Este procedimiento resuelve de
-forma aproximada el problema de corte de grafo y no requiere conocer
-$K$ ni $r_0$ a priori; sobre el sistema de 16 generadores y 68 buses
-reproduce los grupos coherentes del análisis de eigenvalores, con la
-capacidad adicional de aislar generadores de comportamiento singular en
-grupos unitarios \cite{jiang2021}.
-
-\chapterbibliography
+\chapterbibliography 

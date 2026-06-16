@@ -1,0 +1,1469 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{6}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{Glover2017}{book}{}{}
+      \name{author}{4}{}{%
+        {{hash=bcba3f15b4fdef5094dac25f7e6eea73}{%
+           family={Glover},
+           familyi={G\bibinitperiod},
+           given={J.\bibnamedelimi D.},
+           giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=ba6ec536012e7919bb2fabf1fe9ec5cc}{%
+           family={Sarma},
+           familyi={S\bibinitperiod},
+           given={M.\bibnamedelimi S.},
+           giveni={M\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=40fdae079834a9e08f429c2753baec87}{%
+           family={Overbye},
+           familyi={O\bibinitperiod},
+           given={T.\bibnamedelimi J.},
+           giveni={T\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=bb198fb11a31132991d386935d948420}{%
+           family={Birchfield},
+           familyi={B\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Boston, MA}%
+      }
+      \list{publisher}{1}{%
+        {Cengage Learning}%
+      }
+      \strng{namehash}{3252ab213f308d90838e01eb16afb04c}
+      \strng{fullhash}{b7e2f7c63faf6548d1cff947e49a1d4c}
+      \strng{fullhashraw}{b7e2f7c63faf6548d1cff947e49a1d4c}
+      \strng{bibnamehash}{b7e2f7c63faf6548d1cff947e49a1d4c}
+      \strng{authorbibnamehash}{b7e2f7c63faf6548d1cff947e49a1d4c}
+      \strng{authornamehash}{3252ab213f308d90838e01eb16afb04c}
+      \strng{authorfullhash}{b7e2f7c63faf6548d1cff947e49a1d4c}
+      \strng{authorfullhashraw}{b7e2f7c63faf6548d1cff947e49a1d4c}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{6}
+      \field{title}{Power System Analysis and Design}
+      \field{year}{2017}
+    \endentry
+    \entry{Garza1994}{book}{}{}
+      \name{author}{3}{}{%
+        {{hash=5efe7d25d3c8b2798f4c80c6d30c1bec}{%
+           family={Garza\bibnamedelima Toledo},
+           familyi={G\bibinitperiod\bibinitdelim T\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod},
+           prefix={de\bibnamedelima la},
+           prefixi={d\bibinitperiod\bibinitdelim l\bibinitperiod}}}%
+        {{hash=39b5485a7143f92c02d8b671fc64b142}{%
+           family={Melgoza},
+           familyi={M\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=b6e814263c0749109b577d2d109cd92d}{%
+           family={Garza},
+           familyi={G\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod},
+           prefix={de\bibnamedelima la},
+           prefixi={d\bibinitperiod\bibinitdelim l\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {México}%
+      }
+      \list{publisher}{1}{%
+        {Universidad Autónoma Metropolitana}%
+      }
+      \strng{namehash}{c4d9eb5b3b503e31c2df0add7f699a27}
+      \strng{fullhash}{87f4729310af7dbf4922c6e5c3653084}
+      \strng{fullhashraw}{87f4729310af7dbf4922c6e5c3653084}
+      \strng{bibnamehash}{87f4729310af7dbf4922c6e5c3653084}
+      \strng{authorbibnamehash}{87f4729310af7dbf4922c6e5c3653084}
+      \strng{authornamehash}{c4d9eb5b3b503e31c2df0add7f699a27}
+      \strng{authorfullhash}{87f4729310af7dbf4922c6e5c3653084}
+      \strng{authorfullhashraw}{87f4729310af7dbf4922c6e5c3653084}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{1}
+      \field{title}{Historia de la industria eléctrica}
+      \field{year}{1994}
+    \endentry
+    \entry{Amin2008}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=b5a3a1bd1decb45d1de6e8c4ebfc50ea}{%
+           family={Amin},
+           familyi={A\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=822b3fc1eb45536cac663c5b9a6593dd}{%
+           family={Stringer},
+           familyi={S\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{27b2982b7b9e2999becd348e79e512c3}
+      \strng{fullhash}{27b2982b7b9e2999becd348e79e512c3}
+      \strng{fullhashraw}{27b2982b7b9e2999becd348e79e512c3}
+      \strng{bibnamehash}{27b2982b7b9e2999becd348e79e512c3}
+      \strng{authorbibnamehash}{27b2982b7b9e2999becd348e79e512c3}
+      \strng{authornamehash}{27b2982b7b9e2999becd348e79e512c3}
+      \strng{authorfullhash}{27b2982b7b9e2999becd348e79e512c3}
+      \strng{authorfullhashraw}{27b2982b7b9e2999becd348e79e512c3}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{MRS Bulletin}
+      \field{number}{4}
+      \field{title}{The Electric Power Grid: Today and Tomorrow}
+      \field{volume}{33}
+      \field{year}{2008}
+      \field{pages}{347\bibrangedash 354}
+      \range{pages}{8}
+    \endentry
+    \entry{Kundur2004}{article}{}{}
+      \name{author}{12}{}{%
+        {{hash=144a9899938b4d53e8bb5b09f70a4d2c}{%
+           family={Kundur},
+           familyi={K\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=205f1325ca17d9a964b6fd90381dfea4}{%
+           family={Paserba},
+           familyi={P\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=abf5eb2570a7358ed425732dbc6597ff}{%
+           family={Ajjarapu},
+           familyi={A\bibinitperiod},
+           given={V.},
+           giveni={V\bibinitperiod}}}%
+        {{hash=6e3dcb953ceebf8fb058ca51d36d16e7}{%
+           family={Andersson},
+           familyi={A\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod}}}%
+        {{hash=2b391f752625d98c4d5a0e23ac07f18d}{%
+           family={Bose},
+           familyi={B\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=64b7c90299bf4f1ee8dfcbc484ebe373}{%
+           family={Cañizares},
+           familyi={C\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=93ddc13431600eb381fd998e901c2f8e}{%
+           family={Hatziargyriou},
+           familyi={H\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod}}}%
+        {{hash=5ce60e707d7f8d2e6a847fd3cf98f86e}{%
+           family={Hill},
+           familyi={H\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=6569ee19caff9396a232d5e0a04ee77d}{%
+           family={Stankovic},
+           familyi={S\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=c0336ed54af5be4d03c863b005eaa8e0}{%
+           family={Taylor},
+           familyi={T\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=a6dabe1610d68284ef16ec9c2235e0d6}{%
+           family={Cutsem},
+           familyi={C\bibinitperiod},
+           given={T.\bibnamedelimi Van},
+           giveni={T\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+        {{hash=ef80e06e2cd953eb8a21f586d2ee82d6}{%
+           family={Vittal},
+           familyi={V\bibinitperiod},
+           given={V.},
+           giveni={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{71149832b250c0f46be74580f793cf30}
+      \strng{fullhash}{38ef6a8259372ee6a255df8de8a03000}
+      \strng{fullhashraw}{38ef6a8259372ee6a255df8de8a03000}
+      \strng{bibnamehash}{71149832b250c0f46be74580f793cf30}
+      \strng{authorbibnamehash}{71149832b250c0f46be74580f793cf30}
+      \strng{authornamehash}{71149832b250c0f46be74580f793cf30}
+      \strng{authorfullhash}{38ef6a8259372ee6a255df8de8a03000}
+      \strng{authorfullhashraw}{38ef6a8259372ee6a255df8de8a03000}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Power Systems}
+      \field{number}{3}
+      \field{title}{Definition and Classification of Power System Stability {IEEE/CIGRE} Joint Task Force on Stability Terms and Definitions}
+      \field{volume}{19}
+      \field{year}{2004}
+      \field{pages}{1387\bibrangedash 1401}
+      \range{pages}{15}
+    \endentry
+    \entry{Hatziargyriou2021}{article}{}{}
+      \name{author}{16}{}{%
+        {{hash=93ddc13431600eb381fd998e901c2f8e}{%
+           family={Hatziargyriou},
+           familyi={H\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod}}}%
+        {{hash=6a7fce669afa89b198daec7a92e7cab9}{%
+           family={Milanovic},
+           familyi={M\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=336cba3dfade9ade8be48944d312dfed}{%
+           family={Rahmann},
+           familyi={R\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=abf5eb2570a7358ed425732dbc6597ff}{%
+           family={Ajjarapu},
+           familyi={A\bibinitperiod},
+           given={V.},
+           giveni={V\bibinitperiod}}}%
+        {{hash=7ac6a029f6e3f537424c652948625662}{%
+           family={Canizares},
+           familyi={C\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=90fc01457638e7897d2bd7ebb3bd5b32}{%
+           family={Erlich},
+           familyi={E\bibinitperiod},
+           given={I.},
+           giveni={I\bibinitperiod}}}%
+        {{hash=5ce60e707d7f8d2e6a847fd3cf98f86e}{%
+           family={Hill},
+           familyi={H\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=8568f55c98ae08f911db1c543f40521f}{%
+           family={Hiskens},
+           familyi={H\bibinitperiod},
+           given={I.},
+           giveni={I\bibinitperiod}}}%
+        {{hash=45d2e6bfe537fbfc214485737ede0230}{%
+           family={Kamwa},
+           familyi={K\bibinitperiod},
+           given={I.},
+           giveni={I\bibinitperiod}}}%
+        {{hash=b9ada2c7665d4650953cd50ee321f6d0}{%
+           family={Pal},
+           familyi={P\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=3e6413cf52995ea6bb465d80fcb3b6b8}{%
+           family={Pourbeik},
+           familyi={P\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=4944fb009ce4ae3fda427ebe59fba7b4}{%
+           family={Sanchez-Gasca},
+           familyi={S\bibinithyphendelim G\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=6569ee19caff9396a232d5e0a04ee77d}{%
+           family={Stankovic},
+           familyi={S\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=a6dabe1610d68284ef16ec9c2235e0d6}{%
+           family={Cutsem},
+           familyi={C\bibinitperiod},
+           given={T.\bibnamedelimi Van},
+           giveni={T\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+        {{hash=ef80e06e2cd953eb8a21f586d2ee82d6}{%
+           family={Vittal},
+           familyi={V\bibinitperiod},
+           given={V.},
+           giveni={V\bibinitperiod}}}%
+        {{hash=7adeb1311bc4c37b563abb8f5ecc838c}{%
+           family={Vournas},
+           familyi={V\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{345c15880dd6b784b1231e7bdce7d43c}
+      \strng{fullhash}{7fff911b7c1ed39e6ff84018275770b5}
+      \strng{fullhashraw}{7fff911b7c1ed39e6ff84018275770b5}
+      \strng{bibnamehash}{345c15880dd6b784b1231e7bdce7d43c}
+      \strng{authorbibnamehash}{345c15880dd6b784b1231e7bdce7d43c}
+      \strng{authornamehash}{345c15880dd6b784b1231e7bdce7d43c}
+      \strng{authorfullhash}{7fff911b7c1ed39e6ff84018275770b5}
+      \strng{authorfullhashraw}{7fff911b7c1ed39e6ff84018275770b5}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Power Systems}
+      \field{number}{4}
+      \field{title}{Definition and Classification of Power System Stability - Revisited \& Extended}
+      \field{volume}{36}
+      \field{year}{2021}
+      \field{pages}{3271\bibrangedash 3281}
+      \range{pages}{11}
+    \endentry
+    \entry{Hauer2007}{inproceedings}{}{}
+      \name{author}{3}{}{%
+        {{hash=361ffe1349e5ae800e592b7675c7c548}{%
+           family={Hauer},
+           familyi={H\bibinitperiod},
+           given={J.\bibnamedelimi F.},
+           giveni={J\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=fe5212b420e7f0ba885499320fa117e1}{%
+           family={Trudnowski},
+           familyi={T\bibinitperiod},
+           given={D.\bibnamedelimi J.},
+           giveni={D\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=80bbdb70bd8b2ab8970e75891082e8d6}{%
+           family={DeSteese},
+           familyi={D\bibinitperiod},
+           given={J.\bibnamedelimi G.},
+           giveni={J\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \strng{namehash}{eeef22f726c54e99d8b7ea2138bb9587}
+      \strng{fullhash}{ea88013ca143ad1f4b0eb523fd81c9f2}
+      \strng{fullhashraw}{ea88013ca143ad1f4b0eb523fd81c9f2}
+      \strng{bibnamehash}{ea88013ca143ad1f4b0eb523fd81c9f2}
+      \strng{authorbibnamehash}{ea88013ca143ad1f4b0eb523fd81c9f2}
+      \strng{authornamehash}{eeef22f726c54e99d8b7ea2138bb9587}
+      \strng{authorfullhash}{ea88013ca143ad1f4b0eb523fd81c9f2}
+      \strng{authorfullhashraw}{ea88013ca143ad1f4b0eb523fd81c9f2}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{IEEE Power Engineering Society General Meeting}
+      \field{title}{A Perspective on {WAMS} Analysis Tools for Tracking of Oscillatory Dynamics}
+      \field{year}{2007}
+    \endentry
+    \entry{Thambirajah2010}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=2e0745fc5b3366b775e60bb2a8ad56e7}{%
+           family={Thambirajah},
+           familyi={T\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=df1d997102b59e76d54dda8d29c96ab1}{%
+           family={Barocio},
+           familyi={B\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=6c8ae5af325406a94019fbdd344d1f89}{%
+           family={Thornhill},
+           familyi={T\bibinitperiod},
+           given={N.\bibnamedelimi F.},
+           giveni={N\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+      }
+      \strng{namehash}{e5177c166723cf25eba99c488fde3bab}
+      \strng{fullhash}{82671c339e3ad0c19e42e73eb17bbd6c}
+      \strng{fullhashraw}{82671c339e3ad0c19e42e73eb17bbd6c}
+      \strng{bibnamehash}{82671c339e3ad0c19e42e73eb17bbd6c}
+      \strng{authorbibnamehash}{82671c339e3ad0c19e42e73eb17bbd6c}
+      \strng{authornamehash}{e5177c166723cf25eba99c488fde3bab}
+      \strng{authorfullhash}{82671c339e3ad0c19e42e73eb17bbd6c}
+      \strng{authorfullhashraw}{82671c339e3ad0c19e42e73eb17bbd6c}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IET Generation, Transmission and Distribution}
+      \field{number}{10}
+      \field{title}{Comparative review of methods for stability monitoring in electrical power systems and vibrating structures}
+      \field{volume}{4}
+      \field{year}{2010}
+      \field{pages}{1086\bibrangedash 1103}
+      \range{pages}{18}
+    \endentry
+    \entry{Trudnowski1999}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=fe5212b420e7f0ba885499320fa117e1}{%
+           family={Trudnowski},
+           familyi={T\bibinitperiod},
+           given={D.\bibnamedelimi J.},
+           giveni={D\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=1f30b97efb1e95dddc95ee66a89126d2}{%
+           family={Johnson},
+           familyi={J\bibinitperiod},
+           given={J.\bibnamedelimi M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=361ffe1349e5ae800e592b7675c7c548}{%
+           family={Hauer},
+           familyi={H\bibinitperiod},
+           given={J.\bibnamedelimi F.},
+           giveni={J\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+      }
+      \strng{namehash}{6e054d4f72e1bdb8dd558830e6d34c98}
+      \strng{fullhash}{8880e9a9e65863cce274a63a49bf9439}
+      \strng{fullhashraw}{8880e9a9e65863cce274a63a49bf9439}
+      \strng{bibnamehash}{8880e9a9e65863cce274a63a49bf9439}
+      \strng{authorbibnamehash}{8880e9a9e65863cce274a63a49bf9439}
+      \strng{authornamehash}{6e054d4f72e1bdb8dd558830e6d34c98}
+      \strng{authorfullhash}{8880e9a9e65863cce274a63a49bf9439}
+      \strng{authorfullhashraw}{8880e9a9e65863cce274a63a49bf9439}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Power Systems}
+      \field{number}{1}
+      \field{title}{Making {Prony} analysis more accurate using multiple signals}
+      \field{volume}{14}
+      \field{year}{1999}
+      \field{pages}{226\bibrangedash 231}
+      \range{pages}{6}
+    \endentry
+    \entry{Messina2007}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=ff0069573c1373118e6f5bed44b21aa3}{%
+           family={Messina},
+           familyi={M\bibinitperiod},
+           given={A.\bibnamedelimi R.},
+           giveni={A\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=ef80e06e2cd953eb8a21f586d2ee82d6}{%
+           family={Vittal},
+           familyi={V\bibinitperiod},
+           given={V.},
+           giveni={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{c4dd641771d8e77fb7a8917c50dd60c1}
+      \strng{fullhash}{c4dd641771d8e77fb7a8917c50dd60c1}
+      \strng{fullhashraw}{c4dd641771d8e77fb7a8917c50dd60c1}
+      \strng{bibnamehash}{c4dd641771d8e77fb7a8917c50dd60c1}
+      \strng{authorbibnamehash}{c4dd641771d8e77fb7a8917c50dd60c1}
+      \strng{authornamehash}{c4dd641771d8e77fb7a8917c50dd60c1}
+      \strng{authorfullhash}{c4dd641771d8e77fb7a8917c50dd60c1}
+      \strng{authorfullhashraw}{c4dd641771d8e77fb7a8917c50dd60c1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Power Systems}
+      \field{number}{2}
+      \field{title}{Extraction of Dynamic Patterns From Wide-Area Measurements Using Empirical Orthogonal Functions}
+      \field{volume}{22}
+      \field{year}{2007}
+      \field{pages}{682\bibrangedash 692}
+      \range{pages}{11}
+    \endentry
+    \entry{Esquivel2015}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=e5f5f87cd21925ff23470c982e88446d}{%
+           family={Prado},
+           familyi={P\bibinitperiod},
+           given={P.\bibnamedelimi Esquivel},
+           giveni={P\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=8935cdc50afa1669ad0481409d7fc2cc}{%
+           family={Castañeda},
+           familyi={C\bibinitperiod},
+           given={C.\bibnamedelimi E.},
+           giveni={C\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=26aae7c9c35b3e6c5e127f8b0e5791e0}{%
+           family={Jurado},
+           familyi={J\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{cd03d383bf136c46f2ed2b234a9d6630}
+      \strng{fullhash}{99669b00c99a09524bd0675997e13a81}
+      \strng{fullhashraw}{99669b00c99a09524bd0675997e13a81}
+      \strng{bibnamehash}{99669b00c99a09524bd0675997e13a81}
+      \strng{authorbibnamehash}{99669b00c99a09524bd0675997e13a81}
+      \strng{authornamehash}{cd03d383bf136c46f2ed2b234a9d6630}
+      \strng{authorfullhash}{99669b00c99a09524bd0675997e13a81}
+      \strng{authorfullhashraw}{99669b00c99a09524bd0675997e13a81}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Electric Power Systems Research}
+      \field{title}{Partitioned modal extraction applied to power system wide-area measurements using empirical orthogonal functions}
+      \field{volume}{123}
+      \field{year}{2015}
+      \field{pages}{185\bibrangedash 191}
+      \range{pages}{7}
+    \endentry
+    \entry{Yang2012}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=c8fdd55388190a28eaf7696d1254822a}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=c0761c944a0991e043c9c472174b9cb4}{%
+           family={Rehtanz},
+           familyi={R\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=66d548e0e670e107fc4a80dc0c3825b3}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Y.},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=988ecc300df83cfb6a3861b5d6e7e488}{%
+           family={Cai},
+           familyi={C\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{c6d6dcb872a2e91035a61845ab22f76e}
+      \strng{fullhash}{5b75b596ec647bdd945f8bad0625be70}
+      \strng{fullhashraw}{5b75b596ec647bdd945f8bad0625be70}
+      \strng{bibnamehash}{5b75b596ec647bdd945f8bad0625be70}
+      \strng{authorbibnamehash}{5b75b596ec647bdd945f8bad0625be70}
+      \strng{authornamehash}{c6d6dcb872a2e91035a61845ab22f76e}
+      \strng{authorfullhash}{5b75b596ec647bdd945f8bad0625be70}
+      \strng{authorfullhashraw}{5b75b596ec647bdd945f8bad0625be70}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Electric Power Systems Research}
+      \field{number}{1}
+      \field{title}{Identification of dominant oscillation mode using complex singular value decomposition method}
+      \field{volume}{83}
+      \field{year}{2012}
+      \field{pages}{227\bibrangedash 236}
+      \range{pages}{10}
+    \endentry
+    \entry{Tashman2014}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=d6035243a765a06d52d4428d3a04afeb}{%
+           family={Tashman},
+           familyi={T\bibinitperiod},
+           given={Z.},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=6cd3a55dda1ca0b5ef4e965350e9d2c9}{%
+           family={Khalilinia},
+           familyi={K\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+        {{hash=6ec28182efefe4fd1a0e6fa3dc9b77c5}{%
+           family={Venkatasubramanian},
+           familyi={V\bibinitperiod},
+           given={V.},
+           giveni={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{7e3344b9ca8a589f74883da19071f539}
+      \strng{fullhash}{884201bd712bd596fc4bf3467bf7cba5}
+      \strng{fullhashraw}{884201bd712bd596fc4bf3467bf7cba5}
+      \strng{bibnamehash}{884201bd712bd596fc4bf3467bf7cba5}
+      \strng{authorbibnamehash}{884201bd712bd596fc4bf3467bf7cba5}
+      \strng{authornamehash}{7e3344b9ca8a589f74883da19071f539}
+      \strng{authorfullhash}{884201bd712bd596fc4bf3467bf7cba5}
+      \strng{authorfullhashraw}{884201bd712bd596fc4bf3467bf7cba5}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Power Systems}
+      \field{number}{2}
+      \field{title}{Multi Dimensional Fourier Ringdown Analysis for Power Systems Using Synchrophasors}
+      \field{volume}{29}
+      \field{year}{2014}
+      \field{pages}{731\bibrangedash 741}
+      \range{pages}{11}
+    \endentry
+    \entry{Barocio2015}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=df1d997102b59e76d54dda8d29c96ab1}{%
+           family={Barocio},
+           familyi={B\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=28c0deef40d910b597aed438c555954f}{%
+           family={Pal},
+           familyi={P\bibinitperiod},
+           given={B.\bibnamedelimi C.},
+           giveni={B\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=6c8ae5af325406a94019fbdd344d1f89}{%
+           family={Thornhill},
+           familyi={T\bibinitperiod},
+           given={N.\bibnamedelimi F.},
+           giveni={N\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=ff0069573c1373118e6f5bed44b21aa3}{%
+           family={Messina},
+           familyi={M\bibinitperiod},
+           given={A.\bibnamedelimi R.},
+           giveni={A\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{0b5fa76bf808a2bb48f4d5dcbec5b978}
+      \strng{fullhash}{60a0ac0db57bc1a8e8aa26654bcd438d}
+      \strng{fullhashraw}{60a0ac0db57bc1a8e8aa26654bcd438d}
+      \strng{bibnamehash}{60a0ac0db57bc1a8e8aa26654bcd438d}
+      \strng{authorbibnamehash}{60a0ac0db57bc1a8e8aa26654bcd438d}
+      \strng{authornamehash}{0b5fa76bf808a2bb48f4d5dcbec5b978}
+      \strng{authorfullhash}{60a0ac0db57bc1a8e8aa26654bcd438d}
+      \strng{authorfullhashraw}{60a0ac0db57bc1a8e8aa26654bcd438d}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Power Systems}
+      \field{number}{6}
+      \field{title}{A Dynamic Mode Decomposition Framework for Global Power System Oscillation Analysis}
+      \field{volume}{30}
+      \field{year}{2015}
+      \field{pages}{2902\bibrangedash 2912}
+      \range{pages}{11}
+    \endentry
+    \entry{Arvizu2016}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=58755126dcb6c0db41cbfb4e20369ff9}{%
+           family={Arvizu},
+           familyi={A\bibinitperiod},
+           given={C.\bibnamedelimi M.\bibnamedelimi C.},
+           giveni={C\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=ff0069573c1373118e6f5bed44b21aa3}{%
+           family={Messina},
+           familyi={M\bibinitperiod},
+           given={A.\bibnamedelimi R.},
+           giveni={A\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{353b594ca57f207d0cd5297fdaf6f42e}
+      \strng{fullhash}{353b594ca57f207d0cd5297fdaf6f42e}
+      \strng{fullhashraw}{353b594ca57f207d0cd5297fdaf6f42e}
+      \strng{bibnamehash}{353b594ca57f207d0cd5297fdaf6f42e}
+      \strng{authorbibnamehash}{353b594ca57f207d0cd5297fdaf6f42e}
+      \strng{authornamehash}{353b594ca57f207d0cd5297fdaf6f42e}
+      \strng{authorfullhash}{353b594ca57f207d0cd5297fdaf6f42e}
+      \strng{authorfullhashraw}{353b594ca57f207d0cd5297fdaf6f42e}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Power Delivery}
+      \field{number}{5}
+      \field{title}{Dimensionality Reduction in Transient Simulations: A Diffusion Maps Approach}
+      \field{volume}{31}
+      \field{year}{2016}
+      \field{pages}{2379\bibrangedash 2389}
+      \range{pages}{11}
+    \endentry
+    \entry{Li2018}{article}{}{}
+      \name{author}{6}{}{%
+        {{hash=c9a3728dcc2397d1bab78a791b51779b}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={X.},
+           giveni={X\bibinitperiod}}}%
+        {{hash=7ea4b28c888462994ef43cd7772edea7}{%
+           family={Cui},
+           familyi={C\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+        {{hash=d6617df304086302cec5a304f85530c1}{%
+           family={Jiang},
+           familyi={J\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+        {{hash=2efac453cb818e3e871c3147d9153d6d}{%
+           family={Xu},
+           familyi={X\bibinitperiod},
+           given={Y.},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=bdd05b02a1b7f9f06d763320237b355f}{%
+           family={Jia},
+           familyi={J\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+        {{hash=6026ccfc90df3a5fa9c8628348d98cc0}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{0b26886cabde4f6202af5174b37a09ec}
+      \strng{fullhash}{5dbec39aad57b6150742ce3463e93a9b}
+      \strng{fullhashraw}{5dbec39aad57b6150742ce3463e93a9b}
+      \strng{bibnamehash}{5dbec39aad57b6150742ce3463e93a9b}
+      \strng{authorbibnamehash}{5dbec39aad57b6150742ce3463e93a9b}
+      \strng{authornamehash}{0b26886cabde4f6202af5174b37a09ec}
+      \strng{authorfullhash}{5dbec39aad57b6150742ce3463e93a9b}
+      \strng{authorfullhashraw}{5dbec39aad57b6150742ce3463e93a9b}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal of Electrical Power and Energy Systems}
+      \field{title}{Multichannel continuous wavelet transform approach to estimate electromechanical oscillation modes, mode shapes and coherent groups from synchrophasors in bulk power grids}
+      \field{volume}{96}
+      \field{year}{2018}
+      \field{pages}{222\bibrangedash 237}
+      \range{pages}{16}
+    \endentry
+    \entry{Schumacher2019}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=2f90a66cf44dffea2cafc32a3a840f8d}{%
+           family={Schumacher},
+           familyi={S\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=f2c84f7cf54f86dad081de165f3c8add}{%
+           family={Oliveira},
+           familyi={O\bibinitperiod},
+           given={G.\bibnamedelimi H.\bibnamedelimi C.},
+           giveni={G\bibinitperiod\bibinitdelim H\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=543c7e31390dfcb6cc24d77487634193}{%
+           family={Kuiava},
+           familyi={K\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{c327bd4a61b8b52263c4e4e89e6082e3}
+      \strng{fullhash}{6b628f214edd4e20cf53ce71d05405d3}
+      \strng{fullhashraw}{6b628f214edd4e20cf53ce71d05405d3}
+      \strng{bibnamehash}{6b628f214edd4e20cf53ce71d05405d3}
+      \strng{authorbibnamehash}{6b628f214edd4e20cf53ce71d05405d3}
+      \strng{authornamehash}{c327bd4a61b8b52263c4e4e89e6082e3}
+      \strng{authorfullhash}{6b628f214edd4e20cf53ce71d05405d3}
+      \strng{authorfullhashraw}{6b628f214edd4e20cf53ce71d05405d3}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal of Electrical Power and Energy Systems}
+      \field{title}{A multi-signal instrumental variable vector fitting method for estimating inter-area electromechanical modes of power systems}
+      \field{volume}{111}
+      \field{year}{2019}
+      \field{pages}{1\bibrangedash 13}
+      \range{pages}{13}
+    \endentry
+    \entry{Banuelos2019}{article}{}{}
+      \name{author}{7}{}{%
+        {{hash=34e04dfdd1f0e6db61cfd0f2080ae3f7}{%
+           family={Bañuelos-Cabral},
+           familyi={B\bibinithyphendelim C\bibinitperiod},
+           given={E.\bibnamedelimi S.},
+           giveni={E\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=53fbd9bdbb5c03ad92659aae61310dec}{%
+           family={Nuño-Ayon},
+           familyi={N\bibinithyphendelim A\bibinitperiod},
+           given={J.\bibnamedelimi J.},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=2ae4740202eb4cf65a29b12443a52994}{%
+           family={Gustavsen},
+           familyi={G\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=b97efb986bdbcb99aca41d1cd770eb30}{%
+           family={Gutiérrez-Robles},
+           familyi={G\bibinithyphendelim R\bibinitperiod},
+           given={J.\bibnamedelimi A.},
+           giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=25f2855b4d58c6e91ca7c9cb46f40740}{%
+           family={Galván-Sánchez},
+           familyi={G\bibinithyphendelim S\bibinitperiod},
+           given={V.\bibnamedelimi A.},
+           giveni={V\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=091c3bb18c91b73477893f5dffb28275}{%
+           family={Sotelo-Castañón},
+           familyi={S\bibinithyphendelim C\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=9356e99238c940111ec17e538f9fcffb}{%
+           family={García-Sánchez},
+           familyi={G\bibinithyphendelim S\bibinitperiod},
+           given={J.\bibnamedelimi L.},
+           giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \strng{namehash}{a545b78a9201e9357c9e930679868771}
+      \strng{fullhash}{62131b3a00bf9305f105b952a41b3e75}
+      \strng{fullhashraw}{62131b3a00bf9305f105b952a41b3e75}
+      \strng{bibnamehash}{a545b78a9201e9357c9e930679868771}
+      \strng{authorbibnamehash}{a545b78a9201e9357c9e930679868771}
+      \strng{authornamehash}{a545b78a9201e9357c9e930679868771}
+      \strng{authorfullhash}{62131b3a00bf9305f105b952a41b3e75}
+      \strng{authorfullhashraw}{62131b3a00bf9305f105b952a41b3e75}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Electric Power Systems Research}
+      \field{title}{Spectral fitting approach to estimate electromechanical oscillation modes and mode shapes by using vector fitting}
+      \field{volume}{176}
+      \field{year}{2019}
+      \field{pages}{105958}
+      \range{pages}{1}
+    \endentry
+    \entry{Zamora2024}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=b6118232adf29b39855c92feeca17a68}{%
+           family={Zamora-Mendez},
+           familyi={Z\bibinithyphendelim M\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=bc7affdfb40cdd46d12332794cc3fce9}{%
+           family={Luna},
+           familyi={L\bibinitperiod},
+           given={R.\bibnamedelimi D.\bibnamedelimi Reyes},
+           giveni={R\bibinitperiod\bibinitdelim D\bibinitperiod\bibinitdelim R\bibinitperiod},
+           prefix={de},
+           prefixi={d\bibinitperiod}}}%
+        {{hash=1ae00aed2029780c6c9d083859a1793e}{%
+           family={O\bibnamedelima Serna},
+           familyi={O\bibinitperiod\bibinitdelim S\bibinitperiod},
+           given={J.\bibnamedelimi A.},
+           giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod},
+           prefix={de\bibnamedelima la},
+           prefixi={d\bibinitperiod\bibinitdelim l\bibinitperiod}}}%
+        {{hash=b8ddceb152a3723d8ec3087b753094e9}{%
+           family={Chow},
+           familyi={C\bibinitperiod},
+           given={J.\bibnamedelimi H.},
+           giveni={J\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=1eba897f04bbc7475a9df8f41caed900}{%
+           family={Paternina},
+           familyi={P\bibinitperiod},
+           given={M.\bibnamedelimi R.\bibnamedelimi Arrieta},
+           giveni={M\bibinitperiod\bibinitdelim R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{4247299b875abcf5e1b625095f62876d}
+      \strng{fullhash}{ed855f954274193b2795931bf705c691}
+      \strng{fullhashraw}{ed855f954274193b2795931bf705c691}
+      \strng{bibnamehash}{ed855f954274193b2795931bf705c691}
+      \strng{authorbibnamehash}{ed855f954274193b2795931bf705c691}
+      \strng{authornamehash}{4247299b875abcf5e1b625095f62876d}
+      \strng{authorfullhash}{ed855f954274193b2795931bf705c691}
+      \strng{authorfullhashraw}{ed855f954274193b2795931bf705c691}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Power Systems}
+      \field{number}{2}
+      \field{title}{Electromechanical Modes Identification Based on an Iterative Eigenvalue Decomposition of the Hankel Matrix}
+      \field{volume}{39}
+      \field{year}{2024}
+      \field{pages}{4000\bibrangedash 4012}
+      \range{pages}{13}
+    \endentry
+    \entry{Rodriguez2024}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=5de9191e371274987224e0dad2b461d5}{%
+           family={Rodriguez-Soto},
+           familyi={R\bibinithyphendelim S\bibinitperiod},
+           given={R.\bibnamedelimi D.},
+           giveni={R\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=df1d997102b59e76d54dda8d29c96ab1}{%
+           family={Barocio},
+           familyi={B\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=a226218ab7d31af2b0a8110c9691eff0}{%
+           family={Gonzalez-Longatt},
+           familyi={G\bibinithyphendelim L\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+        {{hash=2baca9800a3d1a44b2d408a04cee936e}{%
+           family={Sevilla},
+           familyi={S\bibinitperiod},
+           given={F.\bibnamedelimi R.\bibnamedelimi Segundo},
+           giveni={F\bibinitperiod\bibinitdelim R\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=f19ec00da1d5830bdf839d25b3deaff8}{%
+           family={Korba},
+           familyi={K\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{4c7386a1516407c2c15a3e1a5eb097d7}
+      \strng{fullhash}{2765378a01fe79b4feece4b2811aae27}
+      \strng{fullhashraw}{2765378a01fe79b4feece4b2811aae27}
+      \strng{bibnamehash}{2765378a01fe79b4feece4b2811aae27}
+      \strng{authorbibnamehash}{2765378a01fe79b4feece4b2811aae27}
+      \strng{authornamehash}{4c7386a1516407c2c15a3e1a5eb097d7}
+      \strng{authorfullhash}{2765378a01fe79b4feece4b2811aae27}
+      \strng{authorfullhashraw}{2765378a01fe79b4feece4b2811aae27}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Power Systems}
+      \field{number}{2}
+      \field{title}{Robust Three-Stage Dynamic Mode Decomposition for Analysis of Power System Oscillations}
+      \field{volume}{39}
+      \field{year}{2024}
+      \field{pages}{4000\bibrangedash 4012}
+      \range{pages}{13}
+    \endentry
+    \entry{Wang2025}{article}{}{}
+      \name{author}{6}{}{%
+        {{hash=9a75ee293f2555f40976345739087998}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod}}}%
+        {{hash=98163e4a6e74053cdf200fd7ef8d0dcb}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=9433e8fd118bf7a56432e93455427413}{%
+           family={Gao},
+           familyi={G\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+        {{hash=c8fdd55388190a28eaf7696d1254822a}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=32479f557c16def50d4ed1ae38b9abc3}{%
+           family={Xia},
+           familyi={X\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=f57ee1adb4b4148d8a5bd884a416617a}{%
+           family={Lie},
+           familyi={L\bibinitperiod},
+           given={T.\bibnamedelimi T.},
+           giveni={T\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+      }
+      \strng{namehash}{5af5ee7e60ec3528b59ab3d857ea6f93}
+      \strng{fullhash}{2686a62034667ed41972bb33cd9f5a23}
+      \strng{fullhashraw}{2686a62034667ed41972bb33cd9f5a23}
+      \strng{bibnamehash}{2686a62034667ed41972bb33cd9f5a23}
+      \strng{authorbibnamehash}{2686a62034667ed41972bb33cd9f5a23}
+      \strng{authornamehash}{5af5ee7e60ec3528b59ab3d857ea6f93}
+      \strng{authorfullhash}{2686a62034667ed41972bb33cd9f5a23}
+      \strng{authorfullhashraw}{2686a62034667ed41972bb33cd9f5a23}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Instrumentation and Measurement}
+      \field{title}{Synchronized Data-Based Identification of Electromechanical Oscillation Modes Using Improved FastICA Considering Measurement Noise}
+      \field{volume}{74}
+      \field{year}{2025}
+      \field{pages}{3003413}
+      \range{pages}{1}
+    \endentry
+    \entry{Tufts1982}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=9f3e430b8bde42458f1f827ceedd502d}{%
+           family={Tufts},
+           familyi={T\bibinitperiod},
+           given={D.W.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=a69cfa5b99d0ef708a2af6220b90b21d}{%
+           family={Kumaresan},
+           familyi={K\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{95f8ee0d3826b825d0c5314417e6bef3}
+      \strng{fullhash}{95f8ee0d3826b825d0c5314417e6bef3}
+      \strng{fullhashraw}{95f8ee0d3826b825d0c5314417e6bef3}
+      \strng{bibnamehash}{95f8ee0d3826b825d0c5314417e6bef3}
+      \strng{authorbibnamehash}{95f8ee0d3826b825d0c5314417e6bef3}
+      \strng{authornamehash}{95f8ee0d3826b825d0c5314417e6bef3}
+      \strng{authorfullhash}{95f8ee0d3826b825d0c5314417e6bef3}
+      \strng{authorfullhashraw}{95f8ee0d3826b825d0c5314417e6bef3}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Proceedings of the IEEE}
+      \field{number}{9}
+      \field{title}{Estimation of frequencies of multiple sinusoids: Making linear prediction perform like maximum likelihood}
+      \field{volume}{70}
+      \field{year}{1982}
+      \field{pages}{975\bibrangedash 989}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1109/PROC.1982.12428
+      \endverb
+    \endentry
+    \entry{Moghdam2024}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=aeb16c335b0a77a8ce6a64f4d87423ac}{%
+           family={Moghdam},
+           familyi={M\bibinitperiod},
+           given={Majid\bibnamedelima Alizadeh},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=0b8309bb47b320c09424509fe3f559ee}{%
+           family={Noroozian},
+           familyi={N\bibinitperiod},
+           given={Reza},
+           giveni={R\bibinitperiod}}}%
+        {{hash=68686b8be9d2df59370c58130d39b262}{%
+           family={Jalilzadeh},
+           familyi={J\bibinitperiod},
+           given={Saeed},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Taylor \& Francis}%
+      }
+      \strng{namehash}{ebac4633b5b64cc5c60885ebd31a35fe}
+      \strng{fullhash}{ec9149c1fd1428fb80324e779f1772d7}
+      \strng{fullhashraw}{ec9149c1fd1428fb80324e779f1772d7}
+      \strng{bibnamehash}{ec9149c1fd1428fb80324e779f1772d7}
+      \strng{authorbibnamehash}{ec9149c1fd1428fb80324e779f1772d7}
+      \strng{authornamehash}{ebac4633b5b64cc5c60885ebd31a35fe}
+      \strng{authorfullhash}{ec9149c1fd1428fb80324e779f1772d7}
+      \strng{authorfullhashraw}{ec9149c1fd1428fb80324e779f1772d7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal of Modelling and Simulation}
+      \field{number}{3}
+      \field{title}{Improving the accuracy and the estimation time of inter-area modes in power system based on Tufts-Kumaresan algorithm}
+      \field{volume}{44}
+      \field{year}{2024}
+      \field{pages}{126\bibrangedash 135}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1080/02286203.2022.2161443
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+
+\refsection{7}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{kundur1994}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=39882366f85507fce005c512ac3b2240}{%
+           family={Kundur},
+           familyi={K\bibinitperiod},
+           given={Prabha},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York}%
+      }
+      \list{publisher}{1}{%
+        {McGraw-Hill}%
+      }
+      \strng{namehash}{39882366f85507fce005c512ac3b2240}
+      \strng{fullhash}{39882366f85507fce005c512ac3b2240}
+      \strng{fullhashraw}{39882366f85507fce005c512ac3b2240}
+      \strng{bibnamehash}{39882366f85507fce005c512ac3b2240}
+      \strng{authorbibnamehash}{39882366f85507fce005c512ac3b2240}
+      \strng{authornamehash}{39882366f85507fce005c512ac3b2240}
+      \strng{authorfullhash}{39882366f85507fce005c512ac3b2240}
+      \strng{authorfullhashraw}{39882366f85507fce005c512ac3b2240}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{series}{EPRI Power System Engineering Series}
+      \field{title}{Power System Stability and Control}
+      \field{year}{1994}
+    \endentry
+    \entry{sauer2017}{book}{}{}
+      \name{author}{3}{}{%
+        {{hash=b57a58154d60b88458906097e21b5555}{%
+           family={Sauer},
+           familyi={S\bibinitperiod},
+           given={Peter\bibnamedelima W.},
+           giveni={P\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=86cbebb4d2ec295d66d769a4423a05a1}{%
+           family={Pai},
+           familyi={P\bibinitperiod},
+           given={M.\bibnamedelimi A.},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=22e4131d7d9261cd71d4f7115a376486}{%
+           family={Chow},
+           familyi={C\bibinitperiod},
+           given={Joe\bibnamedelima H.},
+           giveni={J\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Hoboken, NJ}%
+      }
+      \list{publisher}{1}{%
+        {Wiley-IEEE Press}%
+      }
+      \strng{namehash}{d9d4f39ee1295c76751231497da40eea}
+      \strng{fullhash}{3463f26b084eb48b93ba3f2915b28aa5}
+      \strng{fullhashraw}{3463f26b084eb48b93ba3f2915b28aa5}
+      \strng{bibnamehash}{3463f26b084eb48b93ba3f2915b28aa5}
+      \strng{authorbibnamehash}{3463f26b084eb48b93ba3f2915b28aa5}
+      \strng{authornamehash}{d9d4f39ee1295c76751231497da40eea}
+      \strng{authorfullhash}{3463f26b084eb48b93ba3f2915b28aa5}
+      \strng{authorfullhashraw}{3463f26b084eb48b93ba3f2915b28aa5}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{2}
+      \field{title}{Power System Dynamics and Stability: With Synchrophasor Measurement and Power System Toolbox}
+      \field{year}{2017}
+    \endentry
+    \entry{tufts1982}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=e3e9c73532fcd684692a533a172bcb40}{%
+           family={Tufts},
+           familyi={T\bibinitperiod},
+           given={Donald\bibnamedelima W.},
+           giveni={D\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=7405adc2d5736ba9aef71518dcbcf799}{%
+           family={Kumaresan},
+           familyi={K\bibinitperiod},
+           given={Ramdas},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{ba83bf7f3a5837e7453e8b3888cd8e98}
+      \strng{fullhash}{ba83bf7f3a5837e7453e8b3888cd8e98}
+      \strng{fullhashraw}{ba83bf7f3a5837e7453e8b3888cd8e98}
+      \strng{bibnamehash}{ba83bf7f3a5837e7453e8b3888cd8e98}
+      \strng{authorbibnamehash}{ba83bf7f3a5837e7453e8b3888cd8e98}
+      \strng{authornamehash}{ba83bf7f3a5837e7453e8b3888cd8e98}
+      \strng{authorfullhash}{ba83bf7f3a5837e7453e8b3888cd8e98}
+      \strng{authorfullhashraw}{ba83bf7f3a5837e7453e8b3888cd8e98}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Proceedings of the IEEE}
+      \field{number}{9}
+      \field{title}{Estimation of Frequencies of Multiple Sinusoids: Making Linear Prediction Perform Like Maximum Likelihood}
+      \field{volume}{70}
+      \field{year}{1982}
+      \field{pages}{975\bibrangedash 989}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1109/PROC.1982.12428
+      \endverb
+    \endentry
+    \entry{brunton2022}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=572af75cb67759c9684ffbb4d11cddf8}{%
+           family={Brunton},
+           familyi={B\bibinitperiod},
+           given={Steven\bibnamedelima L.},
+           giveni={S\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=39878c41ca2338687a0064bcc2ba2922}{%
+           family={Kutz},
+           familyi={K\bibinitperiod},
+           given={J.\bibnamedelimi Nathan},
+           giveni={J\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cambridge}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{30df7fd58c3ce66638d5f915c5667db4}
+      \strng{fullhash}{30df7fd58c3ce66638d5f915c5667db4}
+      \strng{fullhashraw}{30df7fd58c3ce66638d5f915c5667db4}
+      \strng{bibnamehash}{30df7fd58c3ce66638d5f915c5667db4}
+      \strng{authorbibnamehash}{30df7fd58c3ce66638d5f915c5667db4}
+      \strng{authornamehash}{30df7fd58c3ce66638d5f915c5667db4}
+      \strng{authorfullhash}{30df7fd58c3ce66638d5f915c5667db4}
+      \strng{authorfullhashraw}{30df7fd58c3ce66638d5f915c5667db4}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{2}
+      \field{title}{Data-Driven Science and Engineering: Machine Learning, Dynamical Systems, and Control}
+      \field{year}{2022}
+    \endentry
+    \entry{gavish2014}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=48a1c9e7c88a91077320dfaff070b654}{%
+           family={Gavish},
+           familyi={G\bibinitperiod},
+           given={Matan},
+           giveni={M\bibinitperiod}}}%
+        {{hash=9fb99e5502c0b871a6067b55fcaf8986}{%
+           family={Donoho},
+           familyi={D\bibinitperiod},
+           given={David\bibnamedelima L.},
+           giveni={D\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \strng{namehash}{d55c14383c00a76064b8237430f2f375}
+      \strng{fullhash}{d55c14383c00a76064b8237430f2f375}
+      \strng{fullhashraw}{d55c14383c00a76064b8237430f2f375}
+      \strng{bibnamehash}{d55c14383c00a76064b8237430f2f375}
+      \strng{authorbibnamehash}{d55c14383c00a76064b8237430f2f375}
+      \strng{authornamehash}{d55c14383c00a76064b8237430f2f375}
+      \strng{authorfullhash}{d55c14383c00a76064b8237430f2f375}
+      \strng{authorfullhashraw}{d55c14383c00a76064b8237430f2f375}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Information Theory}
+      \field{number}{8}
+      \field{title}{The Optimal Hard Threshold for Singular Values is $4/\sqrt{3}$}
+      \field{volume}{60}
+      \field{year}{2014}
+      \field{pages}{5040\bibrangedash 5053}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1109/TIT.2014.2323359
+      \endverb
+    \endentry
+    \entry{askham2018}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=a074ed87ae5fa460e98ec336732eca3b}{%
+           family={Askham},
+           familyi={A\bibinitperiod},
+           given={Travis},
+           giveni={T\bibinitperiod}}}%
+        {{hash=39878c41ca2338687a0064bcc2ba2922}{%
+           family={Kutz},
+           familyi={K\bibinitperiod},
+           given={J.\bibnamedelimi Nathan},
+           giveni={J\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+      }
+      \strng{namehash}{414d3e960bde2ec5bb893b65523fd819}
+      \strng{fullhash}{414d3e960bde2ec5bb893b65523fd819}
+      \strng{fullhashraw}{414d3e960bde2ec5bb893b65523fd819}
+      \strng{bibnamehash}{414d3e960bde2ec5bb893b65523fd819}
+      \strng{authorbibnamehash}{414d3e960bde2ec5bb893b65523fd819}
+      \strng{authornamehash}{414d3e960bde2ec5bb893b65523fd819}
+      \strng{authorfullhash}{414d3e960bde2ec5bb893b65523fd819}
+      \strng{authorfullhashraw}{414d3e960bde2ec5bb893b65523fd819}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM Journal on Applied Dynamical Systems}
+      \field{number}{1}
+      \field{title}{Variable Projection Methods for an Optimized Dynamic Mode Decomposition}
+      \field{volume}{17}
+      \field{year}{2018}
+      \field{pages}{380\bibrangedash 416}
+      \range{pages}{37}
+      \verb{doi}
+      \verb 10.1137/M1124176
+      \endverb
+    \endentry
+    \entry{jiang2021}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=fcb33f0c8626d335119785afb031c1db}{%
+           family={Jiang},
+           familyi={J\bibinitperiod},
+           given={Tao},
+           giveni={T\bibinitperiod}}}%
+        {{hash=9ba0d354153c0accf9d6a58323b02b50}{%
+           family={Kou},
+           familyi={K\bibinitperiod},
+           given={Xiao},
+           giveni={X\bibinitperiod}}}%
+        {{hash=94499897f3cbdd7771a0d386fd479b5a}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Guodong},
+           giveni={G\bibinitperiod}}}%
+        {{hash=8755b46964be635ff5a02d480c9f467a}{%
+           family={Yuan},
+           familyi={Y\bibinitperiod},
+           given={Haoyu},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{02768d2788f983dd8fa2fbfb41e793f8}
+      \strng{fullhash}{c54942924d76f356eb233bdf160c9858}
+      \strng{fullhashraw}{c54942924d76f356eb233bdf160c9858}
+      \strng{bibnamehash}{c54942924d76f356eb233bdf160c9858}
+      \strng{authorbibnamehash}{c54942924d76f356eb233bdf160c9858}
+      \strng{authornamehash}{02768d2788f983dd8fa2fbfb41e793f8}
+      \strng{authorfullhash}{c54942924d76f356eb233bdf160c9858}
+      \strng{authorfullhashraw}{c54942924d76f356eb233bdf160c9858}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal of Electrical Power and Energy Systems}
+      \field{title}{Synergistic Data Analytics for Electromechanical Oscillation in Electric Power Systems}
+      \field{volume}{135}
+      \field{year}{2022}
+      \field{pages}{107610}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.ijepes.2021.107610
+      \endverb
+    \endentry
+    \entry{li2018cwt}{article}{}{}
+      \name{author}{6}{}{%
+        {{hash=89c9155e05a699717ef1737c0fffa46e}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Xue},
+           giveni={X\bibinitperiod}}}%
+        {{hash=ecec65b415b19b3621e8d452315cd17f}{%
+           family={Cui},
+           familyi={C\bibinitperiod},
+           given={Hantao},
+           giveni={H\bibinitperiod}}}%
+        {{hash=fcb33f0c8626d335119785afb031c1db}{%
+           family={Jiang},
+           familyi={J\bibinitperiod},
+           given={Tao},
+           giveni={T\bibinitperiod}}}%
+        {{hash=080b3224de289be9c1c2f73933fd242c}{%
+           family={Xu},
+           familyi={X\bibinitperiod},
+           given={Yao},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=9137f72ff9013c60ebc2f3fc9d4c0477}{%
+           family={Jia},
+           familyi={J\bibinitperiod},
+           given={Hongjie},
+           giveni={H\bibinitperiod}}}%
+        {{hash=50d012f9296d486c31076084ff77e333}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Fangxing},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{1463bfa635ce48e66c71b5c324e8e2d9}
+      \strng{fullhash}{4cd1ea4b200bcf27cd44c95bb7a15d76}
+      \strng{fullhashraw}{4cd1ea4b200bcf27cd44c95bb7a15d76}
+      \strng{bibnamehash}{4cd1ea4b200bcf27cd44c95bb7a15d76}
+      \strng{authorbibnamehash}{4cd1ea4b200bcf27cd44c95bb7a15d76}
+      \strng{authornamehash}{1463bfa635ce48e66c71b5c324e8e2d9}
+      \strng{authorfullhash}{4cd1ea4b200bcf27cd44c95bb7a15d76}
+      \strng{authorfullhashraw}{4cd1ea4b200bcf27cd44c95bb7a15d76}
+      \field{extraname}{1}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal of Electrical Power and Energy Systems}
+      \field{title}{Multichannel Continuous Wavelet Transform Approach to Estimate Electromechanical Oscillation Modes, Mode Shapes and Coherent Groups from Synchrophasors in Bulk Power Grids}
+      \field{volume}{96}
+      \field{year}{2018}
+      \field{pages}{222\bibrangedash 237}
+      \range{pages}{16}
+      \verb{doi}
+      \verb 10.1016/j.ijepes.2017.09.043
+      \endverb
+    \endentry
+    \entry{li2020era}{article}{}{}
+      \name{author}{7}{}{%
+        {{hash=89c9155e05a699717ef1737c0fffa46e}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Xue},
+           giveni={X\bibinitperiod}}}%
+        {{hash=fcb33f0c8626d335119785afb031c1db}{%
+           family={Jiang},
+           familyi={J\bibinitperiod},
+           given={Tao},
+           giveni={T\bibinitperiod}}}%
+        {{hash=8755b46964be635ff5a02d480c9f467a}{%
+           family={Yuan},
+           familyi={Y\bibinitperiod},
+           given={Haoyu},
+           giveni={H\bibinitperiod}}}%
+        {{hash=ecec65b415b19b3621e8d452315cd17f}{%
+           family={Cui},
+           familyi={C\bibinitperiod},
+           given={Hantao},
+           giveni={H\bibinitperiod}}}%
+        {{hash=50d012f9296d486c31076084ff77e333}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Fangxing},
+           giveni={F\bibinitperiod}}}%
+        {{hash=44614b5f5ec8f4fe27540b1f3f99e6d0}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Guoqing},
+           giveni={G\bibinitperiod}}}%
+        {{hash=9137f72ff9013c60ebc2f3fc9d4c0477}{%
+           family={Jia},
+           familyi={J\bibinitperiod},
+           given={Hongjie},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{1463bfa635ce48e66c71b5c324e8e2d9}
+      \strng{fullhash}{dba9cf6ba454771f5b7dc838e09314e2}
+      \strng{fullhashraw}{dba9cf6ba454771f5b7dc838e09314e2}
+      \strng{bibnamehash}{1463bfa635ce48e66c71b5c324e8e2d9}
+      \strng{authorbibnamehash}{1463bfa635ce48e66c71b5c324e8e2d9}
+      \strng{authornamehash}{1463bfa635ce48e66c71b5c324e8e2d9}
+      \strng{authorfullhash}{dba9cf6ba454771f5b7dc838e09314e2}
+      \strng{authorfullhashraw}{dba9cf6ba454771f5b7dc838e09314e2}
+      \field{extraname}{2}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal of Electrical Power and Energy Systems}
+      \field{title}{An Eigensystem Realization Algorithm Based Data-Driven Approach for Extracting Electromechanical Oscillation Dynamic Patterns from Synchrophasor Measurements in Bulk Power Grids}
+      \field{volume}{116}
+      \field{year}{2020}
+      \field{pages}{105549}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.ijepes.2019.105549
+      \endverb
+    \endentry
+    \entry{hauer1990}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=2df9cedac8b9713ec5840e1d463ebbfc}{%
+           family={Hauer},
+           familyi={H\bibinitperiod},
+           given={John\bibnamedelima F.},
+           giveni={J\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=2dd58bbb2d368fccfa43fe7b85673c3a}{%
+           family={Demeure},
+           familyi={D\bibinitperiod},
+           given={C.\bibnamedelimi J.},
+           giveni={C\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=8f8861d48902c6fcdefc2af76f054ac6}{%
+           family={Scharf},
+           familyi={S\bibinitperiod},
+           given={Louis\bibnamedelima L.},
+           giveni={L\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \strng{namehash}{b7bf4e87c4ba3146f7e5edcb1c566927}
+      \strng{fullhash}{afb8dcead5cf582a2fc220b20e11512b}
+      \strng{fullhashraw}{afb8dcead5cf582a2fc220b20e11512b}
+      \strng{bibnamehash}{afb8dcead5cf582a2fc220b20e11512b}
+      \strng{authorbibnamehash}{afb8dcead5cf582a2fc220b20e11512b}
+      \strng{authornamehash}{b7bf4e87c4ba3146f7e5edcb1c566927}
+      \strng{authorfullhash}{afb8dcead5cf582a2fc220b20e11512b}
+      \strng{authorfullhashraw}{afb8dcead5cf582a2fc220b20e11512b}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Power Systems}
+      \field{number}{1}
+      \field{title}{Initial Results in {Prony} Analysis of Power System Response Signals}
+      \field{volume}{5}
+      \field{year}{1990}
+      \field{pages}{80\bibrangedash 89}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1109/59.49090
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
