@@ -19,8 +19,8 @@
   ],
   "latex-workshop.latex.recipes": [
     {
-      "name": "pdflatex + biber + pdflatex*2 (build)",
-      "tools": ["pdflatex-build", "biber-build", "pdflatex-build", "pdflatex-build"]
+      "name": "pdflatex + biber ",
+      "tools": ["pdflatex-build", "biber-build","pdflatex-build","pdflatex-build"]
     }
   ],
   "latex-workshop.latex.autoClean.run": "onBuilt",
