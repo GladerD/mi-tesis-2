@@ -1,0 +1,5 @@
+Partiendo del supuesto cuasi estático en el eje z para una línea uniforme, los campos transversales $E(x,y)$ y $H(x,y)$ determinan los parámetros por unidad de longitud. Las energías eléctricas y magnéticas almacenada, se obtienen integrando las densidades de energías en el dominio el dominio de interés, donde los campos eléctricos se concentran en el medio dieléctrico, y el campo magnético en toda la sección transversal del cable.
+
+\begin{equation}
+	W_e' = \int_A \frac{1}{2} \vec{E} \cdot \vec{D} \, dA \qquad W_m' = \int_A \frac{1}{2} \vec{B} \cdot \vec{H} \, dA
+\end{equation}

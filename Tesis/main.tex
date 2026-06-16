@@ -1,0 +1,110 @@
+\documentclass[spanish,pagenum=top,chapterstart=even]{thesis}
+
+% pasos importates para copilar: pdflatex - bibtex - pdflatex - pdflatex
+
+%en la terminal:
+%pdflatex main.tex
+%biber main
+%pdflatex main.tex
+%pdflatex main.tex
+
+
+% Paquetes adicionales
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes,arrows}
+
+% --- Referencias coloridas con corchetes ---
+\usepackage{cleveref}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{textcomp}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz,circuitikz}
+\usepackage{siunitx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{pdflscape}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usetikzlibrary{positioning, shadows}
+\usepackage[table]{xcolor} % CRUCIAL para \cellcolor en tablas
+\definecolor{colorRama5}{RGB}{220, 235, 252}
+\definecolor{colorRama4}{RGB}{228, 252, 220}
+\definecolor{colorRama3}{RGB}{252, 248, 220}
+\definecolor{colorRama2}{RGB}{252, 225, 220}
+\definecolor{colorRama1}{RGB}{235, 220, 252}
+
+% Configuración para color de corchetes
+\crefformat{equation}{\textcolor{blue}{[#2#1#3]}}
+\crefformat{figure}{\textcolor{red}{[#2#1#3]}}
+\crefformat{table}{\textcolor{teal}{[#2#1#3]}}
+\crefformat{section}{\textcolor{violet}{[#2#1#3]}}
+\crefformat{chapter}{\textcolor{orange}{[#2#1#3]}}
+% Puedes ajustar los colores a tu preferencia
+
+\university{Universidad de Guadalajara222}
+\campus{Centro Universitario de Ciencias Exactas e Ingenierías}{División de Ingenierías}
+\title{Identificación de modos de oscilación electromecánicos mediante una técnica de Tufts-Kumaresan multivariable} %% titulo del trabajo
+\grade{Maestro en Ciencias en Ingeniería Eléctrica} % grado académico
+\author{Ing. Glader David Hernández Reyes} % autor
+\directors{Dr. José de Jesús Nuño Ayon} % asesor
+\codirector{Dr. Nombre del Codirector}
+\place{Guadalajara, Jalisco}
+\udglogo{University_emblem} % sin extension si es pdf/png
+
+\newcommand{\blankpage}{\clearpage\thispagestyle{empty}\addtocounter{page}{-1}\newpage}
+
+\thesisbibfile{ref.bib} % definiendo el archivo .bib para la bibliografía
+
+\begin{document}
+% ===== preliminares: romanos =====
+\frontmatter
+
+\maketitle
+% pagina extra en blanco
+% \blankpage
+
+\setcounter{page}{9} % ajustar inicio de numeración
+\dedicatoria{A mi familia y a mi país.}
+%\clearemptydoublepage
+\agradecimientos{agradezco a toda la evolución de la humanidad que me ha llevado hasta aquí.}
+
+\begingroup
+\let\cleardoublepage\clearpage
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\contentsname}
+\tableofcontents
+
+\phantomsection
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+
+\phantomsection
+\addcontentsline{toc}{chapter}{\listtablename}
+\listoftables
+\clearpage
+\thispagestyle{empty}
+\ifodd\value{page}\null\newpage\fi
+
+\endgroup
+
+\clearemptydoublepage
+
+\mainmatter
+
+\include{capitulos/capitulo1}
+\include{capitulos/capitulo2/capitulo2}
+\include{capitulos/capitulo3}
+
+% pagina en balnco al final del documento
+\clearpage
+\thispagestyle{empty}
+\null
+\newpage
+
+\end{document}

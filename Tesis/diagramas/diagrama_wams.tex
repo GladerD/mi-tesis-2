@@ -1,0 +1,56 @@
+
+% 1. Definición de colores para cada rama (estilo profesional pastel)
+\definecolor{colorRama5}{RGB}{220, 235, 252} % Azul claro
+\definecolor{colorRama4}{RGB}{228, 252, 220} % Verde claro
+\definecolor{colorRama3}{RGB}{252, 248, 220} % Amarillo/Crema
+\definecolor{colorRama2}{RGB}{252, 225, 220} % Rosa/Rojo claro
+\definecolor{colorRama1}{RGB}{235, 220, 252} % Morado claro
+
+
+\begin{tikzpicture}[
+    % 2. Estilos globales mejorados
+    base/.style={rectangle, draw, rounded corners=2pt, align=center, font=\scriptsize, minimum width=3.2cm, fill=white},
+    category/.style={base, font=\small\bfseries, minimum height=0.8cm, inner sep=5pt},
+    item/.style={base, minimum height=0.6cm, inner sep=3pt},
+    arrow/.style={->, >=stealth, thick, gray!80},
+    node distance=0.3cm and 0.6cm % Distancia (Vertical y Horizontal) entre cuadros
+]
+
+% --- RAMA 5 (Paramétricos) ---
+\node[category, fill=colorRama5] (r5) {Ajuste de Señal\\(Paramétricos)};
+\node[item, below=of r5] (prony) {Prony Multiseñal:\\(Almunif 2019, Trudnowski 1999)};
+\node[item, below=of prony] (mp) {Matrix Pencil:\\(Almunif 2019)};
+\node[item, below=of mp] (tk) {\textbf{TK multivariable}\\\textbf{(propuesto)}};
+\node[item, below=of tk] (vf) {Vector Fitting:\\(Bañuelos 2019)};
+
+% --- RAMA 4 (Subespacios) ---
+\node[category, fill=colorRama4, right=of r5] (r4) {Subespacios\\(State-Space)};
+\node[item, below=of r4] (sw) {Sliding Window:\\(Ordóñez y Ríos 2013)};
+\node[item, below=of sw] (mssi) {MSSI: (Ramos 2013)};
+\node[item, below=of mssi] (era) {ERA: (Li 2020, Almunif 2019)};
+\node[item, below=of era] (eof) {EOF: (Messina 2007)\\C-SVD: (Yang 2012)};
+
+% --- RAMA 3 (Geometría) ---
+\node[category, fill=colorRama3, right=of r4] (r3) {Geometría y\\Patrones Globales};
+\node[item, below=of r3] (koopman) {Koopman: (Susuki 2014)};
+\node[item, below=of koopman] (dmd) {DMD: (Barocio 2015)\\DMD Robusto: (Rodriguez 2024)};
+\node[item, below=of dmd] (diff) {Diffusion Maps:\\(Arvizu 2016)};
+\node[item, below=of diff] (nlsa) {NLSA: (Arvizu 2016)\\Fourier: (Tashman 2014)};
+
+% --- RAMA 2 (Tiempo-Frecuencia) ---
+\node[category, fill=colorRama2, right=of r3] (r2) {Tiempo-Frecuencia\\Multicanal};
+\node[item, below=of r2] (wave) {Wavelets (MCWT):\\(Li, Jiang 2017)};
+\node[item, below=of wave] (vmd) {VMD: (Arrieta 2018)\\TKF: (Zamora 2016)};
+\node[item, below=of vmd] (ievdhm) {IEVDHM: (Zamora 2022)};
+
+% --- RAMA 1 (Híbridos) ---
+% Se posiciona debajo de la Rama 2 para mantener el flujo WAMS
+\node[category, fill=colorRama1, below=1.0cm of ievdhm] (r1) {Híbridos\\(2022-2025)};
+\node[item, below=of r1] (ivvf) {IV-VF: (Schumacher 2019)};
+\node[item, below=of ivvf] (fastica) {FastICA Mejorado:\\(Wang 2025)};
+\node[item, below=of fastica] (filtros) {Filtros Bessel y Coseno:\\(Reyes de Luna 2025)};
+
+% Título del diagrama
+\node[above=0.6cm of r4.north east, font=\large\bfseries] {Análisis Modal Multivariable (Enfoque WAMS)};
+
+\end{tikzpicture}
