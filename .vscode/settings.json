@@ -5,6 +5,7 @@
       "name": "pdflatex-build",
       "command": "pdflatex",
       "args": [
+        "-shell-escape",
         "-interaction=nonstopmode",
         "-synctex=1",
         "-file-line-error",
