@@ -1,0 +1,179 @@
+% ===========================================================
+% diagrama_wams.tex  (version de dos capas)
+%
+% CAPA 1 (arriba): familias de tecnicas multivariables segun el
+%   OBJETO ALGEBRAICO que construyen a partir de la matriz de
+%   datos P x N. Criterio unico de particion, por lo que cada
+%   tecnica tiene exactamente un lugar. Las familias se agrupan
+%   segun entreguen o no un modelo dinamico explicito.
+%
+% CAPA 2 (abajo): banda de atributos operativos WAMS por familia.
+%   Ejes tomados de Thambirajah2010 (Fig. 1: regimen, parametrico,
+%   dominio) y de ieee2012 (Cap. 2 Sec. 2.4: bloque/recursivo,
+%   forma cerrada/iterativa; Cap. 4: uso operativo).
+%
+% Requiere: tikz con la libreria positioning, xcolor, y las claves
+% de ref.bib.
+% ===========================================================
+\begin{tikzpicture}[
+    font=\scriptsize,
+    grupo/.style={rectangle, draw, thick, rounded corners=3pt,
+                  align=center, font=\small\bfseries, anchor=north,
+                  minimum height=0.62cm, inner sep=3pt},
+    fam/.style={rectangle, draw, rounded corners=2pt, align=center,
+                font=\scriptsize\bfseries, text width=3.2cm,
+                inner sep=3pt, minimum height=0.95cm, anchor=north},
+    it/.style={rectangle, draw, rounded corners=2pt, align=center,
+               font=\scriptsize, text width=3.2cm, inner sep=3pt,
+               minimum height=0.72cm, fill=white, anchor=north},
+    prop/.style={it, fill=red!8, draw=red!60!black, very thick}
+]
+
+\definecolor{cF1}{RGB}{220,235,252}   % prediccion lineal
+\definecolor{cF2}{RGB}{228,252,220}   % espacio de estados
+\definecolor{cF3}{RGB}{252,248,220}   % operador en observables
+\definecolor{cF4}{RGB}{252,225,220}   % ajuste racional
+\definecolor{cF5}{RGB}{235,220,252}   % descomposicion estadistica
+\definecolor{cF6}{RGB}{222,240,240}   % variedad no lineal
+\definecolor{cF7}{RGB}{245,234,222}   % tiempo-frecuencia
+\definecolor{cGI}{RGB}{ 35, 75,130}
+\definecolor{cGII}{RGB}{130, 80, 25}
+
+% ===========================================================
+% CAPA 1 - GRUPO I: entregan un modelo dinamico explicito
+% ===========================================================
+\node[grupo, draw=cGI, text=cGI, fill=cGI!8, minimum width=13.9cm]
+     (gI) at (5.325,0)
+     {GRUPO I \quad Construyen un modelo din\'amico:
+       $\lambda_i \Rightarrow$ frecuencia \emph{y} amortiguamiento};
+
+% ---------- F1: prediccion lineal / ajuste exponencial ----------
+\node[fam, fill=cF1, draw=cGI] (f1) at (0,-0.85)
+     {F1. Predicci\'on lineal y\\ajuste exponencial\\[1pt]
+      {\normalfont\scriptsize (Hankel $\to$ ra\'ices)}};
+\node[it, below=2pt of f1] (f1a)
+     {Prony multise\~nal\\\cite{Trudnowski1999,Ordonez2013}};
+\node[it, below=2pt of f1a] (f1b)
+     {Matrix pencil, TLS-Prony\\\cite{Almunif2020,Chen2024}$^{\star}$};
+\node[it, below=2pt of f1b] (f1c)
+     {Hankel iterativa\\\cite{Zamora2023}};
+\node[it, below=2pt of f1c] (f1d)
+     {Tufts-Kumaresan\\\cite{Tufts1982,Moghdam2024}};
+\node[prop, below=2pt of f1d] (f1e)
+     {\textbf{Multi-TK}\\\textbf{(propuesto)}};
+
+% ---------- F2: realizacion en espacio de estados ----------
+\node[fam, fill=cF2, draw=cGI] (f2) at (3.55,-0.85)
+     {F2. Realizaci\'on en\\espacio de estados\\[1pt]
+      {\normalfont\scriptsize (Hankel $\to$ $A,B,C,D$)}};
+\node[it, below=2pt of f2] (f2a)
+     {ERA\\\cite{li2020era,Almunif2020}$^{\bullet}$};
+\node[it, below=2pt of f2a] (f2b)
+     {Subespacios multise\~nal\\\cite{Ramos2013}};
+
+% ---------- F3: operador lineal en observables ----------
+\node[fam, fill=cF3, draw=cGI] (f3) at (7.10,-0.85)
+     {F3. Operadores lineales \\observadores\\[1pt]
+      {\normalfont\scriptsize (Koopman: $X'\!\approx\! AX$)}};
+\node[it, below=2pt of f3] (f3a)
+     {Modos de Koopman\\\cite{Susuki2014}};
+\node[it, below=2pt of f3a] (f3b)
+     {DMD\\\cite{Barocio2015}$^{\bullet}$};
+\node[it, below=2pt of f3b] (f3c)
+     {DMD robusta y mejorada\\\cite{Rodriguez2024,Zuhaib2021}};
+\node[it, below=2pt of f3c] (f3d)
+     {Proyecci\'on variable opt.\\\cite{jiang2021}$^{\star\bullet}$};
+
+% ---------- F4: ajuste racional en frecuencia ----------
+\node[fam, fill=cF4, draw=cGI] (f4) at (10.65,-0.85)
+     {F4. Ajuste racional\\en frecuencia\\[1pt]
+      {\normalfont\scriptsize (polos y residuos)}};
+\node[it, below=2pt of f4] (f4a)
+     {Vector fitting\\\cite{Banuelos2019}$^{\star}$};
+\node[it, below=2pt of f4a] (f4b)
+     {Vector fitting con\\variable instrumental\\\cite{Schumacher2019}$^{\star}$};
+
+% ===========================================================
+% CAPA 1 - GRUPO II: sin modelo dinamico explicito
+% ===========================================================
+\node[grupo, draw=cGII, text=cGII, fill=cGII!8, minimum width=13.9cm,
+      below=0.45cm of f1e.south, anchor=north] (gII) at (5.325,-6.7)
+     {GRUPO II \quad No construyen modelo din\'amico:
+       estructura o frecuencia};
+
+% ---------- F5: descomposicion estadistica ortogonal ----------
+\node[fam, fill=cF5, draw=cGII] (f5) at (0,-8)
+     {F5. Descomposici\'on\\estad\'istica ortogonal\\[1pt]
+      {\normalfont\scriptsize (SVD, PCA, ICA )}};
+\node[it, below=2pt of f5] (f5a)
+     {EOF y EOF particionada\\\cite{Messina2007,Esquivel2015}$^{\dagger}$};
+\node[it, below=2pt of f5a] (f5b)
+     {EOF compleja\\\cite{EsquivelCastaneda2014,Ma2019}$^{\dagger\star}$};
+\node[it, below=2pt of f5b] (f5c)
+     {SVD compleja\\\cite{Yang2012}$^{\dagger}$};
+\node[it, below=2pt of f5c] (f5d)
+     {FastICA\\\cite{Wang2025}$^{\star}$};
+
+% ---------- F6: aprendizaje de variedad no lineal ----------
+\node[fam, fill=cF6, draw=cGII] (f6) at (3.55,-8)
+     {F6. Aprendizaje de\\variedad no lineal\\[1pt]
+      {\normalfont\scriptsize (n\'ucleo o grafo)}};
+\node[it, below=2pt of f6] (f6a)
+     {Mapas de difusi\'on\\\cite{Arvizu2016}};
+\node[it, below=2pt of f6a] (f6b)
+     {An\'alisis espectral\\laplaciano no lineal\\\cite{ArvizuNLSA2016}};
+
+% ---------- F7: descomposicion tiempo-frecuencia multicanal ----------
+\node[fam, fill=cF7, draw=cGII] (f7) at (7.10,-8)
+     {F7. Descomposici\'on\\tiempo-frecuencia\\multicanal};
+\node[it, below=2pt of f7] (f7a)
+     {Wavelet multicanal\\\cite{Li2018,Jiang2017}$^{\star}$};
+\node[it, below=2pt of f7a] (f7b)
+     {VMD y Taylor-Fourier\\\cite{Paternina2019,Zamora2017}$^{\star}$};
+\node[it, below=2pt of f7b] (f7c)
+     {Filtros Bessel y coseno\\\cite{ReyesDeLuna2025}};
+\node[it, below=2pt of f7c] (f7d)
+     {Fourier multidimensional\\\cite{Tashman2014}};
+\node[it, below=2pt of f7d] (f7e)
+     {Densidades espectrales\\cruzadas \cite{Hauer2007,Trudnowski2025}$^{\star}$};
+
+% ---------- NOTAS (columna 4 de la segunda fila) ----------
+\node[rectangle, draw, rounded corners=2pt, align=left, font=\scriptsize,
+      text width=3.2cm, inner sep=4pt, fill=black!3, anchor=north]
+     (notas) at (10.65,-8)
+     {\textbf{Notas}\\[2pt]
+      $\star$ soluci\'on iterativa (no de forma cerrada)\\[2pt]
+      $\dagger$ no entrega amortiguamiento\\[2pt]
+      $\bullet$ entrega los tres patrones
+      (centro de la Fig.~\ref{fig:patrones_dinamicos})};
+
+% ===========================================================
+% CAPA 2 - BANDA DE ATRIBUTOS OPERATIVOS WAMS
+% ===========================================================
+\node[anchor=north, font=\tiny] at (5.325,-14.05)
+{%
+\begin{tabular}{@{}l l l l@{}}
+\multicolumn{4}{@{}l}{\normalfont\scriptsize\bfseries  Caracteristicas operativas por familia}\\[2pt]
+\hline
+\textbf{Familia} & \textbf{R\'egimen} & \textbf{Soluci\'on} &
+\textbf{Patrones}\\
+\hline
+F1 Predicci\'on lineal      & ringdown            & forma cerrada        & \textbf{solo forma modal; ninguno alcanza los tres}\\
+F2 Espacio de estados       & ringdown / ambiente & forma cerrada        & los tres (ERA)\\
+F3 Operador en observables  & ringdown            & cerrada o iterativa  & los tres (DMD, proyecci\'on variable)\\
+F4 Ajuste racional          & ringdown            & iterativa            & forma modal, \'indices de participaci\'on\\
+F5 Descomp.\ estad\'istica  & ambiente / ringdown & forma cerrada        & forma modal, \'indices de participaci\'on\\
+F6 Variedad no lineal       & ambiente / ringdown & forma cerrada        & solo grupos coherentes\\
+F7 Tiempo-frecuencia        & ringdown / ambiente & cerrada o iterativa  & forma modal m\'as uno de los otros dos\\
+\hline
+\end{tabular}};
+
+%\node[anchor=north west, font=\scriptsize\itshape, text width=13.9cm]
+%     at (-1.655,-17.90)
+ %    {Las siete familias procesan por bloque; ninguna de las 32 t\'ecnicas
+  %    revisadas se formula como estimador recursivo en el sentido
+   %   de~\cite[Sec.~2.4.2]{ieee2012}. La familia F1 es la \'unica que combina
+    %  soluci\'on en forma cerrada con ventana corta de ringdown y, a la vez,
+     % la \'unica del Grupo~I que no alcanza los tres patrones espaciales.};
+
+\end{tikzpicture}

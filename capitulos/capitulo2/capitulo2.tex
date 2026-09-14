@@ -13,11 +13,9 @@ dominantes, formas modales, factores de participación y grupos coherentes
 con robustez frente al ruido es un problema abierto. Se propone un algoritmo de
 identificación que combine la predicción lineal multicanal de
 Tufts--Kumaresan, basada en el truncamiento de la descomposición en
-valores singulares permite estimar los parámetros modales con exactitud comparable 
-al análisis de eigenvalores y mayor robustez al ruido que los métodos basados en 
-datos existentes. El objetivo es establecer el marco teórico que fundamenta
-esa cadena, deduciendo el modelo de señal desde la física del generador
-síncrono y rigorizando cada etapa de estimación. El capitulo
+valores singulares permite aproximar los parámetros modales con exactitud. El objetivo es 
+establecer el marco teórico que fundamenta esa cadena, deduciendo el modelo de señal desde 
+la física del generador síncrono y rigorizando cada etapa de estimación. El capitulo
 articula una estructura teórica invertible que (i) deriva el modelo de
 exponenciales amortiguadas como consecuencia de la respuesta libre del
 sistema y no como postulado; (ii) sustenta el truncamiento de la SVD como
@@ -45,17 +43,15 @@ toda señal registrada por una unidad de medición fasorial en régimen de
 \emph{ring-down} obedece un modelo de suma de exponenciales complejas
 amortiguadas. Esta derivación convierte el modelo de señal en consecuencia
 de la física del sistema, y no en postulado, y delimita su dominio de
-validez: la banda electromecánica ($0.1$--$3$~Hz) observada con tasas de
-reporte PMU de $30$~Hz o superiores \cite{sauer2017}.
+validez: la banda electromecánica ($0.1$--$2$~Hz).
 
 Sobre esa base se desarrolla la maquinaria de estimación: la formulación
 discreta y su mapeo al plano $z$; la predicción lineal hacia atrás
 multicanal de Tufts--Kumaresan y su mecanismo de separación señal--ruido
-\cite{tufts1982}; el truncamiento de la SVD como filtro óptimo de
-Eckart--Young--Mirsky con selección de orden por energía y por umbral duro
-óptimo \cite{brunton2022,gavish2014}; la estimación de amplitudes mediante
-sistemas de Vandermonde estables; y el refinamiento por proyección variable
-\cite{askham2018}. La parte final traduce los parámetros en patrones
+\cite{Tufts1982}; el truncamiento de la SVD como filtro selección de orden 
+por energía y por umbral duro \cite{brunton2022,gavish2014}; la estimación de 
+amplitudes mediante sistemas de Vandermonde; y el refinamiento por proyección 
+variable \cite{askham2018}. La parte final traduce los parámetros en patrones
 dinámicos interpretables: formas modales, índices de participación y grupos
 coherentes \cite{jiang2021,li2018cwt,li2020era}. Se incluye, además, el
 diseño de los estudios experimentales que validan la selección del orden
@@ -65,14 +61,17 @@ optimización con restricciones de subespacio.
 
 
 \subsection{Dinámica de Oscilaciones Electromecánicas}
+
 \subsubsection{Ecuaciones de Swing del Generador Síncrono}
 
-La dinámica de cada generador $i$ en un sistema de $n_g$ máquinas ($i=1,\ldots,n_g$) se describe mediante las \textbf{ecuaciones de swing}:
+La dinámica de cada generador $i$ en un sistema de $n_g$ máquinas ($i=1,\ldots,n_g$) se 
+describe mediante las \textbf{ecuaciones de swing}:\autoref{subsec:marco}
 
 \begin{align}
     \dot{\delta}_i  &= \omega_i - \omega_s \label{eq:swing1} \\[4pt]
     \dot{\omega}_i  &= \frac{\omega_s}{2H_i}
-                       \Bigl(P_{m,i} - P_{e,i}(\boldsymbol{\delta}) - D_i(\omega_i - \omega_s)\Bigr)
+                       \Bigl(P_{m,i} - P_{e,i}(\boldsymbol{\delta}) - 
+                       D_i(\omega_i - \omega_s)\Bigr)
                        \label{eq:swing2}
 \end{align}
 
@@ -84,8 +83,8 @@ $P_{m,i}$ constante en la ventana de análisis y con todos los efectos de
 amortiguamiento (devanados amortiguadores, cargas sensibles a la frecuencia, etc.)
 agregados en el coeficiente $D_i$. Este nivel de modelado es suficiente para
 caracterizar la dinámica electromecánica de interés, pues los modos de
-oscilación de nuestro interes  entre rotores quedan determinados por el intercambio de energía
-cinética y potencia sincronizante entre máquinas \cite{kundur1994,sauer2017}.
+oscilación de nuestro interes  entre rotores quedan determinados por el intercambio de 
+energía cinética y potencia sincronizante entre máquinas \cite{kundur1994,sauer2017}.
 
 % -----------------------------------------------------------
 
@@ -95,7 +94,7 @@ $S_{\text{base}}$):
 \begin{itemize}
     \item $\delta_i$: ángulo del rotor respecto a la referencia síncrona (rad);
     \item $\omega_i$: velocidad angular del rotor (rad/s);
-    \item $H_i$: constante de inercia, $H_i = \tfrac{1}{2}J_i\omega_s^2/S_{\text{base}}$ (s);
+    \item $H_i$: constante de inercia, $H_i = \tfrac{1}{2}J_i\omega_s^2/S_{\text{base}}$(s);
     \item $D_i$: coeficiente de amortiguamiento (p.u.\ de par por
           p.u.\ de desviación de velocidad, adimensional);
     \item $P_{m,i}$: potencia mecánica de entrada (p.u.);
@@ -110,8 +109,10 @@ $S_{\text{base}}$):
 
 \subsubsection{Linealización alrededor del Punto de Operación}
 
-Para analizar la estabilidad de pequeña señal, se linealiza el sistema alrededor del punto de equilibrio
-$(\boldsymbol{\delta}^0, \boldsymbol{\omega}^0)$; en régimen permanente se cumple ($\dot{\delta}_i = 0$, $\dot{\omega}_i = 0$):
+Para analizar la estabilidad de pequeña señal, se linealiza el sistema alrededor del punto
+de equilibrio $(\boldsymbol{\delta}^0, \boldsymbol{\omega}^0)$; en régimen permanente se 
+cumple ($\dot{\delta}_i = 0$, $\dot{\omega}_i = 0$):
+
 \begin{equation}
     P_{m,i} = P_{e,i}(\boldsymbol{\delta}^0), \qquad \omega_i^0 = \omega_s
 \end{equation}
@@ -125,28 +126,37 @@ Se definen las variables de estado de perturbación (desviaciones):
 % -----------------------------------------------------------
 
 Linealizando la primera ecuación de oscilación:
+
 \begin{equation}
     \Delta\dot{\boldsymbol{\delta}} = \Delta\boldsymbol{\omega}
 \end{equation}
 
-Expandiendo la serie de Taylor de primer orden de $P_{e,i}(\boldsymbol{\delta})$ alrededor de $\boldsymbol{\delta}^0$ y usando la condición de equilibrio se linealiza la segunda ecuación de oscilación:
+Expandiendo la serie de Taylor de primer orden de $P_{e,i}(\boldsymbol{\delta})$ alrededor 
+de $\boldsymbol{\delta}^0$ y usando la condición de equilibrio se linealiza la segunda 
+ecuación de oscilación:
+
 \begin{equation}
-    \Delta\dot{\omega}_i = \frac{\omega_s}{2H_i}\Bigl(-\sum_{j=1}^{n_g} \frac{\partial P_{e,i}}{\partial \delta_j}\Big|_0 \Delta\delta_j - D_i \Delta\omega_i\Bigr)
+    \Delta\dot{\omega}_i = \frac{\omega_s}{2H_i}\Bigl(-\sum_{j=1}^{n_g} 
+    \frac{\partial P_{e,i}}{\partial \delta_j}\Big|_0 \Delta\delta_j - D_i \Delta\omega_i\Bigr)
 \end{equation}
 
 Las derivadas parciales evaluadas en el punto de operación definen los
 \textbf{coeficientes de potencia sincronizante} \cite{kundur1994}:
+
 \begin{equation}
     K_{ij} \;=\; \left.\frac{\partial P_{e,i}}{\partial \delta_j}\right|_{\boldsymbol{\delta}^0},
     \qquad i,j = 1,\ldots,n_g,
     \label{eq:Kij}
 \end{equation}
+
 que representan el acoplamiento entre las
-máquinas $i$ y $j$ a través de la red y representa el cambio en la potencia eléctrica para un cambio en el punto de equilibr. Agrupando las desviaciones en el
+máquinas $i$ y $j$ a través de la red y representa el cambio en la potencia eléctrica 
+para un cambio en el punto de equilibrio. Agrupando las desviaciones en el
 vector de estados $\Delta\mathbf{x} =
 [\Delta\boldsymbol{\delta}^\top \;\; \Delta\boldsymbol{\omega}^\top]^\top
 \in \mathbb{R}^{2n_g}$, el sistema linealizado adquiere la forma canónica
 de espacio de estados en lazo abierto (movimiento libre):
+
 \begin{equation}
     \Delta\dot{\mathbf{x}} \;=\; \mathbf{A}\,\Delta\mathbf{x},
     \qquad
@@ -158,6 +168,7 @@ de espacio de estados en lazo abierto (movimiento libre):
     \in \mathbb{R}^{2n_g \times 2n_g},
     \label{eq:statespace}
 \end{equation}
+
 donde $\mathbf{M} = \operatorname{diag}(2H_1,\ldots,2H_{n_g})$,
 $\mathbf{D} = \operatorname{diag}(D_1,\ldots,D_{n_g})$ y
 $\mathbf{K} = [K_{ij}] \in \mathbb{R}^{n_g\times n_g}$ es la matriz de
@@ -204,6 +215,7 @@ $f_k = \omega_k/2\pi$ y razón de amortiguamiento
     \zeta_k \;=\; \frac{-\sigma_k}{\sqrt{\sigma_k^2 + \omega_k^2}}.
     \label{eq:damping_ratio}
 \end{equation}
+
 Cualquier señal medida $x_i(t)$ que sea combinación lineal de los estados
 --- es el caso de desviaciones de velocidad de rotor, frecuencia de bus,
 potencia activa o ángulos de tensión registrados por un PMU, expresables
@@ -233,7 +245,7 @@ extensión geográfica y banda de frecuencia \cite{kundur1994,sauer2017}:
 \textbf{modos locales} (una planta contra el resto del sistema,
 aproximadamente $1$--$3$~Hz) y \textbf{modos interárea} (grupos coherentes
 de generadores oscilando entre sí, por debajo de $1$~Hz, típicamente
-$0.25$--$1$~Hz). Los modos interárea, de bajo amortiguamiento
+$0.2$--$1$~Hz). Los modos interárea, de bajo amortiguamiento
 ($\zeta_k < 3\%$) y difícil diagnóstico, limitan las transferencias de
 potencia y constituyen el objeto principal de la identificación modal
 \cite{sauer2017}.
@@ -244,19 +256,17 @@ potencias sincronizados vía GPS, con tasas de reporte de $30$ a $120$
 muestras por segundo \cite{sauer2017}. Puesto que la banda electromecánica
 completa se encuentra por debajo de $3$~Hz, una tasa de reporte
 $F_s \ge 30$~Hz satisface holgadamente el criterio de Nyquist
-($F_s > 2 f_k$) y dota a las señales sincrofasoriales de la resolución
-temporal necesaria para estimar tanto $\omega_k$ como $\sigma_k$
+($F_s > 2 f_k$) y dota a las señales de la resolución
+temporal necesaria para aproximar tanto $\omega_k$ como $\sigma_k$
 \cite{sauer2017}. En contraste, los sistemas SCADA convencionales, con
 periodos de muestreo del orden de segundos, no resuelven esta dinámica.
 
 Tras una gran perturbación, la respuesta inmediata del sistema es
 fuertemente no lineal; sin embargo, una vez que las trayectorias se
-aproximan al nuevo punto de equilibrio, las oscilaciones decrecientes
-registradas por los PMU --- el régimen de \textbf{ring-down} --- se modelan
-con precisión como la respuesta libre de un sistema lineal no forzado
-\cite{sauer2017}. Es en este régimen donde el modelo
-\eqref{eq:measured_modal} es válido y donde operan los algoritmos de
-predicción lineal desarrollados a continuación.
+aproximan al nuevo punto de equilibrio, las oscilaciones registradas por los 
+PMU se pueden modelar como la respuesta libre de un sistema lineal \cite{sauer2017}. 
+Es en este estado donde el modelo \eqref{eq:measured_modal} es válido 
+y donde operan los algoritmos de predicción lineal desarrollados a continuación.
 
 \section{Formulación Discreta y Predicción Lineal}
 % ===========================================================
@@ -267,16 +277,19 @@ Muestreando cada señal $x_i(t)$ de \eqref{eq:measured_modal} con periodo
 $\Delta t = 1/F_s$, definimos $x_i[n] = x_i(n\Delta t)$ para
 $n = 0,1,\dots,N-1$. El modelo continuo de suma de exponenciales
 amortiguadas se transforma exactamente en
+
 \begin{equation}
     x_i[n] = \sum_{k=1}^{M} a_{i,k}\, z_k^{\,n}, \qquad
     z_k = e^{\lambda_k \Delta t} = e^{(\sigma_k + j\omega_k)\Delta t},
     \label{eq:discrete}
 \end{equation}
+
 donde $M \le 2n_g$ es el número de modos efectivamente observables en la
 ventana de datos. Puesto que las señales medidas son reales, los polos
 $z_k$ y las amplitudes $a_{i,k}$ aparecen en pares complejos conjugados,
-por lo que $M$ es par para modos puramente oscilatorios. Los polos en
-tiempo discreto contienen toda la información modal:
+de modo que $M$ es el número de exponenciales complejas y $K$ el número de
+ modos oscilatorios físicos.. Los polos en tiempo discreto contienen toda 
+ la información modal:
 
 \begin{align}
     z_k &= e^{(\sigma_k + j\omega_k)\Delta t}, \\[4pt]
@@ -295,44 +308,46 @@ $\sigma_k = \operatorname{Re}(\ln z_k)/\Delta t$, la frecuencia
 $\omega_k = \operatorname{Im}(\ln z_k)/\Delta t$ y la razón de
 amortiguamiento $\zeta_k$ de \eqref{eq:damping_ratio}.
 
+Las variables del problema se clasifican en tres grupos. Las variables 
+\textit{medidas} son las $P$ series de tiempo $\mathbf{x}_i \in \mathbb{C}^{N}$, 
+con $\mathbf{x}_i = [x_i(0)\ x_i(1)\ \cdots\ x_i(N-1)]^{\top}$. Las variables 
+\textit{de control} del algoritmo, fijadas a criterios heuristicos, son el orden 
+de predicción $L$ y el orden del modelo $M$. Las variables \textit{estimadas} 
+son los polos $\hat{s}_k$ y las amplitudes complejas $\hat{a}_{i,k}$; a partir 
+de ellas se aproximan la frecuencia $f_k$, la razón de amortiguamiento 
+$\zeta_k$, las formas modales, los índices de participación y los cosenos directores.
+
 \section{Algoritmo Tufts-Kumaresan Multivariable (Multi-TK)}
 % ===========================================================
 
 \subsection{Modelo de Señal y Predicción Lineal hacia Atrás}
 
-Para $P$ señales medidas $\{x_i[n]\}_{i=1}^P$, cada una de $N$ muestras ($n=0,\dots,N-1$), el modelo de señal con ruido de medición $w_i[n]$ es
-\[
-x_i[n] = \sum_{k=1}^{M} a_{i,k}\, z_k^n + w_i[n], \qquad z_k = e^{(\sigma_k + j\omega_k)\Delta t}.
-\]
+Para $P$ canales medidos $\{x_i[n]\}_{i=1}^P$, cada una de $N$ muestras ($n=0,\dots,N-1$), 
+el modelo de señal con ruido de medición $w_i[n]$ es
 
-Se elige un orden de predictor $L$ tal que $M \le L \le N-M$. Para cada canal $i$ se plantea el problema de \textbf{predicción lineal hacia atrás}:
+\begin{equation}
+x_i[n] = \sum_{k=1}^{M} a_{i,k}\, z_k^n + w_i[n], \qquad z_k = e^{(\sigma_k + j\omega_k)\Delta t}.
+\label{eq:signal_model}
+\end{equation}
+
+Se elige un orden de predictor $L$ tal que $M \le L \le N-M$. Para cada  $i$-ésimo canal se 
+plantea el problema de \textbf{predicción lineal hacia atrás} de orden $L$:
+
 \begin{equation}
 \mathbf{A}_i\,\mathbf{b} = -\mathbf{h}_i,
 \label{eq:backward_pred}
 \end{equation}
-donde $\mathbf{b}=[b(1),b(2),\dots,b(L)]^\top$ es el vector de coeficientes del polinomio característico.
+donde $\mathbf{b}=[b(1),b(2),\dots,b(L)]^\top \in \mathbb{C}^{L \times 1} $ es el vector de 
+coeficientes de prediccion hacia atras del polinomio característico y 
+$\mathbf{h}_i = [x_i^*(0),x_i^*(1),\dots,x_i^*(N-L-1)]^\top \in \mathbb{C}^{(N-L)\times 1}$ es
+el vector objetivo de la predicción hacia atras del polinomio característico.
 
-La elección de la predicción \textit{hacia atrás} sobre datos conjugados
-no es accidental: constituye el mecanismo de discriminación señal--ruido
-del método de Tufts--Kumaresan \cite{tufts1982}. Al elegir un orden
-sobredimensionado $L > M$, el polinomio característico
-\begin{equation}
-    B(z) \;=\; 1 + \sum_{\ell=1}^{L} b(\ell)\, z^{-\ell}
-    \label{eq:charpoly}
-\end{equation}
-posee $L$ raíces, de las cuales sólo $M$ corresponden a modos físicos. En
-la formulación hacia atrás, las raíces de señal se ubican en los
-recíprocos conjugados de los polos, $1/z_k^*$: para modos amortiguados
-($|z_k|<1$) éstas quedan \textbf{fuera} del círculo unitario, mientras que
-las $L-M$ raíces extrañas inducidas por el ruido tienden a permanecer
-\textbf{dentro} de él \cite{tufts1982}. Esta separación geométrica en el
-plano $z$ permite identificar los modos físicos sin ambigüedad, propiedad
-de la que carece la predicción hacia adelante del método de Prony clásico
-\cite{sauer2017,hauer1990}, cuya estructura Hankel es por lo demás análoga
-a \eqref{eq:Ai}.
 
-La matriz de Hankel conjugada para la $i$-ésima señal (el asterisco denota
-conjugación compleja) se construye como:
+La matriz de Hankel,  conjugada para la $i$-ésima señal (el asterisco denota
+conjugación compleja) se construye dezplazando las muestras y apilando 
+los vectores desplazados, formando asi una matriz donde los elementos a lo largo 
+sus antidiagonales son constantes, tomando la forma de:
+
 \begin{equation}
 \mathbf{A}_i =
 \begin{bmatrix}
@@ -341,22 +356,37 @@ x_i^*(2)   & x_i^*(3)   & \cdots & x_i^*(L+1) \\
 \vdots     & \vdots     & \ddots & \vdots   \\
 x_i^*(N-L) & x_i^*(N-L+1) & \cdots & x_i^*(N-1)
 \end{bmatrix}
-\in \mathbb{C}^{(N-L)\times L},
+\in \mathbb{C}^{(N-L)\times L}.
 \label{eq:Ai}
 \end{equation}
-y el vector objetivo asociado es
+
+
+La elección de la predicción \textit{hacia atrás} sobre datos conjugados
+no es accidental: constituye el mecanismo de discriminación señal--ruido
+del método de Tufts--Kumaresan \cite{Tufts1982}. Al elegir un orden
+sobredimensionado $L > M$, el polinomio característico
+
 \begin{equation}
-\mathbf{h}_i =
-\begin{bmatrix}
-x_i^*(0) \\ x_i^*(1) \\ \vdots \\ x_i^*(N-L-1)
-\end{bmatrix}
-\in \mathbb{C}^{N-L}.
-\label{eq:hi}
+    B(z) = z^L + b(1)z^{L-1} + b(2)z^{L-2} + \cdots + b(L) = 0.
+    \label{eq:charpoly}
 \end{equation}
 
-\subsection{Sistema Global Multicanal}
+posee $L$ raíces, de las cuales sólo $M$ corresponden a raices reales. En
+la formulación hacia atrás, las raíces de señal se ubican en los
+recíprocos conjugados de los polos, $1/z_k^*$: para modos amortiguados
+($|z_k|<1$) éstas quedan \textbf{fuera} del círculo unitario, mientras que
+las $L-M$ raíces extrañas inducidas por el ruido tienden a permanecer
+\textbf{dentro} de él \cite{Tufts1982,Marple}. Esta separación geométrica en el
+plano $z$ permite identificar los polos presentes en la señal de los polos espurios, 
+propiedad de la que carece la predicción hacia adelante del método de Prony clásico
+\cite{sauer2017,hauer1990}.
 
-Se apilan verticalmente las matrices y los vectores de todos los canales:
+\subsection{Sistema  Multicanal}
+
+La contribución central de la formulación multivariable consiste en apilar las 
+$P$ matrices de Hankel individuales en una única matriz rectangular de gran tamaño y
+los vectores objetivo de todos los canales:
+
 \begin{equation}
 \mathbf{A}_{\text{multi}} =
 \begin{bmatrix} \mathbf{A}_1 \\ \mathbf{A}_2 \\ \vdots \\ \mathbf{A}_P \end{bmatrix}
@@ -364,34 +394,51 @@ Se apilan verticalmente las matrices y los vectores de todos los canales:
 \qquad
 \mathbf{h}_{\text{multi}} =
 \begin{bmatrix} \mathbf{h}_1 \\ \mathbf{h}_2 \\ \vdots \\ \mathbf{h}_P \end{bmatrix}
-\in \mathbb{C}^{P(N-L)}.
+\in \mathbb{C}^{P(N-L)\times 1}.
 \label{eq:multi_system}
 \end{equation}
 
 El sistema completo de predicción lineal es:
+
 \begin{equation}
 \boxed{\mathbf{A}_{\text{multi}}\,\mathbf{b} = -\mathbf{h}_{\text{multi}}}.
 \label{eq:multi_equation}
 \end{equation}
 
-\subsection{Descomposición SVD y Selección del Orden del Modelo}
+El apilamiento vertical impone un \textit{único} vector de coeficientes $\mathbf{b}$ 
+---y por lo tanto un único conjunto de polos--- a los $P$ canales simultáneamente, lo 
+que constituye la hipótesis física del método: los $P$ registros son observaciones 
+distintas de la misma dinámica global. Para que \eqref{eq:multi_equation} esté 
+sobredeterminado debe cumplirse $P(N-L) \geq L$ condición que mejora al aumentar el 
+número de canales $P$. 
+
+
+\subsection{Descomposición en Valores Singulares (SVD) y Selección del Orden del Modelo}
 
 Se aplica la \textbf{descomposición en valores singulares} a $\mathbf{A}_{\text{multi}}$:
+
 \begin{equation}
 \mathbf{A}_{\text{multi}} = \mathbf{U}\,\boldsymbol{\Sigma}\,\mathbf{V}^H,
 \label{eq:svd}
 \end{equation}
-con $\boldsymbol{\Sigma} = \operatorname{diag}(\sigma_1,\sigma_2,\dots,\sigma_r)$, $\sigma_1 \ge \sigma_2 \ge \dots \ge \sigma_r > 0$
-(en esta sección, $\sigma_k$ denota los valores singulares de
-$\mathbf{A}_{\text{multi}}$, no el amortiguamiento modal).
 
-La optimalidad del truncamiento de la SVD está garantizada por el teorema
-de Eckart--Young--Mirsky \cite{brunton2022}: la mejor aproximación de
-rango $M$ a una matriz, en el sentido de mínimos cuadrados, es
-precisamente su SVD truncada.
+cdonde $\mathbf{U} \in \mathbb{C}^{P(N-L) \times P(N-L)}$, $\mathbf{\Sigma} \in \mathbb{R}^{P(N-L) 
+\times L}$ y $\mathbf{V} \in \mathbb{C}^{L \times L}$, y el superíndice $H$ denota transpuesta 
+conjugada. Los valores singulares $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_L \geq 0$ 
+separan el subespacio de señal del subespacio de ruido.
 
-Sea $\mathbf{A}_{\mathrm{multi}} = \mathbf{U}\boldsymbol{\Sigma}\mathbf{V}^H$.
-Entonces
+El teorema de Eckart‑Young‑Mirsky \cite{brunton2022}, garantiza que 
+$ \mathbf{U}_s\boldsymbol{\Sigma}_s\mathbf{V}_s$ 
+es la mejor aproximación de rango $M$ a una matriz, en el sentido de mínimos cuadrados, 
+es precisamente su SVD truncada, en este sentido cabe aclarar que la determinacion del rango
+es un problema mal planteado, pues una perturbacion numerica pequeña en matrices deficientes 
+de rango, devuelve el rango completo, por lo que el enfoque es una aproximación de bajo
+rango sobre la matris de datos formulada~\cite{Markovsky} \cite{Antoulas}. 
+
+Dado que el rango exacto no es un objeto estable bajo perturbaciones, se define el rango 
+numerico de una matriz respecto a una toleracia, a fijar a priori. Sea $\mathbf{A}_{\mathrm{multi}} 
+= \mathbf{U}\boldsymbol{\Sigma}\mathbf{V}^H$, entonces
+
 \begin{equation}
     \mathbf{U}_s\boldsymbol{\Sigma}_s\mathbf{V}_s^H
     \;=\;
@@ -399,36 +446,39 @@ Entonces
     \bigl\lVert \mathbf{A}_{\mathrm{multi}} - \mathbf{B} \bigr\rVert_F,
     \label{eq:eckartyoung}
 \end{equation}
-y el error de aproximación queda exactamente cuantificado por la energía
-de los valores singulares descartados:
+
+donde la norma de Frobeniusde una matriz es la raiz de la suma de los cuadrados de todos
+sus elementos $\| A \|_F = \sqrt{\sum_{i}^{n} \sum_{j}^{m} |A_{ij}|^2}$, y el error de 
+aproximación queda cuantificado por la energía de los valores singulares descartados:
+
 \begin{equation}
     \bigl\lVert \mathbf{A}_{\mathrm{multi}}
     - \mathbf{U}_s\boldsymbol{\Sigma}_s\mathbf{V}_s^H \bigr\rVert_F^2
-    \;=\; \sum_{k=M+1}^{r} \sigma_k^2 .
+    \;=\; \sum_{k=M+1}^{L} \sigma_k^2 .
     \label{eq:trunc_error}
 \end{equation}
 
-Bajo el modelo aditivo
-$\mathbf{A}_{\mathrm{multi}} = \mathbf{A}_{\mathrm{señal}} +
-\mathbf{A}_{\mathrm{ruido}}$, donde
-$\operatorname{rank}(\mathbf{A}_{\mathrm{señal}}) = M$ por construcción del
-modelo \eqref{eq:discrete}, los primeros $M$ valores singulares capturan el
+Bajo el modelo $\mathbf{A}_{\mathrm{multi}} = \mathbf{A}_{\mathrm{real}} + \mathbf{A}_{\mathrm{ruido}}$, 
+donde $\operatorname{rank}(\mathbf{A}_{\mathrm{real}}) = M$ por construcción del
+modelo en el caso sin ruido \eqref{eq:discrete}, ya que con ruido de observación 
+el rango efectivo excede $M$, los primeros $M$ valores singulares aproximan el
 subespacio de señal y los restantes la contribución del ruido de medición;
-el truncamiento de rango $M$ actúa entonces como un filtro óptimo en el
-sentido de \eqref{eq:eckartyoung} \cite{brunton2022,tufts1982}.
+el truncamiento de rango $M$ actúa entonces como un filtro ante el ruido
+en el sentido de \eqref{eq:eckartyoung} \cite{brunton2022,Tufts1982}. El número de polos 
+dominantes $M$ se selecciona mediante el criterio de \textbf{energía acumulada}
+de los valores singulares de \eqref{eq:svd}:
 
-El número de modos $M$ se selecciona mediante el criterio de \textbf{energía acumulada}:
 \begin{equation}
-E_{s,M} = \frac{\displaystyle\sum_{k=1}^{M} \sigma_k^2}{\displaystyle\sum_{k=1}^{r} \sigma_k^2} \ge E_0,
+\hat{\sigma}_M = \frac{\displaystyle\sum_{k=1}^{M} \sigma_k^2}{\displaystyle\sum_{k=1}^{r} 
+\sigma_k^2} \ge E_0,
 \label{eq:energy}
 \end{equation}
-donde típicamente $E_0 = 97\%$ (o $99.9\%$ según el nivel de ruido).
 
+$E_0$ es la tolerancia energetica, propuesta en funcion del nivel de ruido, que 
+garantiza la retención de los polos reales durante el evento transitorio. Reteniendo el 
+menor $M$ tal que $\hat{\sigma}_M$ supere o iguale la tolerancia de energía preestablecido 
+\cite{brunton2022}. Con el orden $M$ determinado, la SVD truncada de $\mathbf{A}_{\text{multi}}$ es:
 
-
-\subsection{Truncamiento de la SVD y Solución del Sistema}
-
-Se retiene el subespacio de señal de rango $M$:
 \begin{equation}
 \mathbf{A}_{\text{multi}} \approx \mathbf{U}_s \boldsymbol{\Sigma}_s \mathbf{V}_s^H,
 \quad
@@ -438,15 +488,18 @@ Se retiene el subespacio de señal de rango $M$:
 \label{eq:truncsvd}
 \end{equation}
 
-La solución regularizada del sistema es:
+y la solución del sistema es:
 \begin{equation}
-\boxed{\mathbf{b} = -\mathbf{V}_s\,\boldsymbol{\Sigma}_s^{-1}\,\mathbf{U}_s^H\,\mathbf{h}_{\text{multi}}}.
+\boxed{\mathbf{b} = -\sum_{k=1}^{M} \sigma_{k}^{-1} \left(\mathbf{u}_{k}^{H}\mathbf{h}_{\text{multi}}\right) \mathbf{v}_{k},}.
 \label{eq:solution_final}
 \end{equation}
 
-La ecuación \eqref{eq:solution_final} es la solución de mínimos cuadrados
-mediante la \textbf{pseudoinversa de Moore--Penrose truncada}
-\cite{brunton2022}:
+donde $\mathbf{u}_{k} \in \mathbb{C}^{P(N-L) \times 1}$ y $\mathbf{v}_{k} \in \mathbb{C}^{L \times 1}$ 
+son el $k$-ésimo vector singular izquierdo y derecho, respectivamente, y $\sigma_k$ el $k$-ésimo 
+valor singular. En forma compacta, $\mathbf{b} = -\mathbf{V}_s \mathbf{\Sigma}_s^{-1} \mathbf{U}_s^{H} 
+\mathbf{h}_{\text{multi}}$. La ecuación \eqref{eq:solution_final} es la solución de mínimos cuadrados
+mediante la \textbf{pseudoinversa de Moore--Penrose} de la matriz de datos \cite{brunton2022}:
+
 \begin{equation}
     \mathbf{b}
     \;=\;
@@ -456,31 +509,45 @@ mediante la \textbf{pseudoinversa de Moore--Penrose truncada}
     \;=\;
     \mathbf{V}_s\,\boldsymbol{\Sigma}_s^{-1}\,\mathbf{U}_s^H .
     \label{eq:pinv}
-\end{equation}
-Esta solución posee una doble optimalidad \cite{brunton2022}: minimiza el
-residuo $\lVert \mathbf{A}_{\mathrm{multi}}\mathbf{b} +
+\end{equation} 
+
+$\mathbf{A}_{\mathrm{multi}}$ Y $\mathbf{h}_{\mathrm{multi}}$ estan contruidas
+con las mismas muestras contaminadas de ruido de las señales, por lo que el ruido 
+introduce sesgos en el paso lineal. Esta solución posee una doble optimalidad \cite{brunton2022}: 
+minimiza el residuo $\lVert \mathbf{A}_{\mathrm{multi}}\mathbf{b} +
 \mathbf{h}_{\mathrm{multi}} \rVert_2$ restringido al subespacio de señal de
 rango $M$ y, entre todas las soluciones que lo logran, es la de mínima
-norma $\lVert\mathbf{b}\rVert_2$. El truncamiento cumple además una función
-de regularización numérica: en la pseudoinversa completa, los valores
-singulares pequeños asociados al ruido aparecen invertidos
-($\sigma_k^{-1}$ grande) y amplifican catastróficamente la componente de
-ruido de $\mathbf{h}_{\mathrm{multi}}$; al retener sólo
+norma $\lVert\mathbf{b}\rVert_2$. Ambas optimalidades se enuncian bajo la hipótesis de 
+que la matriz de datos es exacta. 
+
+El truncamiento cumple además una función
+espesifica: en la pseudoinversa completa, los valores singulares pequeños asociados al 
+ruido aparecen invertidos ($\sigma_k^{-1}$ grande) y amplifican catastróficamente la 
+componente de ruido de $\mathbf{h}_{\mathrm{multi}}$; al retener sólo
 $\boldsymbol{\Sigma}_s$, dicha amplificación se elimina y la varianza del
 estimador de $\mathbf{b}$ se reduce drásticamente
-\cite{tufts1982,brunton2022}. Para la longitud del predictor se recomienda
-$L \approx \tfrac{3N}{4}$, valor que maximiza el desempeño del estimador en
-presencia de ruido \cite{tufts1982}.
+\cite{Tufts1982,brunton2022}.
 
-\section{Patrones Dinámicos: Formas Modales y Factores de Participación}
+
+\section{Una Aproximación a los Patrones Dinámicos}
+\label{cap:ArprochDynamicPatterns}
 % ===========================================================
+
 
 \subsection{Estimación de Amplitudes Complejas}
 
-Conocidos los polos $\{z_k\}_{k=1}^{M}$, para cada señal $i$ se resuelve:
+Una vez identificados los polos, la etapa final consiste en determinar la contribución de 
+cada modo en cada canal. Evaluando \eqref{eq:discrete} sin ruido para las $N$ muestras 
+del canal $i$ se obtiene el sistema lineal, conocidos los polos $\{z_k\}_{k=1}^{M}$, para 
+cada canal $i$ se resuelve:
 
 \begin{equation}
-\underbrace{
+\mathbf{x}_i = \mathbf{\Psi} \mathbf{B}_i,
+\label{eq:vandermonde_system}
+\end{equation}
+
+\begin{equation}
+\mathbf{x}_i = \underbrace{
 \begin{bmatrix}
     z_1^0 & z_2^0 & \cdots & z_M^0 \\
     z_1^1 & z_2^1 & \cdots & z_M^1 \\
@@ -488,30 +555,30 @@ Conocidos los polos $\{z_k\}_{k=1}^{M}$, para cada señal $i$ se resuelve:
     z_1^{N-1} & z_2^{N-1} & \cdots & z_M^{N-1}
 \end{bmatrix}
 }_{\boldsymbol{\Psi}}
-\begin{bmatrix} a_{i,1} \\ a_{i,2} \\ \vdots \\ a_{i,M} \end{bmatrix}
-= \mathbf{x}_i
+\begin{bmatrix} B_{i,1} \\ B_{i,2} \\ \vdots \\ B_{i,M} \end{bmatrix}
 \end{equation}
 
-Mediante mínimos cuadrados:
+donde $\mathbf{\Psi} \in \mathbb{C}^{N \times M}$ es la matriz de Vandermonde construida 
+con las raíces estimadas y $\mathbf{B}_i \in \mathbb{C}^{M \times 1}$ el vector de amplitudes 
+complejas desconocidas del canal $i$. Mediante mínimos cuadrados:
+
 \begin{equation}
-\mathbf{a}_i = \boldsymbol{\Psi}^+\,\mathbf{x}_i
+\mathbf{B}_i = \boldsymbol{\Psi}^+\,\mathbf{x}_i
 = \bigl(\boldsymbol{\Psi}^H\boldsymbol{\Psi}\bigr)^{-1}\boldsymbol{\Psi}^H\mathbf{x}_i
 \end{equation}
 
 La matriz $\boldsymbol{\Psi}\in\mathbb{C}^{N\times M}$ es una matriz de
 \textbf{Vandermonde} construida sobre los polos estimados. En la práctica,
-la solución vía ecuaciones normales
-$(\boldsymbol{\Psi}^H\boldsymbol{\Psi})^{-1}\boldsymbol{\Psi}^H$ debe
-evitarse: cuando el sistema presenta modos de frecuencias cercanas ---
-situación típica de los modos interárea --- los nodos $z_k$ se aglomeran y
-$\boldsymbol{\Psi}$ se vuelve mal condicionada, y el producto
+la solución vía ecuaciones $(\boldsymbol{\Psi}^H\boldsymbol{\Psi})^{-1}\boldsymbol{\Psi}^H$ se aconseja
+evitarse: cuando el sistema presenta modos de frecuencias cercanas los nodos $z_k$ se 
+aglomeran y $\boldsymbol{\Psi}$ se vuelve mal condicionada, y el producto
 $\boldsymbol{\Psi}^H\boldsymbol{\Psi}$ eleva al cuadrado su número de
-condición, $\kappa(\boldsymbol{\Psi}^H\boldsymbol{\Psi}) =
-\kappa(\boldsymbol{\Psi})^2$. La alternativa numéricamente estable es la
+condición, $\kappa(\boldsymbol{\Psi}^H\boldsymbol{\Psi}) = \kappa(\boldsymbol{\Psi})^2$. La alternativa numéricamente estable es la
 pseudoinversa calculada mediante la SVD de $\boldsymbol{\Psi}$
 \cite{brunton2022}:
+
 \begin{equation}
-    \mathbf{a}_i \;=\;
+    \mathbf{B}_i \;=\;
     \mathbf{V}_{\Psi}\,\boldsymbol{\Sigma}_{\Psi}^{-1}\,
     \mathbf{U}_{\Psi}^{H}\,\mathbf{x}_i,
     \qquad
@@ -519,6 +586,30 @@ pseudoinversa calculada mediante la SVD de $\boldsymbol{\Psi}$
     \mathbf{U}_{\Psi}\boldsymbol{\Sigma}_{\Psi}\mathbf{V}_{\Psi}^{H}.
     \label{eq:amp_svd}
 \end{equation}
+
+
+Puesto que $\mathbf{\Psi}$ es \textit{común a todos los canales},
+ las $P$ soluciones se obtienen en un solo paso resolviendo
+
+\begin{equation}
+\mathbf{B} = \mathbf{\Psi}^{\dagger} \mathbf{X}, \qquad
+\mathbf{X} = [\mathbf{x}_1\ \mathbf{x}_2\ \cdots\ \mathbf{x}_P],
+\label{eq:amplitudes_multi}
+\end{equation}
+
+con $\mathbf{X} \in \mathbb{C}^{N \times P}$, $\mathbf{B} \in \mathbb{C}^{M \times P}$ y
+ $\mathbf{\Psi}^{\dagger} \in \mathbb{C}^{M \times N}$ la pseudoinversa. De cada elemento 
+ $B_{k,i}$ se extraen la amplitud y la fase del modo $k$ en el canal $i$:
+ \begin{equation}
+|a_{i,k}| = |B_{k,i}|, \qquad
+\phi_{i,k} = \arg(B_{k,i}).
+\label{eq:amp_fase}
+\end{equation}
+En la práctica, la magnitud $a_{i,k}$ se usa para medir cuanto participa un modo de oscilación 
+en las mediciones (o viceversa), mientras que la fase $\phi_{i,k}$ nos permite medir la actividad 
+del modo oscilatorio en las señales medidas. Por lo tanto, la magnitud y la fase son empleadas 
+para determinar modos shapes y las magnitudes son utilizadas para proporcionar un índice de    participación.
+
 
 
 \subsection{Discriminación de Modos Dominantes por Energía Modal}
@@ -532,7 +623,7 @@ las amplitudes estimadas \cite{jiang2021}: la energía del modo $k$ se
 define a partir de las amplitudes complejas de todos los canales,
 \begin{equation}
     E_k \;=\; \sum_{i=1}^{P} |a_{i,k}|^2
-    \;=\; \lVert \mathbf{s}_k \rVert_2^2,
+    \;=\; \lVert \mathbf{\varphi}_k \rVert_2^2,
     \label{eq:mode_energy}
 \end{equation}
 y los modos se ordenan por energía decreciente. El peso de energía
@@ -556,9 +647,9 @@ jerarquiza los modos físicos dentro de ese orden.
 
 \subsection{Forma Modal (Mode Shape)}
 
-La \textbf{forma modal} del modo $k$ describe la distribución espacial:
+La \textbf{forma modal} del modo $k$ aproxima la distribución espacial:
 \begin{equation}
-\mathbf{s}_k =
+\mathbf{\varphi}_k =
 \begin{bmatrix}
     a_{1,k} \\
     a_{2,k} \\
@@ -570,21 +661,42 @@ La \textbf{forma modal} del modo $k$ describe la distribución espacial:
     |a_{1,k}|\,e^{j\phi_{1,k}} \\
     |a_{2,k}|\,e^{j\phi_{2,k}} \\
     \vdots \\
-    |a_{P,k}|\,e^{j\phi_{P,k}}
-\end{bmatrix}
+    |a_{P,k}|\,e^{j\phi_{P,k}} 
+\end{bmatrix} \in \mathbb{C}^{P \times 1}.
 \end{equation}
 
-La magnitud $|\mathbf{s}_k|$ indica observabilidad; la fase $\angle\mathbf{s}_k$ revela relaciones entre señales. Para comparar formas
-modales entre modos o entre métodos, $\mathbf{s}_k$ se normaliza a norma
-unitaria, $\hat{\mathbf{s}}_k = \mathbf{s}_k / \lVert\mathbf{s}_k\rVert_2$,
-o respecto a su componente de mayor magnitud, convención empleada en la
-literatura de identificación basada en mediciones
-\cite{jiang2021,li2020era}.
 
-La forma modal empírica $\mathbf{s}_k$ tiene una interpretación exacta en
+La magnitud $|\mathbf{\varphi}_k|$ indica observabilidad del modo en la medición; la fase $\angle\mathbf{\varphi}_k$ 
+revela relaciones entre señales. Para comparar formas
+modales entre modos, $\mathbf{\varphi}_k$ se normaliza a norma unitaria, 
+$\hat{\mathbf{\varphi}}_k = \mathbf{\varphi}_k / \lVert\mathbf{\varphi}_k\rVert_2$,
+o respecto a su componente de mayor magnitud, convención empleada en la literatura de identificación 
+basada en mediciones \cite{jiang2021,li2020era} se usa la componente de mayor magnitud tal que:
+
+\begin{equation}
+\hat{\boldsymbol{\varphi}}_k = \frac{\boldsymbol{\varphi}_k}{|\boldsymbol{\varphi}_k|_{max}}, \quad
+|\boldsymbol{\varphi}_k|_{max} = \max_{1 \leq i \leq P} |a_{i,k}|,
+\label{eq:normalizacion}
+\end{equation}
+
+de manera que $|\hat{\varphi}_{i,k}| \in [0,1]$. Agrupando los $K$ modos se forma la matriz de formas modales
+
+\begin{equation}
+\boldsymbol{\Phi} = [\hat{\boldsymbol{\varphi}}_1\ \hat{\boldsymbol{\varphi}}_2\ \cdots\ \hat{\boldsymbol{\varphi}}_K] =
+\begin{bmatrix}
+\hat{\varphi}_{1,1} & \hat{\varphi}_{1,2} & \cdots & \hat{\varphi}_{1,K} \\
+\hat{\varphi}_{2,1} & \hat{\varphi}_{2,2} & \cdots & \hat{\varphi}_{2,K} \\
+\vdots & \vdots & \ddots & \vdots \\
+\hat{\varphi}_{P,1} & \hat{\varphi}_{P,2} & \cdots & \hat{\varphi}_{P,K}
+\end{bmatrix} \in \mathbb{C}^{P \times K},
+\label{eq:matriz_formas_modales}
+\end{equation}
+
+La forma modal empírica $\mathbf{\varphi}_k$ tiene una interpretación so se toma la interpretación en
 términos del modelo de estados \eqref{eq:statespace}: por
 \eqref{eq:measured_modal}, $a_{i,k} =
 (\mathbf{c}_i^\top\boldsymbol{\phi}_k)\,c_k$, de modo que
+
 \begin{equation}
     \mathbf{s}_k \;=\; c_k
     \begin{bmatrix}
@@ -604,13 +716,24 @@ precisamente la forma modal del análisis de pequeña señal
 ($\Delta\phi \approx 180^\circ$) identifican los grupos coherentes de
 generadores que oscilan uno contra otro en un modo interárea.
 
-\subsection{Factor de Participación}
+\subsection{Índices de Participación}
 
-Para el modo $k$, la participación normalizada de la señal $i$ es:
+De la matriz de modos shape se define el índice de participación del canal $i$ en el modo $k$ como la magnitud normalizada
+
 \begin{equation}
-\hat{p}_{ik} = \frac{|a_{i,k}|}{\displaystyle\sum_{j=1}^{P} |a_{j,k}|}
+p_{i,k} = |\hat{\varphi}_{i,k}| = \frac{|a_{i,k}|}{|\boldsymbol{\varphi}_k|_{max}} \in [0,1],
+\label{eq:participacion}
 \end{equation}
 
+que da lugar a la matriz de índices de participación
+
+\begin{equation}
+\mathbf{P} = [p_{i,k}] \in \mathbb{R}^{P \times K}.
+\label{eq:matriz_participacion}
+\end{equation}
+
+Un valor $p_{i,k} \to 1$ indica que el modo $k$ es altamente observable en la medición $i$, 
+mientras que $p_{i,k} \to 0$ indica que el modo prácticamente no se manifiesta en ese canal.
 Debe distinguirse $\hat{p}_{ik}$ del \textbf{factor de participación} del
 análisis de pequeña señal, definido como el producto de los elementos de
 los eigenvectores derecho e izquierdo,
@@ -649,26 +772,65 @@ La forma modal de un solo modo separa a los generadores en, a lo sumo,
 dos grupos en contrafase; la partición del sistema en grupos coherentes
 bajo la acción conjunta de \emph{múltiples} modos dominantes requiere una
 medida de similitud entre generadores construida sobre el conjunto
-completo de formas modales \cite{jiang2021,li2018cwt}. Sea
-$\mathbf{r}_i = [a_{i,1}, a_{i,2}, \ldots, a_{i,M}] \in \mathbb{C}^{1\times M}$
-la fila de amplitudes complejas (residuos) del generador $i$ sobre los $M$
-modos dominantes, normalizada a norma unitaria,
-$\hat{\mathbf{r}}_i = \mathbf{r}_i / \lVert\mathbf{r}_i\rVert_2$. El
-\textbf{coseno director} entre los generadores $i$ y $j$ se define como la
-parte real del producto interno complejo normalizado:
+completo de formas modales \cite{jiang2021,Li2018}. Sea $\mathbf{g}_i \in \mathbb{C}^{K \times 1}$ 
+la transpuesta de la $i$-ésima fila de $\boldsymbol{\Phi}$,
+
 \begin{equation}
-    r_{ij} \;=\;
-    \operatorname{Re}\bigl( \hat{\mathbf{r}}_i\, \hat{\mathbf{r}}_j^{H} \bigr)
-    \;\in\; [-1,\, 1].
-    \label{eq:direction_cosine}
+\mathbf{g}_i = [\hat{\varphi}_{i,1}\ \hat{\varphi}_{i,2}\ \cdots\ \hat{\varphi}_{i,K}]^{\top},
+\label{eq:vector_firma}
 \end{equation}
-Dos generadores completamente coherentes (misma respuesta modal, fase
-relativa nula) tienen $r_{ij}=1$; dos generadores en contrafase perfecta
-tienen $r_{ij}=-1$ \cite{li2018cwt,li2020era}. Es esencial conservar el
-signo en \eqref{eq:direction_cosine}: tomar la magnitud
-$|\hat{\mathbf{r}}_i \hat{\mathbf{r}}_j^{H}|$ colapsa el rango a $[0,1]$ y
-asigna similitud máxima a generadores en oposición de fase, que por
-definición pertenecen a grupos coherentes distintos.
+
+es decir, la \textit{firma modal} del canal $i$ en el espacio de los $K$ modos. 
+En \cite{li2020era} el coseno director entre los canales $i$ y $j$ se define, para 
+formas modales reales, como
+
+\begin{equation}
+d_{ij} = \frac{\sum_{h=1}^{K} \varphi_{ih}\varphi_{jh}}{\sqrt{\sum_{h=1}^{K}\varphi_{ih}^2 \sum_{h=1}^{K}\varphi_{jh}^2}}.
+\label{eq:coseno_li}
+\end{equation}
+
+Puesto que las amplitudes obtenidas en \eqref{eq:amp_fase} son complejas y de fase
+ arbitraria, en este trabajo se emplea la extensión
+
+\begin{equation}
+d_{ij} = \frac{\text{Re}\left(\mathbf{g}_i^{H}\mathbf{g}_j\right)}{\|\mathbf{g}_i\|_2\,\|\mathbf{g}_j\|_2} \in [-1,1],
+\label{eq:coseno_complejo}
+\end{equation}
+
+que preserva la interpretación geométrica de \eqref{eq:coseno_li} ---el coseno del ángulo 
+entre las firmas modales de ambos canales--- y se reduce exactamente a ella cuando todas las 
+componentes $\hat{\varphi}_{ih}$ son reales, esto es, cuando las fases modales son $0^{\circ}$ 
+o $180^{\circ}$. La parte real del producto interno hermitiano es necesaria para que $d_{ij}$ 
+sea una cantidad real y simétrica; su uso equivale a proyectar la firma modal de un canal 
+sobre la del otro.
+
+Evaluando \eqref{eq:coseno_complejo} para todos los pares se forma la matriz de cosenos directores
+
+\begin{equation}
+\mathbf{d} =
+\begin{bmatrix}
+d_{11} & d_{12} & \cdots & d_{1P} \\
+d_{21} & d_{22} & \cdots & d_{2P} \\
+\vdots & \vdots & \ddots & \vdots \\
+d_{P1} & d_{P2} & \cdots & d_{PP}
+\end{bmatrix} \in \mathbb{R}^{P \times P},
+\label{eq:matriz_cosenos}
+\end{equation}
+
+simétrica y con diagonal unitaria, $d_{ii} = 1$. La interpretación física es directa: cuando 
+la diferencia angular entre dos generadores es $0^{\circ}$, ambos son completamente coherentes 
+y $d_{ij} = 1$; conforme dicha diferencia crece hacia $\pm 180^{\circ}$, $d_{ij}$ decrece
+ monotónicamente hasta $-1$, valor que corresponde a incoherencia total.
+
+\begin{equation}
+d_{ij} \geq 0.8,
+\label{umbral_coherencia}
+\end{equation}
+
+y los grupos coherentes se identifican como los bloques de la matriz $\mathbf{d}$ que 
+satisfacen \eqref{umbral_coherencia}. La representación de $\mathbf{d}$ como mapa de 
+calor permite reconocer visualmente dichos bloques sin requerir información \textit{a priori} 
+sobre el número de grupos.
 
   \begin{figure}[t]
      \centering
@@ -677,4 +839,4 @@ definición pertenecen a grupos coherentes distintos.
      \label{fig:metodologia}
  \end{figure}
 
-\chapterbibliography 
+\chapterbibliography%
